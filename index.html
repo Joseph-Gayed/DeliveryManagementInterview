@@ -40,7 +40,6 @@ mark{background:#fde68a;padding:0 2px;border-radius:2px}
 
 <main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
 
-<!-- IMPORT TOOLS -->
 <section class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border border-slate-200 dark:border-slate-800">
 <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2">
 <button id="loadJsonBtn" class="min-h-[44px] px-4 bg-brand-600 hover:bg-blue-500 active:scale-[.98] transition text-white rounded-lg text-sm font-semibold"><i class="fa-solid fa-folder-open mr-2"></i>Load JSON file(s)</button>
@@ -48,20 +47,17 @@ mark{background:#fde68a;padding:0 2px;border-radius:2px}
 <label class="flex items-center justify-center gap-2 min-h-[44px] px-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm cursor-pointer select-none">
 <input type="checkbox" id="mergeMode" class="w-4 h-4 accent-blue-600" checked><span>Merge with current</span>
 </label>
-<button id="starterBtn" class="min-h-[44px] px-3 bg-slate-100 dark:bg-slate-800 active:scale-[.98] transition rounded-lg text-sm hidden"><i class="fa-solid fa-rotate mr-1"></i>Load starter set</button>
 <button id="exportJsonBtn" class="min-h-[44px] px-3 bg-slate-100 dark:bg-slate-800 active:scale-[.98] transition rounded-lg text-sm hidden"><i class="fa-solid fa-download mr-1"></i>Export</button>
 <button id="clearAllBtn" class="min-h-[44px] px-3 bg-red-50 dark:bg-red-950/40 text-red-600 rounded-lg text-sm hidden"><i class="fa-solid fa-trash mr-1"></i>Clear all</button>
 </div>
 <p class="text-[11px] text-slate-400 mt-2">Same question across files → one card with all answers (counted once). Matching ignores case, punctuation, spacing, quotes and leading numbering. Desktop: drag &amp; drop supported.</p>
 
-<!-- SOURCES PANEL -->
 <div id="sourcesPanel" class="hidden mt-3 pt-3 border-t border-slate-200 dark:border-slate-800">
 <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2"><i class="fa-solid fa-database mr-1"></i>Loaded sources</p>
 <div id="sourcesList" class="flex flex-wrap gap-2"></div>
 </div>
 </section>
 
-<!-- METRICS -->
 <section id="metricsSection" class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 hidden">
 <div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-brand-500 text-lg sm:text-xl"><i class="fa-solid fa-list-check"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Unique Qs</p><h3 id="metricTotal" class="text-xl sm:text-2xl font-extrabold">0</h3></div></div>
 <div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-emerald-500 text-lg sm:text-xl"><i class="fa-solid fa-graduation-cap"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Mastered</p><h3 class="text-xl sm:text-2xl font-extrabold text-emerald-600"><span id="metricMastered">0</span><span id="metricMasteredTotal" class="text-xs text-slate-400 font-normal">/0</span></h3></div></div>
@@ -69,7 +65,6 @@ mark{background:#fde68a;padding:0 2px;border-radius:2px}
 <div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-indigo-500 text-lg sm:text-xl"><i class="fa-solid fa-percent"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Done</p><h3 id="metricPercent" class="text-xl sm:text-2xl font-extrabold text-indigo-600">0%</h3></div></div>
 </section>
 
-<!-- FILTERS -->
 <section id="filtersSection" class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border hidden">
 <div class="flex flex-col md:flex-row gap-2 md:gap-3">
 <div class="relative flex-1"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i><input id="searchInput" placeholder="Search by keyword in any question or answer..." class="w-full min-h-[44px] pl-9 pr-9 bg-slate-100 dark:bg-slate-800 rounded-lg outline-none border border-transparent focus:border-brand-500"><button id="clearSearch" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg text-slate-400 hover:text-slate-600 hidden" aria-label="Clear"><i class="fa-solid fa-xmark"></i></button></div>
@@ -90,21 +85,14 @@ mark{background:#fde68a;padding:0 2px;border-radius:2px}
 <div id="questionsContainer" class="lg:col-span-3 space-y-3"></div>
 </div>
 
-<!-- EMPTY / STARTER STATE -->
 <div id="emptyState" class="hidden bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-8 sm:p-10 text-center">
 <div class="mx-auto w-16 h-16 rounded-2xl bg-brand-50 dark:bg-blue-950/40 text-brand-500 flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-file-import"></i></div>
 <h2 class="text-lg font-bold mb-1">No questions loaded yet</h2>
 <p id="emptyMsg" class="text-sm text-slate-500 max-w-md mx-auto mb-5">Load one or more JSON files to build your bank. Import several files with the same questions to compare multiple answers side by side.</p>
 <div class="flex flex-col sm:flex-row gap-2 justify-center">
-<button id="emptyStarterBtn" class="min-h-[44px] px-5 bg-brand-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold active:scale-95 transition hidden"><i class="fa-solid fa-bolt mr-2"></i>Load starter set</button>
-<button id="emptyLoadBtn" class="min-h-[44px] px-5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm font-semibold active:scale-95 transition"><i class="fa-solid fa-folder-open mr-2"></i>Load JSON file(s)</button>
+<button id="emptyLoadBtn" class="min-h-[44px] px-5 bg-brand-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold active:scale-95 transition"><i class="fa-solid fa-folder-open mr-2"></i>Load JSON file(s)</button>
 </div>
-<pre class="text-left text-[11px] text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 mt-6 overflow-x-auto">[
-  { "id": "Q001", "q": "What is ...?", "a": "answer text",
-    "sectionTitle": "Topic name" }
-]</pre>
 </div>
-
 </main>
 
 <footer class="safe-bottom mt-10 border-t border-slate-200 dark:border-slate-800 py-6 bg-white dark:bg-slate-900 text-center text-xs text-slate-500">
@@ -117,152 +105,90 @@ Question Bank • interactive preparation engine
 <script>
 /* ============================================================
    ⭐ STARTER SET CONFIG  — edit this list only.
-   Put your JSON file(s) in the same folder as index.html and
-   list their names (or full URLs) here. On GitHub Pages these
-   auto-load for first-time visitors and can be reloaded anytime.
-   Example:
-     const STARTER_FILES = ["questions.json", "answers-v2.json"];
-   Leave empty [] to disable the starter set entirely.
+   List the JSON filenames (or full URLs) to load automatically
+   when hosted on GitHub Pages. Example:
+     const STARTER_FILES = ["InterviewAnswers-Original.json"];
+   Leave empty [] to disable.
    ============================================================ */
 const STARTER_FILES = ["InterviewAnswers-Original.json","InterviewAnswers-A.json","InterviewAnswers-B.json"];
 /* ============================================================ */
 
-/* ================= state ================= */
-let DB=[];
-let sectionsList=[];
-let activeSection="all",searchTerm="",statusFilterValue="all",visibleCount=50;
-const PAGE=50;
-let openSet=new Set();
-let masteredSet=new Set(JSON.parse(localStorage.getItem("qb_mastered")||"[]"));
-let bookmarkedSet=new Set(JSON.parse(localStorage.getItem("qb_bookmarked")||"[]"));
-const fallbackSections=["Section 1","Section 2","Section 3","Section 4","Section 5"];
+let DB=[]; let sectionsList=[]; let activeSection="all",searchTerm="",statusFilterValue="all",visibleCount=50; const PAGE=50;
+let openSet=new Set(); let masteredSet=new Set(JSON.parse(localStorage.getItem("qb_mastered")||"[]")); let bookmarkedSet=new Set(JSON.parse(localStorage.getItem("qb_bookmarked")||"[]"));
+const fallbackSections=["Section 1","Section 2","Section 3","Section 4","Section 5","Section 6","Section 7"];
 
 const $=id=>document.getElementById(id);
-const els={
-  metricTotal:$("metricTotal"),metricMastered:$("metricMastered"),metricMasteredTotal:$("metricMasteredTotal"),
-  metricBookmarked:$("metricBookmarked"),metricPercent:$("metricPercent"),globalProgressBar:$("globalProgressBar"),
-  searchInput:$("searchInput"),clearSearch:$("clearSearch"),statusFilter:$("statusFilter"),
-  sectionsSidebar:$("sectionsSidebar"),questionsContainer:$("questionsContainer"),
-  loadJsonBtn:$("loadJsonBtn"),jsonFileInput:$("jsonFileInput"),exportJsonBtn:$("exportJsonBtn"),clearAllBtn:$("clearAllBtn"),
-  starterBtn:$("starterBtn"),mergeMode:$("mergeMode"),sourcesPanel:$("sourcesPanel"),sourcesList:$("sourcesList"),
-  metricsSection:$("metricsSection"),filtersSection:$("filtersSection"),workspace:$("workspace"),emptyState:$("emptyState"),
-  emptyMsg:$("emptyMsg"),emptyStarterBtn:$("emptyStarterBtn"),emptyLoadBtn:$("emptyLoadBtn"),
-  toast:$("toast"),themeToggle:$("themeToggle"),drawer:$("drawer"),drawerOverlay:$("drawerOverlay"),
-  drawerBtn:$("drawerBtn"),closeDrawer:$("closeDrawer"),toTop:$("toTop")
-};
+const els={metricTotal:$("metricTotal"),metricMastered:$("metricMastered"),metricMasteredTotal:$("metricMasteredTotal"),metricBookmarked:$("metricBookmarked"),metricPercent:$("metricPercent"),globalProgressBar:$("globalProgressBar"),searchInput:$("searchInput"),clearSearch:$("clearSearch"),statusFilter:$("statusFilter"),sectionsSidebar:$("sectionsSidebar"),questionsContainer:$("questionsContainer"),loadJsonBtn:$("loadJsonBtn"),jsonFileInput:$("jsonFileInput"),exportJsonBtn:$("exportJsonBtn"),clearAllBtn:$("clearAllBtn"),mergeMode:$("mergeMode"),sourcesPanel:$("sourcesPanel"),sourcesList:$("sourcesList"),metricsSection:$("metricsSection"),filtersSection:$("filtersSection"),workspace:$("workspace"),emptyState:$("emptyState"),emptyMsg:$("emptyMsg"),emptyLoadBtn:$("emptyLoadBtn"),toast:$("toast"),themeToggle:$("themeToggle"),drawer:$("drawer"),drawerOverlay:$("drawerOverlay"),drawerBtn:$("drawerBtn"),closeDrawer:$("closeDrawer"),toTop:$("toTop")};
 
-/* ================= helpers ================= */
 function showToast(msg,type="info"){els.toast.textContent=msg;els.toast.className=`fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm z-[90] px-4 py-3 rounded-xl text-sm font-medium shadow-lg ${type==="error"?"bg-red-600 text-white":"bg-slate-900 text-white dark:bg-white dark:text-slate-900"}`;clearTimeout(showToast._t);showToast._t=setTimeout(()=>els.toast.classList.add("hidden"),3400);}
 function saveProgress(){localStorage.setItem("qb_mastered",JSON.stringify([...masteredSet]));localStorage.setItem("qb_bookmarked",JSON.stringify([...bookmarkedSet]));}
 function saveBank(){localStorage.setItem("qb_bank",JSON.stringify({items:DB,sections:sectionsList}));}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
 function highlight(text,term){if(!term)return esc(text);const safe=esc(text);const t=term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");try{return safe.replace(new RegExp("("+t+")","ig"),"<mark>$1</mark>");}catch(e){return safe;}}
-function buildKey(q){
-  return String(q).toLowerCase()
-    .replace(/<[^>]*>/g," ").replace(/&[a-z]+;/g," ")
-    .replace(/[\u2018\u2019\u201C\u201D]/g,"'")
-    .replace(/^\s*(?:q?\d+[).:\-]\s*)/,"")
-    .replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();
-}
-function makeItem(q,answers,sectionTitle,hint,id){
-  const cleanId=(id!==undefined&&id!==null&&String(id).trim()!=="")?String(id).trim():null;
-  return {id:cleanId||autoId(),q:String(q).trim(),sectionTitle:sectionTitle||"General",
-    hint:hint||String(answers[0]?.text||"").replace(/<[^>]*>/g,"").slice(0,140),answers};
-}
-let _autoSeq=0;
-function autoId(){_autoSeq++;return "Q"+String(_autoSeq).padStart(3,"0");}
+function buildKey(q){return String(q).toLowerCase().replace(/<[^>]*>/g," ").replace(/&[a-z]+;/g," ").replace(/[\u2018\u2019\u201C\u201D]/g,"'").replace(/^\s*(?:q?\d+[).:\-]\s*)/,"").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();}
+function makeItem(q,answers,sectionTitle,hint,id){const cleanId=(id!==undefined&&id!==null&&String(id).trim()!=="")?String(id).trim():null;return{id:cleanId||autoId(),q:String(q).trim(),sectionTitle:sectionTitle||"General",hint:hint||String(answers[0]?.text||"").replace(/<[^>]*>/g,"").slice(0,140),answers};}
+let _autoSeq=0;function autoId(){_autoSeq++;return "Q"+String(_autoSeq).padStart(3,"0");}
 
-/* ================= import / merge ================= */
 function normalizeJson(parsed,fileName){
   let arr=null,sectionsFromFile=null;
   if(Array.isArray(parsed))arr=parsed;
   else if(parsed&&Array.isArray(parsed.data)){arr=parsed.data;sectionsFromFile=parsed.sections||parsed.sectionList||null;}
   else if(parsed&&Array.isArray(parsed.questions)){arr=parsed.questions;sectionsFromFile=parsed.sections||null;}
   else if(parsed&&Array.isArray(parsed.items)){arr=parsed.items;sectionsFromFile=parsed.sections||null;}
-  else throw new Error("must be an array or {data|questions|items:[...]}");
-  if(!arr.length)throw new Error("file is empty");
+  else throw new Error("must be array or {data|questions|items:[...]}");
+  if(!arr.length)throw new Error("file empty");
   const items=[];
   if(Array.isArray(arr[0])){
-    arr.forEach(row=>{const[id,c,q,a]=row;if(!q)return;const text=String(a||"").trim();if(!text)return;
-      const sec=(sectionsFromFile&&sectionsFromFile[c])||fallbackSections[c]||`Section ${(c??0)+1}`;
-      items.push(makeItem(q,[{source:fileName,text}],sec,undefined,id));});
+    arr.forEach(row=>{const[id,c,q,a]=row;if(!q)return;const text=String(a||"").trim();if(!text)return;const sec=(sectionsFromFile&&sectionsFromFile[c])||fallbackSections[c]||`Section ${(c??0)+1}`;items.push(makeItem(q,[{source:fileName,text}],sec,undefined,id));});
   }else{
-    arr.forEach(o=>{
-      const q=o.q||o.question||o.title;if(!q)return;
-      let answers=[];
-      if(Array.isArray(o.answers)){
-        answers=o.answers.map(x=>typeof x==="string"?{source:o.source||fileName,text:x}
-          :{source:x.source||x.from||x.label||o.source||fileName,text:String(x.text||x.a||x.answer||"")}).filter(x=>x.text&&x.text.trim());
-      }else{const t=o.a||o.answer||o.content||"";if(t)answers=[{source:o.source||o.file||fileName,text:String(t)}];}
-      if(!answers.length)return;
-      items.push(makeItem(q,answers,o.sectionTitle||o.section||o.category||"General",o.hint,o.id));
-    });
+    arr.forEach(o=>{const q=o.q||o.question||o.title;if(!q)return;let answers=[];if(Array.isArray(o.answers)){answers=o.answers.map(x=>typeof x==="string"?{source:o.source||fileName,text:x}:{source:x.source||x.from||x.label||o.source||fileName,text:String(x.text||x.a||x.answer||"")}).filter(x=>x.text&&x.text.trim());}else{const t=o.a||o.answer||o.content||"";if(t)answers=[{source:o.source||o.file||fileName,text:String(t)}];}if(!answers.length)return;items.push(makeItem(q,answers,o.sectionTitle||o.section||o.category||"General",o.hint,o.id));});
   }
-  if(!items.length)throw new Error("no questions with answers found");
-  return items;
+  if(!items.length)throw new Error("no questions with answers found");return items;
 }
-function mergeAnswer(item,text,source){
-  const t=String(text||"").trim();if(!t)return;
-  const i=item.answers.findIndex(x=>x.source===source);
-  if(i>=0){item.answers[i].text=t;return;}
-  if(item.answers.some(x=>x.text.trim()===t))return;
-  item.answers.push({source,text:t});
-}
-function mergeItems(target,incoming){
-  const index=new Map(target.map((it,i)=>[buildKey(it.q),i]));
-  let added=0,merged=0;
-  incoming.forEach(item=>{
-    const k=buildKey(item.q);
-    if(index.has(k)){const tgt=target[index.get(k)];item.answers.forEach(a=>mergeAnswer(tgt,a.text,a.source));
-      if(tgt.sectionTitle==="General"&&item.sectionTitle&&item.sectionTitle!=="General")tgt.sectionTitle=item.sectionTitle;merged++;}
-    else{target.push(item);index.set(k,target.length-1);added++;}
-  });
-  return {added,merged};
-}
+function mergeAnswer(item,text,source){const t=String(text||"").trim();if(!t)return;const i=item.answers.findIndex(x=>x.source===source);if(i>=0){item.answers[i].text=t;return;}if(item.answers.some(x=>x.text.trim()===t))return;item.answers.push({source,text:t});}
+function mergeItems(target,incoming){const index=new Map(target.map((it,i)=>[buildKey(it.q),i]));let added=0,merged=0;incoming.forEach(item=>{const k=buildKey(item.q);if(index.has(k)){const tgt=target[index.get(k)];item.answers.forEach(a=>mergeAnswer(tgt,a.text,a.source));if(tgt.sectionTitle==="General"&&item.sectionTitle&&item.sectionTitle!=="General")tgt.sectionTitle=item.sectionTitle;merged++;}else{target.push(item);index.set(k,target.length-1);added++;}});return{added,merged};}
 function recomputeSections(){const seen=[];DB.forEach(it=>{if(!seen.includes(it.sectionTitle))seen.push(it.sectionTitle);});sectionsList=seen;}
 function getSources(){const m=new Map();DB.forEach(it=>{it.answers.forEach(a=>{const s=m.get(a.source)||{answers:0,questions:new Set()};s.answers++;s.questions.add(it.id);m.set(a.source,s);});});return [...m.entries()].map(([name,v])=>({name,answers:v.answers,questions:v.questions.size}));}
 
-function ingest(incomingSets){ /* incomingSets: [{name,items}] */
+function ingest(sets){
   if(!els.mergeMode.checked)DB=[];
   let added=0,merged=0;
-  incomingSets.forEach(({items})=>{const r=mergeItems(DB,items);added+=r.added;merged+=r.merged;});
+  sets.forEach(({items})=>{const r=mergeItems(DB,items);added+=r.added;merged+=r.merged;});
   recomputeSections();saveBank();
   openSet.clear();visibleCount=PAGE;activeSection="all";
   renderAll();
-  return {added,merged};
+  return{added,merged};
 }
 function handleFiles(fileList){
   const files=[...fileList].filter(f=>f&&f.name.toLowerCase().endsWith(".json"));
   if(!files.length){showToast("Please choose .json file(s)","error");return;}
   Promise.all(files.map(f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res({name:f.name,text:e.target.result});r.onerror=rej;r.readAsText(f);})))
   .then(results=>{
-    const sets=[];
-    results.forEach(({name,text})=>{try{sets.push({name,items:normalizeJson(JSON.parse(text),name)});}catch(err){showToast(name+": "+err.message,"error");}});
-    if(!sets.length)return;
-    const {added,merged}=ingest(sets);
-    showToast(`${added} unique added, ${merged} merged — ${DB.length} total`);
+    const sets=[];results.forEach(({name,text})=>{try{sets.push({name,items:normalizeJson(JSON.parse(text),name)});}catch(err){showToast(name+": "+err.message,"error");}});
+    if(!sets.length)return;const{added,merged}=ingest(sets);showToast(`${added} unique added, ${merged} merged — ${DB.length} total`);
   }).catch(()=>showToast("Could not read file(s)","error"));
 }
+
 async function loadStarter(silent){
-  if(!STARTER_FILES.length){if(!silent)showToast("No starter files configured","error");return false;}
+  if(window.location.protocol==="file:"){if(!silent)showToast("Running locally — starter files can't be fetched automatically. Use 'Load JSON file(s)' or deploy to GitHub Pages.","info");return false;}
+  if(!STARTER_FILES.length){if(!silent)showToast("No starter files configured in STARTER_FILES array.","info");return false;}
   try{
-    const sets=[];
+    const sets=[];els.emptyMsg.textContent="Loading starter set…";
     for(const url of STARTER_FILES){
       try{
-        const res=await fetch(url,{cache:"no-store"});
-        if(!res.ok)throw new Error("HTTP "+res.status);
-        const name=url.split("/").pop();
+        const res=await fetch(url,{cache:"no-store"});if(!res.ok)throw new Error("HTTP "+res.status);
+        const name=url.split("/").pop()||"starter";
         sets.push({name,items:normalizeJson(await res.json(),name)});
       }catch(e){if(!silent)showToast("Starter '"+url+"': "+e.message,"error");}
     }
     if(!sets.length)return false;
-    // starter always starts fresh unless user is merging manually
-    const prevMerge=els.mergeMode.checked; els.mergeMode.checked=false;
-    const {added}=ingest(sets); els.mergeMode.checked=prevMerge;
+    const prev=els.mergeMode.checked;els.mergeMode.checked=false;
+    const{added}=ingest(sets);els.mergeMode.checked=prev;
     showToast(`Loaded starter set — ${added} questions`);
     return true;
   }catch(e){if(!silent)showToast("Could not load starter set","error");return false;}
 }
+
 function removeSource(name){
   if(!confirm(`Remove source "${name}"? Its answers will be deleted, and any question left with no answers will be removed.`))return;
   DB.forEach(it=>{it.answers=it.answers.filter(a=>a.source!==name);});
@@ -272,7 +198,6 @@ function removeSource(name){
 }
 function tryLoadFromStorage(){try{const raw=localStorage.getItem("qb_bank");if(!raw)return false;const p=JSON.parse(raw);if(!p.items||!p.items.length)return false;DB=p.items;sectionsList=p.sections||[];recomputeSections();return true;}catch(e){return false;}}
 
-/* ================= filtering / render ================= */
 function sectionNumOf(it){return String(sectionsList.indexOf(it.sectionTitle)+1).padStart(2,"0");}
 function getFiltered(){
   const term=searchTerm.toLowerCase().trim();
@@ -296,10 +221,7 @@ function showUI(hasData){
   els.emptyState.classList.toggle("hidden",hasData);
   els.exportJsonBtn.classList.toggle("hidden",!hasData);
   els.clearAllBtn.classList.toggle("hidden",!hasData);
-  els.drawerBtn.classList.toggle("hidden",!hasData);
-  const hasStarter=STARTER_FILES.length>0;
-  els.starterBtn.classList.toggle("hidden",!hasStarter);
-  els.emptyStarterBtn.classList.toggle("hidden",!hasStarter);
+  if(hasData){els.drawerBtn.classList.remove("hidden");}else{els.drawerBtn.classList.add("hidden");}
 }
 function renderMetrics(){
   const total=DB.length,m=[...masteredSet].filter(id=>DB.some(d=>d.id===id)).length,pct=total?Math.round(m/total*100):0;
@@ -337,7 +259,7 @@ function answerBlocks(it){
     </div>`).join("");
 }
 function renderQuestions(){
-  if(!DB.length){showUI(false);els.questionsContainer.innerHTML="";return;}
+  if(!DB.length){showUI(false);els.questionsContainer.innerHTML="";els.emptyMsg.textContent="Load one or more JSON files to build your bank. Import several files with the same questions to compare multiple answers side by side.";return;}
   showUI(true);
   const filtered=getFiltered();
   const shown=filtered.slice(0,visibleCount);
@@ -394,7 +316,6 @@ function renderQuestions(){
 }
 function renderAll(){renderSources();if(!DB.length){showUI(false);return;}renderMetrics();renderSidebar();renderQuestions();}
 
-/* ================= drawer ================= */
 function openDrawerFn(){els.drawer.classList.remove("-translate-x-full");els.drawerOverlay.classList.remove("hidden");document.body.style.overflow="hidden";}
 function closeDrawerFn(){els.drawer.classList.add("-translate-x-full");els.drawerOverlay.classList.add("hidden");document.body.style.overflow="";}
 els.drawerBtn.addEventListener("click",openDrawerFn);
@@ -403,15 +324,12 @@ els.drawerOverlay.addEventListener("click",closeDrawerFn);
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawerFn();});
 window.addEventListener("resize",()=>{if(window.innerWidth>=1024)closeDrawerFn();});
 
-/* ================= events ================= */
 els.searchInput.addEventListener("input",e=>{searchTerm=e.target.value;els.clearSearch.classList.toggle("hidden",!searchTerm);visibleCount=PAGE;renderQuestions();});
 els.clearSearch.addEventListener("click",()=>{searchTerm="";els.searchInput.value="";els.clearSearch.classList.add("hidden");renderQuestions();els.searchInput.focus();});
 els.statusFilter.addEventListener("change",e=>{statusFilterValue=e.target.value;visibleCount=PAGE;renderQuestions();});
 els.loadJsonBtn.addEventListener("click",()=>els.jsonFileInput.click());
 els.emptyLoadBtn.addEventListener("click",()=>els.jsonFileInput.click());
 els.jsonFileInput.addEventListener("change",e=>{handleFiles(e.target.files);e.target.value="";});
-els.starterBtn.addEventListener("click",()=>loadStarter(false));
-els.emptyStarterBtn.addEventListener("click",()=>loadStarter(false));
 els.exportJsonBtn.addEventListener("click",()=>{
   const out=DB.map(o=>({id:o.id,q:o.q,sectionTitle:o.sectionTitle,answers:o.answers}));
   const blob=new Blob([JSON.stringify(out,null,2)],{type:"application/json"});
@@ -430,18 +348,18 @@ window.addEventListener("drop",e=>{e.preventDefault();if(e.dataTransfer.files.le
 window.addEventListener("scroll",()=>{if(window.scrollY>500){els.toTop.classList.remove("hidden");els.toTop.classList.add("flex");}else{els.toTop.classList.add("hidden");els.toTop.classList.remove("flex");}},{passive:true});
 els.toTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 
-/* ================= init ================= */
+/* ============== init ============== */
 if(localStorage.getItem("qb_theme")==="light")document.documentElement.classList.remove("dark");
+
 (async function init(){
-  if(tryLoadFromStorage()){renderAll();return;}
-  // first visit / cleared: auto-load starter set if configured
-  els.emptyMsg.textContent="Loading starter set…";
-  showUI(false);
-  const ok=STARTER_FILES.length ? await loadStarter(true) : false;
-  if(!ok){
-    els.emptyMsg.textContent = STARTER_FILES.length
-      ? "Couldn't fetch the starter set (are the files hosted next to index.html?). Load JSON manually below."
-      : "Load one or more JSON files to build your bank. Import several files with the same questions to compare answers.";
+  const loadedLocal=tryLoadFromStorage();
+  if(loadedLocal){renderAll();return;}
+  // If running on a real server (GitHub Pages) with starter files configured
+  if(window.location.protocol!=="file:" && STARTER_FILES.length){
+    await loadStarter(true);
+    renderAll();
+  } else {
+    showUI(false);
     renderAll();
   }
 })();
