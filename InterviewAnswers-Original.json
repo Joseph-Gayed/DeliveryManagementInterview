@@ -1,0 +1,1752 @@
+[
+  {
+    "id": "Q001",
+    "q": "What is the core difference between being Agile and doing Agile?",
+    "a": "Doing Agile means following ceremonies and artifacts. Being Agile means applying the mindset: customer value, transparency, adaptation, empowered teams, short feedback loops, and outcome-driven decisions.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q002",
+    "q": "Explain the four values of the Agile Manifesto and how you apply them in practice.",
+    "a": "I prioritize people over process, working increments over heavy documentation, customer collaboration over contract negotiation, and adapting plans over blindly following them. In practice, I keep documentation useful, demo frequently, invite stakeholder feedback, and re-plan based on evidence.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q003",
+    "q": "How would you coach a team that follows Scrum ceremonies but is not actually agile?",
+    "a": "I would inspect whether ceremonies create decisions, learning, and adaptation. Then I would reconnect the team to outcomes, improve psychological safety, make impediments visible, and turn retrospectives into owned experiments.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q004",
+    "q": "What are the twelve Agile principles, and which three matter most for delivery managers?",
+    "a": "The principles cover early delivery, welcoming change, frequent working software, business/dev collaboration, motivated teams, face-to-face communication, working software as progress, sustainable pace, technical excellence, simplicity, self-organization, and regular reflection. For delivery managers, early continuous delivery, sustainable pace, and inspect/adapt are usually most critical.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q005",
+    "q": "How do you balance predictability with agility?",
+    "a": "I use rolling-wave planning: firm commitments for the near term, forecast ranges for later work, and transparent assumptions. I protect cadence, manage scope trade-offs explicitly, and communicate confidence levels instead of pretending uncertainty does not exist.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q006",
+    "q": "What is the difference between Agile and iterative development?",
+    "a": "Iterative development is a delivery technique where work evolves through repeated cycles. Agile is broader: a value system and management approach that often uses iteration, but also emphasizes customer collaboration, adaptation, team autonomy, and continuous improvement.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q007",
+    "q": "When would Agile not be the right approach for a project?",
+    "a": "Pure Agile may be less suitable where scope, sequence, and compliance gates are fixed and uncertainty is low, such as some regulatory filings, hardware-bound programs, or repeatable implementation work. Even then, agile feedback practices can still help.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q008",
+    "q": "How do you measure whether an agile transformation is working?",
+    "a": "I look at outcomes: lead time, cycle time, predictability, defect leakage, customer satisfaction, deployment frequency, engagement, and ability to respond to change. Ceremony attendance alone proves process adoption, not agility.",
+    "sectionTitle": "Agile Foundations",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q009",
+    "q": "What are the three pillars of Scrum empiricism?",
+    "a": "Transparency, inspection, and adaptation. Work and progress must be visible, inspected frequently, and adjusted based on what is learned.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q010",
+    "q": "List the five Scrum events and their timeboxes for a two-week sprint.",
+    "a": "Sprint, Sprint Planning up to 4 hours, Daily Scrum 15 minutes, Sprint Review up to 2 hours, and Sprint Retrospective up to 1.5 hours. The Sprint itself is the container for all events.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q011",
+    "q": "What are the three Scrum accountabilities?",
+    "a": "Product Owner, Scrum Master, and Developers. Together they form one Scrum Team accountable for creating a valuable, usable Increment every Sprint.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q012",
+    "q": "Explain the purpose of the Sprint Goal and why a sprint should have only one.",
+    "a": "The Sprint Goal gives the team a single objective and decision filter. One goal creates focus and enables scope trade-offs without losing the purpose of the Sprint.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q013",
+    "q": "What happens if a team fails to meet the Sprint Goal?",
+    "a": "It should trigger transparency and learning, not blame. The team inspects causes, communicates impact, adapts the Product Backlog if needed, and agrees improvement actions in the retrospective.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q014",
+    "q": "What is the difference between the Product Backlog and Sprint Backlog?",
+    "a": "The Product Backlog is the ordered, evolving list of all product work. The Sprint Backlog is the Developers' selected work plus plan for achieving the Sprint Goal.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q015",
+    "q": "Who owns the Sprint Backlog during the sprint?",
+    "a": "The Developers own it. They adapt it daily as they learn more, while preserving alignment to the Sprint Goal and collaborating with the Product Owner on scope trade-offs.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q016",
+    "q": "What is the purpose of the Daily Scrum, and why is status update to the Scrum Master a misuse?",
+    "a": "The Daily Scrum is for Developers to inspect progress toward the Sprint Goal and adjust their plan. It is not a reporting meeting to the Scrum Master; that turns ownership away from the team.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q017",
+    "q": "How would you run a Daily Scrum for a distributed team across four time zones?",
+    "a": "I would use async updates for routine coordination, a rotating overlap window for live discussion when needed, and clear blockers/escalations. The goal is alignment without destroying focus or fairness.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q018",
+    "q": "What is the purpose of Sprint Review versus a demo?",
+    "a": "A demo shows completed functionality. A Sprint Review is a collaborative inspection of the Increment, market context, stakeholder feedback, and Product Backlog adjustments.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q019",
+    "q": "What makes a Sprint Retrospective effective versus just a complaint session?",
+    "a": "It creates psychologically safe, fact-based discussion and ends with a small number of owned, measurable improvement actions. Complaints become useful only when converted into experiments or escalated impediments.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q020",
+    "q": "How do you handle a retrospective where the same unresolved issue appears every sprint?",
+    "a": "I classify it as an organizational impediment if outside the team's control, assign an owner, escalate transparently, track it outside the retro, and report progress until resolved or consciously accepted.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q021",
+    "q": "What is the Definition of Done and who owns it?",
+    "a": "The Definition of Done is the shared quality standard required for work to become part of the Increment. The Scrum Team owns it, and organizational standards may set a minimum baseline.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q022",
+    "q": "What is the Definition of Ready, and is it an official Scrum artifact?",
+    "a": "Definition of Ready is an optional working agreement describing when a backlog item is clear enough to pull into a Sprint. It is not an official Scrum artifact and should not become a rigid gate.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q023",
+    "q": "Explain the difference between a Scrum Master and a Project Manager.",
+    "a": "A Scrum Master enables Scrum, removes impediments, coaches, and protects empiricism. A traditional Project Manager often directly manages scope, schedule, budget, risks, and reporting.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q024",
+    "q": "What are the three commitments associated with Scrum artifacts?",
+    "a": "Product Goal commits the Product Backlog, Sprint Goal commits the Sprint Backlog, and Definition of Done commits the Increment.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q025",
+    "q": "How do you handle a Product Owner who is unavailable most of the sprint?",
+    "a": "I make the delivery risk visible, agree required response times and decision rights, use a qualified proxy only if empowered, and escalate if backlog quality or team flow is materially harmed.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q026",
+    "q": "What is a Product Goal and how does it differ from a Sprint Goal?",
+    "a": "The Product Goal is a longer-term objective guiding the Product Backlog. The Sprint Goal is a short-term objective for one Sprint that moves the product toward that larger goal.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q027",
+    "q": "Can Scrum work with a team of two developers? What would you watch for?",
+    "a": "It can work, but skill coverage, review depth, resilience, and single points of failure are risks. I would keep events lightweight and ensure external support for missing capabilities.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q028",
+    "q": "How would you handle a stakeholder who attends Daily Scrum and starts directing the team?",
+    "a": "I would respectfully intervene, restate the event purpose, invite them to observe silently if appropriate, and redirect direction-setting to Product Owner conversations or Sprint Review.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q029",
+    "q": "What is the maximum recommended Scrum Team size and why does it matter?",
+    "a": "The Scrum Guide recommends a Scrum Team of 10 or fewer people. Beyond that, communication paths, coordination overhead, and loss of focus increase sharply.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q030",
+    "q": "How do you handle zombie Scrum?",
+    "a": "I diagnose why events are not producing learning: low autonomy, poor safety, weak Product Ownership, or ceremony fatigue. Then I simplify the process and reconnect each event to decisions and outcomes.",
+    "sectionTitle": "Scrum Framework",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q031",
+    "q": "What makes a Product Backlog DEEP?",
+    "a": "It is Detailed appropriately, Estimated, Emergent, and Prioritized or ordered. Near-term items are clearer; future items remain coarse and adaptable.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q032",
+    "q": "What is the difference between backlog grooming and backlog refinement?",
+    "a": "They refer to the same activity: clarifying, splitting, estimating, ordering, and preparing backlog items. Refinement is the preferred modern term.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q033",
+    "q": "What is INVEST for user stories?",
+    "a": "Independent, Negotiable, Valuable, Estimable, Small, and Testable. It helps ensure stories can be delivered and validated within a Sprint.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q034",
+    "q": "Write the standard user story template and explain each component.",
+    "a": "As a role, I want capability, so that benefit. The role identifies the user, the capability states the need, and the benefit clarifies business or user value.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q035",
+    "q": "Name four techniques for splitting a large user story.",
+    "a": "Split by workflow step, business rule, happy path versus edge cases, data variation, CRUD operation, user role, interface, or platform.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q036",
+    "q": "What is Story Mapping and why is it useful for release planning?",
+    "a": "Story Mapping visualizes the user journey horizontally and prioritizes slices vertically. It exposes MVP scope, dependencies, gaps, and release increments better than a flat backlog.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q037",
+    "q": "What is the difference between Acceptance Criteria and Definition of Done?",
+    "a": "Acceptance Criteria define story-specific behavior and validation. Definition of Done is the universal quality bar applied to all completed work.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q038",
+    "q": "How would you write acceptance criteria using Given/When/Then?",
+    "a": "Use Given for context, When for the action, and Then for the expected result. Example: Given a valid user, When they reset a password, Then a secure reset link is emailed.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q039",
+    "q": "Why do teams use story points instead of hours?",
+    "a": "Story points estimate relative size, complexity, risk, and uncertainty. They reduce false precision and support forecasting using team-specific historical velocity.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q040",
+    "q": "Compare T-shirt sizing, Planning Poker, and Affinity Estimation.",
+    "a": "T-shirt sizing is fast and coarse. Planning Poker is collaborative and exposes disagreement. Affinity Estimation is efficient for many items by grouping relative sizes.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q041",
+    "q": "How does Planning Poker prevent anchoring bias?",
+    "a": "Team members choose estimates privately and reveal simultaneously, preventing the first or most senior opinion from anchoring everyone else.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q042",
+    "q": "How do you calculate sprint capacity accounting for holidays and leave?",
+    "a": "Start with available person-days, subtract planned absences and ceremonies, then apply a historical focus factor. Compare capacity to average completed work, not theoretical hours.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q043",
+    "q": "Explain velocity versus throughput.",
+    "a": "Velocity is story points completed per Sprint. Throughput is the number of work items completed per period, often used in flow/Kanban systems.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q044",
+    "q": "Why is it risky to compare velocity across teams?",
+    "a": "Story points are relative to each team's context, skills, and estimation calibration. Comparing velocities encourages gaming and false productivity conclusions.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q045",
+    "q": "What does a flat burndown chart early in a sprint usually indicate?",
+    "a": "It usually means too much work is in progress, stories are not sliced small enough, testing is delayed, or Done is only reached near the end.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q046",
+    "q": "Why do many experienced teams prefer burnup charts?",
+    "a": "Burnup charts show completed work and total scope separately, making scope change visible. Burndowns can hide scope creep because the target line moves.",
+    "sectionTitle": "Backlog, Stories & Estimation",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q047",
+    "q": "What is the difference between a product roadmap and a delivery/release plan?",
+    "a": "A roadmap communicates strategic themes, outcomes, and sequencing. A release plan translates near-term roadmap intent into concrete scope, dates, dependencies, and readiness criteria.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q048",
+    "q": "How would you build a three-sprint release plan for a major feature?",
+    "a": "Define MVP and success criteria, slice work by value, sequence dependencies, allocate capacity by Sprint, include testing/hardening, identify risks, and agree release criteria.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q049",
+    "q": "How do you handle a release plan when a critical dependency timeline is unknown?",
+    "a": "I log it as a risk, request a commitment date, model scenarios, create contingency scope or mocks, and communicate confidence ranges instead of a false fixed plan.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q050",
+    "q": "In SAFe, what is PI Planning and why face-to-face when possible?",
+    "a": "PI Planning aligns teams on objectives, dependencies, risks, and capacity for an 8-12 week Program Increment. Face-to-face or high-bandwidth interaction improves negotiation and shared understanding.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q051",
+    "q": "What are PI objectives and how are they scored?",
+    "a": "PI objectives are team and program goals for the increment. Business Owners assign business value, teams confidence-vote, and actual achievement is reviewed at PI end.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q052",
+    "q": "What is the distinction between Epic, Feature, and Story?",
+    "a": "An Epic is a large initiative often spanning quarters or PIs. A Feature should fit in a PI. A Story should fit in a Sprint and deliver user value.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q053",
+    "q": "How do you report progress on a multi-quarter epic to executives?",
+    "a": "I report milestone progress, outcome metrics, spend/burn, risks, dependencies, forecast confidence, and decisions needed. I avoid raw story counts as the primary executive measure.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q054",
+    "q": "How do you decide when a feature is released versus code complete?",
+    "a": "Code complete means implementation is finished. Released means deployed, enabled for intended users, operationally monitored, supported, and validated against release criteria.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q055",
+    "q": "What tooling or artifacts visualize cross-team dependencies at scale?",
+    "a": "Program boards, dependency maps, RAID logs, integrated Jira/Azure dependency views, architecture roadmaps, and milestone plans with explicit owners and dates.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q056",
+    "q": "How would you run a Scrum of Scrums and what should it not become?",
+    "a": "I focus it on inter-team dependencies, blockers, integration risks, and decisions. It should not become a generic status meeting where each team reads updates.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q057",
+    "q": "How do you prevent two teams from building conflicting solutions?",
+    "a": "Create shared backlog visibility, architecture forums, ownership maps, ADR reviews, API contracts, and early design checkpoints before parallel work diverges.",
+    "sectionTitle": "Roadmaps & Release Planning",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q058",
+    "q": "Explain the core practices of Kanban.",
+    "a": "Visualize work, limit WIP, manage flow, make policies explicit, implement feedback loops, and improve collaboratively using data.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q059",
+    "q": "Why does limiting WIP improve throughput?",
+    "a": "Lower WIP reduces context switching, queues, and hidden bottlenecks. It helps teams finish work faster instead of starting more work than the system can absorb.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q060",
+    "q": "How is Cycle Time different from Lead Time, and which matters more to customers?",
+    "a": "Lead Time runs from request to delivery and is customer-facing. Cycle Time runs from work start to delivery and is team-facing. Customers usually care more about Lead Time.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q061",
+    "q": "How would you use a Cumulative Flow Diagram to diagnose a bottleneck?",
+    "a": "I look for widening bands, which show work accumulating in a stage. That indicates downstream capacity, policy, or dependency constraints slowing flow.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q062",
+    "q": "What are the seven wastes of Lean in software?",
+    "a": "Partially done work, extra features, relearning, handoffs, task switching, delays, and defects.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q063",
+    "q": "Explain MVP from a Lean perspective.",
+    "a": "An MVP is the smallest experiment that validates a learning hypothesis with real users. It is not simply a poorly featured version of the final product.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q064",
+    "q": "What are the core levels of SAFe?",
+    "a": "Team, Program or ART, Large Solution, and Portfolio. Essential SAFe focuses on Team and ART; Full SAFe includes all levels.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q065",
+    "q": "What is an Agile Release Train in SAFe?",
+    "a": "An ART is a long-lived team of agile teams aligned to a shared mission, cadence, backlog, and value stream, typically 50-125 people.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q066",
+    "q": "What is the role of a Release Train Engineer?",
+    "a": "The RTE is the chief facilitator and servant leader for the ART, enabling PI Planning, flow, dependency resolution, risk escalation, and continuous improvement.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q067",
+    "q": "How does WSJF prioritization work?",
+    "a": "Weighted Shortest Job First ranks work by Cost of Delay divided by job size. It favors high-value, time-critical, risk-reducing work that can be delivered quickly.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q068",
+    "q": "What problem does Nexus solve?",
+    "a": "Nexus coordinates 3-9 Scrum Teams working from one Product Backlog toward one Integrated Increment, with explicit focus on integration and cross-team dependencies.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q069",
+    "q": "How does LeSS differ philosophically from SAFe?",
+    "a": "LeSS minimizes additional roles and structure, extending Scrum with as little overhead as possible. SAFe provides more formal coordination, portfolio, and governance layers.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q070",
+    "q": "What is the Executive Action Team in Scrum@Scale?",
+    "a": "The EAT removes organizational impediments that teams or Scrum of Scrums cannot resolve, such as funding, structure, policy, or leadership constraints.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q071",
+    "q": "How do you design a hybrid model for fixed-scope contracts and agile teams?",
+    "a": "Use fixed governance, commercial controls, and milestone reporting externally, while executing internally with agile iterations, demos, change control, and scope trade-off bands.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q072",
+    "q": "How do you manage Waterfall contract milestones while engineering uses Scrum?",
+    "a": "I map Sprint outputs to contractual gates, maintain traceability, produce required documents incrementally, and use a bridging plan that translates agile evidence into milestone acceptance.",
+    "sectionTitle": "Frameworks at Scale",
+    "cat": "Agile"
+  },
+  {
+    "id": "Q073",
+    "q": "What are traditional SDLC phases and where does delivery management add value?",
+    "a": "Requirements, design, build, test, deploy, and maintain. Delivery management adds most value by coordinating handoffs, risks, dependencies, scope control, and stakeholder decisions across phases.",
+    "sectionTitle": "SDLC & Waterfall",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q074",
+    "q": "When is Waterfall genuinely a better fit than Agile?",
+    "a": "When requirements are stable, scope is fixed, change is expensive, and compliance gates dominate, such as certain regulated, infrastructure, hardware, or contractual programs.",
+    "sectionTitle": "SDLC & Waterfall",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q075",
+    "q": "What primary Waterfall risk does Agile mitigate?",
+    "a": "Late discovery that requirements, design assumptions, or user expectations were wrong. Agile mitigates this through early working software and frequent feedback.",
+    "sectionTitle": "SDLC & Waterfall",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q076",
+    "q": "How would you sequence a delivery plan for a hard regulatory audit date?",
+    "a": "Work backward from the audit, define evidence and control checkpoints, reserve time for remediation, documentation, testing, approvals, and avoid late scope churn.",
+    "sectionTitle": "SDLC & Waterfall",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q077",
+    "q": "What cultural shift does DevOps represent beyond tooling?",
+    "a": "DevOps creates shared ownership across development, operations, security, and delivery for building, deploying, operating, and improving software. It replaces handoff culture with product/service ownership.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q078",
+    "q": "Explain You Build It, You Run It and trade-offs.",
+    "a": "Teams operating what they build gain accountability, faster feedback, and better quality. The trade-off is on-call load and the need for operational skills, tooling, and support.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q079",
+    "q": "Difference between Continuous Integration, Delivery, and Deployment?",
+    "a": "CI means frequent integration with automated tests. Continuous Delivery keeps software always releasable. Continuous Deployment automatically releases every passing change to production.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q080",
+    "q": "Describe typical CI/CD stages for a web app.",
+    "a": "Commit, build, unit tests, lint/static analysis, dependency/security scans, package artifact, integration tests, deploy to staging, smoke tests, production deploy, and post-deploy monitoring.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q081",
+    "q": "What is a flaky test and how does it undermine CI?",
+    "a": "A flaky test passes or fails inconsistently without code changes. It erodes trust, causes ignored failures, slows teams, and can hide real regressions.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q082",
+    "q": "How do you handle a 45-minute test suite slowing releases?",
+    "a": "Segment tests by speed and risk, parallelize, optimize slow tests, run fast PR gates first, move heavier suites to staged or scheduled runs, and eliminate flakiness.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q083",
+    "q": "Explain git merge versus git rebase.",
+    "a": "Merge combines branches with a merge commit and preserves history. Rebase replays commits onto a new base for a linear history but rewrites commit history.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q084",
+    "q": "What is a merge conflict and what causes it?",
+    "a": "A merge conflict occurs when Git cannot automatically reconcile incompatible changes, commonly to the same lines or overlapping file structure changes.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q085",
+    "q": "Compare Git Flow and Trunk-Based Development for release cadence.",
+    "a": "Git Flow uses longer-lived release and feature branches, suiting scheduled releases but increasing integration risk. Trunk-based uses short-lived branches and supports continuous delivery.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q086",
+    "q": "What is a feature branch strategy and risk of long-lived branches?",
+    "a": "Developers isolate work on separate branches. If branches live too long, they accumulate integration debt, merge conflicts, stale assumptions, and delayed feedback.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q087",
+    "q": "How design branching for multiple production releases per day?",
+    "a": "Use trunk-based development, short-lived branches, mandatory CI, small changes, feature flags, automated deployment, and fast rollback or kill-switch mechanisms.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q088",
+    "q": "Difference between release and deploy?",
+    "a": "Deploy means code is installed in an environment. Release means functionality is exposed to users, often controlled independently through feature flags.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q089",
+    "q": "How do feature flags reduce release risk?",
+    "a": "They decouple deployment from user exposure, enabling gradual rollout, A/B testing, instant disablement, and safer rollback without redeploying code.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q090",
+    "q": "Risk of too many long-lived feature flags?",
+    "a": "They create conditional complexity, untested flag combinations, dead code, ownership ambiguity, and operational confusion. Flags need owners and retirement dates.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q091",
+    "q": "What criteria should trigger automatic rollback?",
+    "a": "Pre-agreed guardrails such as error-rate spikes, latency regression, failed health checks, saturation, crash loops, or business KPI degradation versus baseline.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q092",
+    "q": "Rollback versus roll-forward fix, and when choose each?",
+    "a": "Rollback restores a known-good version quickly. Roll-forward patches the current path when rollback is unsafe, such as irreversible data migrations or dependency changes.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q093",
+    "q": "Explain Blue-Green deployment and benefit.",
+    "a": "Two production-like environments run side by side; traffic switches from blue to green. It enables low downtime and rapid rollback by switching traffic back.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q094",
+    "q": "How does Canary differ from Blue-Green, and when prefer it?",
+    "a": "Canary gradually exposes a new version to a small cohort before full rollout. Prefer it when real-user validation and blast-radius reduction are important.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q095",
+    "q": "What metrics monitor during canary rollout?",
+    "a": "Compare canary versus baseline for error rate, latency, saturation, logs, conversion, revenue, support tickets, and domain-specific business KPIs.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q096",
+    "q": "How design rollback-safe database migration?",
+    "a": "Use expand-contract: add backward-compatible schema first, deploy code that supports old and new, backfill safely, switch reads/writes, then remove old fields later.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q097",
+    "q": "How coordinate a release calendar across product lines sharing a platform?",
+    "a": "Maintain a shared release calendar, platform dependency board, freeze windows, sequencing rules, change advisory where needed, and clear ownership for integration readiness.",
+    "sectionTitle": "DevOps, CI/CD & Release Engineering",
+    "cat": "DevOps"
+  },
+  {
+    "id": "Q098",
+    "q": "Difference between horizontal and vertical scaling?",
+    "a": "Vertical scaling increases resources on one machine. Horizontal scaling adds more machines or instances and usually improves resilience and elasticity.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q099",
+    "q": "Explain IaaS, PaaS, and SaaS with examples.",
+    "a": "IaaS provides infrastructure like AWS EC2. PaaS provides managed runtime like Heroku or App Engine. SaaS provides complete applications like Salesforce.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q100",
+    "q": "What is an SLA in cloud vendor uptime?",
+    "a": "An SLA is a contractual availability commitment, often expressed as uptime percentage, with remedies such as service credits if the vendor breaches it.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q101",
+    "q": "Difference between AWS Availability Zone and Region?",
+    "a": "A Region is a geographic area. An Availability Zone is an isolated data center grouping within a Region, used for fault tolerance.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q102",
+    "q": "What does AWS Auto Scaling do and why should a delivery manager care?",
+    "a": "It adjusts compute capacity based on demand. Delivery managers care because it affects cost, launch readiness, performance testing, resilience, and capacity assumptions.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q103",
+    "q": "What is Azure DevOps used for beyond source control?",
+    "a": "Boards, Repos, Pipelines, Test Plans, Artifacts, dashboards, traceability, and end-to-end delivery management from backlog to release.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q104",
+    "q": "What is Google Kubernetes Engine?",
+    "a": "GKE is Google Cloud's managed Kubernetes service, providing cluster orchestration, scaling, upgrades, networking, and operations for containerized workloads.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q105",
+    "q": "Difference between Docker image and container?",
+    "a": "An image is the immutable packaged template. A container is a running instance of that image with its own process and runtime environment.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q106",
+    "q": "Why do containers improve delivery consistency?",
+    "a": "They package application code and dependencies consistently across environments, reducing configuration drift and the classic works-on-my-machine problem.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q107",
+    "q": "What problem does Kubernetes solve that plain Docker does not?",
+    "a": "Kubernetes orchestrates containers across clusters: scheduling, scaling, service discovery, networking, rollout, self-healing, and resource management.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q108",
+    "q": "Explain a Kubernetes Pod.",
+    "a": "A Pod is the smallest deployable Kubernetes unit, containing one or more tightly coupled containers sharing network namespace, storage, and lifecycle.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q109",
+    "q": "Difference between load balancer and reverse proxy?",
+    "a": "A load balancer distributes traffic across backend instances. A reverse proxy sits in front of services to route, terminate TLS, cache, authenticate, or transform requests.",
+    "sectionTitle": "Cloud & Infrastructure",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q110",
+    "q": "What does REST stand for and what are key constraints?",
+    "a": "Representational State Transfer. Key constraints include statelessness, client-server separation, uniform interface, cacheability, layered system, and optional code-on-demand.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q111",
+    "q": "Difference between PUT and PATCH?",
+    "a": "PUT usually replaces the full resource representation idempotently. PATCH applies a partial update to selected fields or operations.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q112",
+    "q": "What problem does GraphQL solve that REST often does not?",
+    "a": "GraphQL reduces over-fetching and under-fetching by letting clients request exactly the fields they need, often across related resources in one query.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q113",
+    "q": "Trade-off of GraphQL versus REST operationally?",
+    "a": "GraphQL can complicate HTTP caching, monitoring, rate limiting, authorization, and query cost control because requests are dynamic and flexible.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q114",
+    "q": "Compare URI versioning versus header-based API versioning.",
+    "a": "URI versioning is explicit and easy to test but clutters endpoints. Header versioning is cleaner but less discoverable and can be harder for consumers.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q115",
+    "q": "How plan a breaking API change without disrupting integrations?",
+    "a": "Introduce a new version in parallel, publish migration guides, notify consumers, track adoption, support both temporarily, and enforce a clear sunset date.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q116",
+    "q": "Difference between authentication and authorization?",
+    "a": "Authentication verifies who the user or service is. Authorization determines what that identity is allowed to access or perform.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q117",
+    "q": "Explain RBAC versus ABAC.",
+    "a": "RBAC grants permissions through predefined roles. ABAC evaluates attributes such as user, resource, action, environment, location, and context for finer-grained decisions.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q118",
+    "q": "What problem does OAuth 2.0 solve?",
+    "a": "It lets users grant third-party applications limited delegated access to resources without sharing credentials, using tokens and defined authorization flows.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q119",
+    "q": "Access Token versus Refresh Token?",
+    "a": "An access token is short-lived and used to call APIs. A refresh token is longer-lived and used to obtain new access tokens securely.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q120",
+    "q": "What is a JWT and its three parts?",
+    "a": "A JSON Web Token is a compact signed token containing claims. It has a header, payload, and signature.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q121",
+    "q": "Risk of storing sensitive data unencrypted in JWT payload?",
+    "a": "JWT payloads are base64url-encoded, not encrypted by default. Anyone with the token can decode and read sensitive claims.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q122",
+    "q": "Difference between INNER JOIN and LEFT JOIN?",
+    "a": "INNER JOIN returns only rows with matches in both tables. LEFT JOIN returns all rows from the left table plus matching right rows or nulls.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q123",
+    "q": "What is normalization and why denormalize?",
+    "a": "Normalization structures data to reduce redundancy and anomalies. Denormalization intentionally duplicates or reshapes data to improve read performance or simplify queries.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q124",
+    "q": "When choose NoSQL over relational?",
+    "a": "When flexible schema, massive horizontal scale, high write throughput, document/key-value access, or availability patterns matter more than complex joins and strict relational integrity.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q125",
+    "q": "What is CAP theorem and why matter?",
+    "a": "During network partitions, distributed systems must trade off consistency and availability. It matters because architecture must match business tolerance for stale data or downtime.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q126",
+    "q": "What is a database index and trade-off?",
+    "a": "An index speeds lookups, filters, joins, and sorting by maintaining auxiliary data structures. It costs extra storage and slows writes/updates.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q127",
+    "q": "What is Redis commonly used for?",
+    "a": "Redis is used for in-memory caching, sessions, rate limiting, distributed locks, queues, leaderboards, counters, and pub/sub-style messaging.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q128",
+    "q": "What problem does Kafka solve for event-driven systems?",
+    "a": "Kafka provides durable, ordered, high-throughput event streams that decouple producers and consumers and allow replay of historical events.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q129",
+    "q": "Difference between Kafka topic and partition?",
+    "a": "A topic is a logical event stream. Partitions split a topic for scalability and guarantee ordering only within each partition.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q130",
+    "q": "RabbitMQ queue model versus Kafka log model?",
+    "a": "RabbitMQ routes messages to queues for consumption and acknowledgement. Kafka stores an append-only retained log where consumers track offsets and can replay.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q131",
+    "q": "Benefit of event-driven architecture for cross-team delivery?",
+    "a": "Teams integrate through published events and contracts rather than synchronous handoffs, reducing coupling, blocking dependencies, and coordinated release pressure.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q132",
+    "q": "Explain cache invalidation and why it is hard.",
+    "a": "Cache invalidation decides when cached data is stale and must be refreshed. It is hard because data changes across systems, timing, replication, and user expectations rarely align perfectly.",
+    "sectionTitle": "APIs, Auth & Data",
+    "cat": "Data"
+  },
+  {
+    "id": "Q133",
+    "q": "Benefits and costs of microservices from delivery perspective?",
+    "a": "Benefits include independent deployment, scaling, ownership, and fault isolation. Costs include distributed complexity, observability needs, data consistency challenges, and cross-service coordination.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q134",
+    "q": "When not migrate from monolith to microservices?",
+    "a": "Do not migrate when the team is small, domain boundaries are unclear, deployment maturity is weak, observability is poor, or the monolith is not yet constraining delivery.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q135",
+    "q": "What is a distributed monolith and why worse?",
+    "a": "It is a set of services that are tightly coupled and must change or deploy together. It adds network and operational complexity without independent delivery benefits.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q136",
+    "q": "What is Single Responsibility Principle and why matter to delivery?",
+    "a": "A component should have one reason to change. It reduces change blast radius, simplifies testing, improves ownership, and lowers coordination cost.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q137",
+    "q": "How facilitate an Architecture Decision Record process?",
+    "a": "Use lightweight ADRs capturing context, options, decision, consequences, owner, and date. Review important decisions collaboratively and store ADRs where teams can find them.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q138",
+    "q": "High-level design for URL shortener service.",
+    "a": "Generate unique short codes, store code-to-long-URL mappings, redirect reads through a fast lookup/cache, handle collisions, track analytics asynchronously, and scale for read-heavy traffic.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q139",
+    "q": "Vertical partitioning versus horizontal partitioning?",
+    "a": "Vertical partitioning splits data by columns or functional domains. Horizontal partitioning, or sharding, splits rows across databases by key.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q140",
+    "q": "Explain eventual consistency and acceptable example.",
+    "a": "Eventual consistency means replicas may temporarily differ but converge over time. It is acceptable for likes, feeds, analytics, or non-critical counters.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q141",
+    "q": "What problem does Circuit Breaker solve?",
+    "a": "It stops repeated calls to a failing dependency, preventing resource exhaustion and cascading failure while giving the downstream service time to recover.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q142",
+    "q": "Explain Strangler Fig pattern.",
+    "a": "Incrementally route functionality from a legacy system to a new system, feature by feature, until the legacy system can be retired.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q143",
+    "q": "What is Saga pattern and why used?",
+    "a": "A Saga coordinates multiple local transactions using events or orchestration plus compensating actions. It avoids fragile distributed transactions across services.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q144",
+    "q": "How evaluate if architecture is over-engineered?",
+    "a": "Compare complexity to actual scale, risk, team capability, and near-term requirements. Challenge speculative flexibility that adds cost without measurable benefit.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q145",
+    "q": "Synchronous versus asynchronous service communication and trade-offs?",
+    "a": "Synchronous calls are simple and immediate but couple availability and latency. Asynchronous messaging improves resilience and decoupling but adds eventual consistency and operational complexity.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q146",
+    "q": "How explain architecture trade-offs to non-technical stakeholders?",
+    "a": "Translate choices into business impact: delivery speed, rework cost, outage risk, compliance exposure, scalability, operational cost, and future flexibility.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q147",
+    "q": "How approach capacity planning for 10x launch traffic?",
+    "a": "Model expected load, load test critical paths, identify bottlenecks, tune autoscaling, pre-warm caches, validate database limits, prepare rollback, and staff launch support.",
+    "sectionTitle": "Architecture & System Design",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q148",
+    "q": "Difference between monitoring and observability?",
+    "a": "Monitoring tracks known signals and alerts on expected failure modes. Observability enables investigation of unknown problems through rich telemetry, correlation, and exploration.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q149",
+    "q": "What are the three pillars of observability?",
+    "a": "Logs, metrics, and traces. Together they show what happened, how much, and where a request traveled.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q150",
+    "q": "What is distributed tracing and why matter?",
+    "a": "Distributed tracing follows a request across services, showing latency and failures at each hop. It is essential for diagnosing microservice performance and dependency issues.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q151",
+    "q": "First 15 minutes of a Sev1 incident?",
+    "a": "Declare the incident, assign Incident Commander, open bridge/chat, start timeline, confirm impact, assign communications and technical leads, stabilize first, and decide rollback or mitigation.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q152",
+    "q": "Role of Incident Commander during major outage?",
+    "a": "The Incident Commander coordinates response, prioritizes actions, manages communication, keeps timeline, removes distractions, and makes decisions. They should not be the main debugger.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q153",
+    "q": "What is Five Whys and limitation?",
+    "a": "Five Whys repeatedly asks why to move from symptom to cause. Its limitation is oversimplifying complex, multi-causal, systemic failures.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q154",
+    "q": "Why should post-incident review be blameless and how enforce?",
+    "a": "Blame suppresses truth and learning. Enforce by focusing on systems, decisions, signals, constraints, and process improvements rather than individual fault.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q155",
+    "q": "How structure on-call rotation to avoid burnout on small team?",
+    "a": "Use fair primary/secondary rotations, clear escalation, runbooks, compensation or time off, alert hygiene, office-hours coverage, and reduce pages through reliability work.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q156",
+    "q": "Difference between runbook and playbook?",
+    "a": "A runbook gives step-by-step technical actions. A playbook defines broader incident process, roles, communications, escalation, and decision flow.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q157",
+    "q": "Difference between SLA, SLO, and SLI?",
+    "a": "SLI is the measured reliability indicator. SLO is the internal target. SLA is the contractual external promise with consequences.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q158",
+    "q": "How set SLO for new service with no history?",
+    "a": "Start with comparable services and business expectations, set a conservative initial target, measure production behavior, then adjust through review cycles.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q159",
+    "q": "What is an error budget?",
+    "a": "An error budget is the allowed unreliability implied by an SLO. It balances feature velocity and reliability by defining when teams must slow down to improve stability.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q160",
+    "q": "How handle team shipping despite exhausted error budget?",
+    "a": "Apply the agreed policy: freeze or restrict risky changes, prioritize reliability fixes, involve product leadership, and resume normal delivery when budget recovers.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q161",
+    "q": "How maintain a technical risk register?",
+    "a": "Track risk description, probability, impact, owner, mitigation, contingency, status, and due date. Review regularly and escalate high-exposure risks.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q162",
+    "q": "How write post-incident report for executives?",
+    "a": "Use plain language: customer impact, timeline, root cause, contributing factors, recovery actions, prevention plan, owners, dates, and residual risk.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q163",
+    "q": "How decide hotfix versus next scheduled release?",
+    "a": "Evaluate severity, customer impact, workaround availability, regulatory/SLA exposure, fix risk, test confidence, and cost of out-of-band release.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q164",
+    "q": "What makes a good alert versus noisy alert?",
+    "a": "A good alert is actionable, urgent, tied to user impact, has ownership, and links to a runbook. Noisy alerts lack clear action or business meaning.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q165",
+    "q": "How use dashboard to distinguish deployment regression from infrastructure noise?",
+    "a": "Correlate metric changes with deploy markers, compare before/after baselines, inspect affected services, cohorts, regions, and check infrastructure-wide signals.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q166",
+    "q": "When communicate incident externally to customers?",
+    "a": "When there is customer-visible impact, contractual obligation, data/security concern, or transparency policy trigger. Communication should be timely, accurate, and updated as facts evolve.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q167",
+    "q": "Value of game day or chaos engineering?",
+    "a": "It tests resilience, alerting, runbooks, roles, and recovery procedures safely before real incidents expose weaknesses.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q168",
+    "q": "How triage spike in customer support tickets?",
+    "a": "Cluster by symptom, timestamp, account, region, version, and workflow; check recent deploys and telemetry; declare an incident if systemic impact is likely.",
+    "sectionTitle": "Monitoring, Incidents & Production Support",
+    "cat": "Ops"
+  },
+  {
+    "id": "Q169",
+    "q": "How explain technical debt to business stakeholders?",
+    "a": "It is like financial debt: taking shortcuts can speed delivery now, but interest appears later as slower changes, more defects, higher risk, and reduced flexibility.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q170",
+    "q": "How prioritize tech debt against feature delivery?",
+    "a": "Quantify impact on incidents, cycle time, onboarding, defect rate, and risk. Allocate capacity, tie debt items to outcomes, and prioritize high-interest debt.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q171",
+    "q": "Difference between deliberate and inadvertent technical debt?",
+    "a": "Deliberate debt is a conscious trade-off for speed or learning. Inadvertent debt comes from poor understanding, changing requirements, or better knowledge discovered later.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q172",
+    "q": "Refactoring versus rewriting and when appropriate?",
+    "a": "Refactoring improves internal structure without changing behavior and is safer incrementally. Rewriting replaces functionality wholesale and is justified only when incremental change is uneconomic or unsafe.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q173",
+    "q": "How ensure large refactor avoids regressions?",
+    "a": "Build characterization tests, refactor incrementally, use feature flags, monitor behavior, run parallel paths where useful, and keep rollback options.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q174",
+    "q": "Difference between Quality Assurance and Quality Control?",
+    "a": "QA prevents defects through process, standards, and practices. QC detects defects through inspection and testing of the product.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q175",
+    "q": "How build quality culture where testing is not only QA's job?",
+    "a": "Make quality part of Definition of Done, require developer-owned tests, shift left, pair QA with dev early, automate checks, and treat defects as team learning.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q176",
+    "q": "What is the Test Pyramid and why more unit than E2E?",
+    "a": "The pyramid favors many fast unit tests, fewer integration tests, and limited E2E tests. Unit tests are cheaper, faster, and more stable.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q177",
+    "q": "Risk of over-investing in UI E2E automation?",
+    "a": "UI E2E tests are slow, brittle, expensive to maintain, and often fail for reasons unrelated to product behavior, reducing pipeline trust.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q178",
+    "q": "What makes a good unit test?",
+    "a": "It is fast, deterministic, isolated, readable, focused on one behavior, independent of external systems, and meaningful when it fails.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q179",
+    "q": "What is TDD and delivery benefit?",
+    "a": "TDD writes a failing test before code, then implements and refactors. It provides design feedback, regression safety, and clearer expected behavior.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q180",
+    "q": "Integration testing versus contract testing?",
+    "a": "Integration testing validates actual components working together. Contract testing verifies provider-consumer API compatibility without requiring full end-to-end environments.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q181",
+    "q": "How test a service depending on third-party API?",
+    "a": "Use mocks/stubs for routine tests, provider sandbox for integration, contract tests where possible, fault injection for timeouts/errors, and periodic validation against production-like behavior.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q182",
+    "q": "Strategy to keep E2E tests fast on every PR?",
+    "a": "Run critical-path smoke E2E tests in parallel on PRs, tag slower tests for nightly or pre-release runs, and remove duplicate coverage.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q183",
+    "q": "Difference between load testing and stress testing?",
+    "a": "Load testing validates expected traffic levels. Stress testing exceeds expected capacity to discover limits, degradation behavior, and breaking points.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q184",
+    "q": "How incorporate performance testing into CI/CD without slowing deploys?",
+    "a": "Run lightweight performance smoke tests per build and schedule full load/stress tests nightly, pre-release, or for high-risk changes.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q185",
+    "q": "How handle QA as bottleneck at sprint end?",
+    "a": "Shift testing left, involve QA in refinement, automate regression, slice stories smaller, enforce dev test ownership, and limit WIP into QA.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q186",
+    "q": "How make business case for two-sprint tech-debt initiative?",
+    "a": "Show current cost using incidents, cycle time, support load, defect leakage, and delivery drag. Present expected measurable improvement and risk reduction.",
+    "sectionTitle": "Technical Debt & Quality Assurance",
+    "cat": "QA"
+  },
+  {
+    "id": "Q187",
+    "q": "What is least privilege and why matter for pipelines?",
+    "a": "Grant only the minimum access required. In pipelines it limits blast radius if credentials, build agents, or deployment automation are compromised.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q188",
+    "q": "Encryption at rest versus in transit?",
+    "a": "At rest protects stored data on disks, databases, and backups. In transit protects data moving over networks, typically using TLS.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q189",
+    "q": "What is OWASP Top 10 and why should a delivery manager know it?",
+    "a": "It is a list of major web application security risks. Delivery managers use it to prioritize security work, plan gates, and communicate risk.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q190",
+    "q": "Explain SQL Injection and prevention.",
+    "a": "SQL Injection occurs when untrusted input changes query logic. Prevent it with parameterized queries, prepared statements, input validation, least privilege, and safe ORM use.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q191",
+    "q": "What does shifting security left mean?",
+    "a": "It means integrating security early in the SDLC through threat modeling, secure design, code scanning, dependency checks, and developer education.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q192",
+    "q": "How add security review gate without slowing delivery?",
+    "a": "Automate SAST, dependency, secret, and container scans in CI; set risk-based thresholds; reserve manual review for high-risk changes.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q193",
+    "q": "High-level GDPR obligations for delivery teams?",
+    "a": "Data minimization, lawful processing, consent/rights handling, access and erasure requests, privacy by design, breach notification, and protection of personal data.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q194",
+    "q": "How does right to be forgotten affect architecture and backlog?",
+    "a": "Systems must locate, delete, anonymize, or suppress personal data across services, logs, analytics, backups, and downstream processors, requiring explicit backlog capacity.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q195",
+    "q": "What does SOC 2 assess and why hard roadmap deadline?",
+    "a": "SOC 2 assesses controls for security, availability, confidentiality, processing integrity, and privacy. It often drives sales, enterprise readiness, and contractual deadlines.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q196",
+    "q": "What is ISO 27001 concerned with?",
+    "a": "ISO 27001 defines an Information Security Management System for identifying risks, implementing controls, auditing, and continuously improving security governance.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q197",
+    "q": "How respond to vulnerability two days before major launch?",
+    "a": "Assess severity, exploitability, exposure, and mitigation. Patch or mitigate urgently, involve security/legal/product, decide launch impact transparently, and document residual risk.",
+    "sectionTitle": "Security & Compliance",
+    "cat": "Architecture"
+  },
+  {
+    "id": "Q198",
+    "q": "What are the four DORA metrics?",
+    "a": "Deployment Frequency, Lead Time for Changes, Change Failure Rate, and Time to Restore Service.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q199",
+    "q": "What distinguishes Elite from Low performers on DORA metrics?",
+    "a": "Elite performers deploy on demand, have short lead times, low change failure, and fast recovery. Low performers deploy infrequently, recover slowly, and carry larger batches.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q200",
+    "q": "Why are deployment frequency and stability not a trade-off?",
+    "a": "High performers use automation, small batches, trunk-based development, tests, observability, and fast rollback, which improves both speed and stability.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q201",
+    "q": "Risk of individual developer commit counts as productivity metric?",
+    "a": "It incentivizes gaming, ignores complexity and collaboration, discourages refactoring/review, and can reward noisy activity over valuable outcomes.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q202",
+    "q": "What is Cycle Time and how identify bottleneck?",
+    "a": "Cycle Time measures work start to completion. Break it down by workflow stage to see where items wait longest or queues grow.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q203",
+    "q": "What KPIs present to executives for delivery health?",
+    "a": "Predictability, lead/cycle time, roadmap progress, quality defects, incident trend, change failure, customer impact, team health, and top risks/decisions.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q204",
+    "q": "How measure whether release cadence improved outcomes?",
+    "a": "Compare before/after deployment frequency, lead time, change failure, MTTR, escaped defects, customer satisfaction, and business impact.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q205",
+    "q": "How avoid vanity metrics in upward reporting?",
+    "a": "Use metrics tied to decisions, risks, and outcomes. Explain trend, target, interpretation, and action rather than reporting attractive numbers in isolation.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q206",
+    "q": "Output metrics versus outcome metrics?",
+    "a": "Output measures activity or deliverables, such as stories completed. Outcome measures business or user impact, such as conversion, retention, reliability, or revenue.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q207",
+    "q": "How set predictability target for team new to sprints?",
+    "a": "Baseline actual commitment versus completion for several Sprints, identify causes of variance, then set gradual improvement targets rather than imposing an arbitrary ideal.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q208",
+    "q": "How improve high Change Failure Rate?",
+    "a": "Reduce batch size, strengthen automated tests, improve code review, use canaries/feature flags, enhance pre-deploy validation, and perform blameless analysis of failures.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q209",
+    "q": "Why not use story points for cross-team performance comparison?",
+    "a": "Points are locally calibrated and relative. Cross-team comparison creates false precision, unhealthy competition, and metric gaming.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q210",
+    "q": "How structure monthly delivery scorecard for five programs?",
+    "a": "Use consistent RAG, milestone progress, forecast confidence, DORA/flow trends, quality, financials if relevant, top risks, dependencies, and decisions needed.",
+    "sectionTitle": "Delivery Metrics & DORA",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q211",
+    "q": "How configure Jira workflow to prevent skipping code review?",
+    "a": "Add a code review status or transition condition, require linked PR approval and passing checks before moving to Done, and audit exceptions.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q212",
+    "q": "Difference between Jira Epic and Initiative?",
+    "a": "An Epic groups related stories for a sizable feature. An Initiative groups multiple epics under a larger strategic, often multi-quarter objective.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q213",
+    "q": "Azure DevOps Boards versus Pipelines?",
+    "a": "Boards manages work items, backlogs, sprints, and tracking. Pipelines automates build, test, release, and deployment workflows.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q214",
+    "q": "How structure Confluence so it avoids documentation graveyard?",
+    "a": "Use a clear taxonomy, ownership, templates, page status, review dates, linked indexes, archive policy, and direct links from active Jira work.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q215",
+    "q": "Purpose of GitHub Actions beyond deploys?",
+    "a": "GitHub Actions automates CI/CD and workflow tasks such as release notes, dependency scanning, issue triage, labeling, environment checks, and compliance evidence.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q216",
+    "q": "Advantage of GitLab integrated CI/CD?",
+    "a": "Source, issues, pipelines, security scans, artifacts, and deployments are tightly connected, reducing handoff friction and improving traceability.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q217",
+    "q": "How use Azure DevOps for five-team dependencies?",
+    "a": "Link work items across teams, use feature/epic hierarchy, dependency views or delivery plans, shared milestones, tags, and a program-level board.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q218",
+    "q": "Purpose of GitHub branch protection rules and production settings?",
+    "a": "They enforce quality gates before merge. For production I require PR reviews, passing status checks, up-to-date branches, signed commits if needed, and restricted admin bypass.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q219",
+    "q": "How use Confluence with Jira to sync requirements and execution?",
+    "a": "Store rich requirements and decisions in Confluence, link them to Jira epics/stories, embed Jira reports, and keep ownership and review cadence clear.",
+    "sectionTitle": "Delivery Tooling",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q220",
+    "q": "How is AI changing the delivery manager role?",
+    "a": "AI accelerates drafting updates, summarizing risks, analyzing delivery data, preparing meeting notes, triaging incidents, and detecting patterns. The manager still validates judgment and context.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q221",
+    "q": "Risks of relying on AI-generated code without review?",
+    "a": "AI code may contain subtle bugs, security flaws, license/IP issues, poor fit to architecture, and plausible but incorrect implementations.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q222",
+    "q": "How adjust Definition of Done for AI-assisted code?",
+    "a": "Require human review, tests, security/dependency checks, explainability of generated logic, license compliance, and ownership by the submitting developer.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q223",
+    "q": "How might an LLM help triage incidents?",
+    "a": "It can summarize alerts/logs, cluster symptoms, compare against historical incidents, draft communications, suggest hypotheses, and create timeline notes, subject to human validation.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q224",
+    "q": "Current limitation of LLMs for automated RCA?",
+    "a": "LLMs can hallucinate plausible causes and lack true system grounding unless connected to reliable telemetry, topology, deployment, and incident data.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q225",
+    "q": "How write prompt for executive status update from sprint data?",
+    "a": "Provide structured facts, audience, tone, format, length, RAG criteria, completed work, risks, dependencies, decisions needed, and ask it not to invent missing data.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q226",
+    "q": "Risk of AI-generated stakeholder communications without review?",
+    "a": "Incorrect facts, confidential leakage, poor tone, missing nuance, or overconfidence can damage trust. Human review is mandatory for external or executive communication.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q227",
+    "q": "How evaluate introducing AI coding assistant?",
+    "a": "Run a controlled pilot, define security/IP policy, measure cycle time, quality, developer satisfaction, review load, defect rate, and expand only if benefits outweigh risks.",
+    "sectionTitle": "AI in Software Delivery",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q228",
+    "q": "A deploy just went out and error rates are climbing. Next five minutes?",
+    "a": "Declare incident if thresholds are met, confirm deploy correlation, open incident channel, assign roles, check dashboards/logs, decide rollback versus flag disablement, and start stakeholder comms.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q229",
+    "q": "During Sev1, two engineers propose conflicting fixes. How decide?",
+    "a": "As Incident Commander, compare reversibility, speed, risk, confidence, and blast radius. Prefer the safest reversible mitigation, timebox investigation, and avoid parallel chaos.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q230",
+    "q": "CI pipeline suddenly fails for all branches after months. Diagnose?",
+    "a": "Check shared dependencies first: runner infrastructure, credentials, base images, external services, pipeline config, certificates, and dependency updates. Re-run a known-good commit to isolate.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q231",
+    "q": "Microservice latency crept up 40 percent over two weeks. Approach?",
+    "a": "Inspect data growth, dependency latency, resource saturation, query plans, cache hit rate, configuration drift, traffic mix, background jobs, and gradual error/retry patterns.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q232",
+    "q": "Whiteboard delivery plan for monolith to microservices over 12 months.",
+    "a": "Assess domains, choose migration seams, build platform/observability, apply Strangler pattern, migrate low-risk capabilities first, manage data boundaries, and measure business-risk reduction.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q233",
+    "q": "Draw CI/CD pipeline for new greenfield service.",
+    "a": "Commit triggers build, unit tests, lint, SAST/dependency scan, package artifact, integration tests, deploy to staging, smoke test, approval if needed, deploy production, monitor.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q234",
+    "q": "Client release slips every sprint by days. Diagnose pattern?",
+    "a": "Review estimation, carryover, scope churn, dependencies, QA bottlenecks, environment issues, unplanned work, decision latency, and whether commitments exceed true capacity.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q235",
+    "q": "Three teams have different Definitions of Done. First move?",
+    "a": "Facilitate a joint quality alignment workshop, identify minimum shared DoD, handle legitimate team-specific additions, and make release readiness criteria explicit.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q236",
+    "q": "Velocity dropped 30 percent after senior engineers left; leadership wants same date. Respond?",
+    "a": "Present capacity evidence and revised forecast, explain risk, and negotiate scope, timeline, staffing, or quality trade-offs. I would not hide the gap.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q237",
+    "q": "Vendor critical API keeps missing dates. Manage risk?",
+    "a": "Escalate with evidence, obtain revised commitments, add contractual pressure if applicable, build mocks/contingency, adjust plan, and evaluate alternate integration paths.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q238",
+    "q": "Rollback fails; old version has same bug. What now?",
+    "a": "Reassess assumptions, keep incident active, seek mitigation such as feature flag, config change, traffic shaping, data fix, or roll-forward patch, and update stakeholders.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q239",
+    "q": "Dashboards misconfigured and hid issue for two hours. Post-mortem handling?",
+    "a": "Treat monitoring failure as a contributing system factor, not blame. Add dashboard validation, alert tests, ownership, and observability readiness to the action plan.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q240",
+    "q": "Two teams both claim ownership of recurring bug and neither fixes it. Break deadlock?",
+    "a": "Convene joint RCA, use evidence to assign single accountable owner, define support roles, deadline, escalation path, and prevention action.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q241",
+    "q": "Whiteboard dependency map for backend, frontend, and data pipeline release.",
+    "a": "Show data schema/pipeline readiness first, backend API contract and service second, frontend integration third, with contract tests, test data, milestones, and fallback points.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q242",
+    "q": "Stakeholder adds major feature two weeks before fixed launch. Handle?",
+    "a": "Quantify impact on scope, quality, date, and risk. Offer options: defer to fast-follow, swap scope, reduce acceptance, or formally accept launch risk.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q243",
+    "q": "Team meets sprint commitments but stakeholders do not trust delivery. Diagnose?",
+    "a": "Check visibility, expectation alignment, roadmap predictability, quality, surprise changes, reporting clarity, and whether delivered work maps to stakeholder outcomes.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q244",
+    "q": "Critical security vulnerability live for six months. Immediate action?",
+    "a": "Activate security incident process, assess exposure and exploitation, patch or mitigate urgently, preserve evidence, involve legal/compliance, communicate per obligations, and perform RCA.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q245",
+    "q": "Executive interrupts engineers on incident bridge. Handle in moment?",
+    "a": "Respectfully redirect: create a separate executive update channel, assign comms lead, and protect the technical bridge for responders.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q246",
+    "q": "Third-party payment API intermittently times out. Triage and mitigate?",
+    "a": "Check vendor status and logs, measure error patterns, enable retries with exponential backoff, circuit breaker, fallback messaging, queueing, and vendor escalation.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q247",
+    "q": "Design on-call escalation path for six engineers across two time zones.",
+    "a": "Use primary and secondary per region, follow-the-sun handoff, escalation timeout, incident commander path, runbooks, manager escalation, and rotation fairness.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q248",
+    "q": "Asked to cut program timeline by 30 percent with no resources. Approach?",
+    "a": "Present delivery math and options: reduce scope, change quality/risk profile, sequence MVP, remove dependencies, simplify solution, or accept a realistic date.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q249",
+    "q": "Key engineer threatens to quit mid-release due to burnout. Handle delivery and person?",
+    "a": "Prioritize wellbeing, listen, reduce immediate load, involve manager/HR appropriately, de-risk knowledge concentration, re-plan release, and avoid making them the single failure point.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  },
+  {
+    "id": "Q250",
+    "q": "Newly acquired engineering team uses different delivery methodology. Approach integration?",
+    "a": "Assess current performance and culture first, avoid imposing process, identify shared goals and interfaces, standardize only where needed, and converge incrementally with joint ownership.",
+    "sectionTitle": "Scenario, Troubleshooting & Case Study",
+    "cat": "Scenario"
+  }
+]
