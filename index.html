@@ -1,348 +1,2165 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
-<title>Question Bank</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{brand:{50:'#f0f7ff',500:'#3b82f6',600:'#2563eb'}}}}}</script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-body{font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent}
-button,a,select,input,details,summary,label{touch-action:manipulation}
-input,select{font-size:16px}
-::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:4px}
-.dark ::-webkit-scrollbar-thumb{background:#475569}
-mark{background:#fde68a;padding:0 2px;border-radius:2px}
-.dark mark{background:rgba(245,158,11,.25);color:#fcd34d}
-.no-scrollbar::-webkit-scrollbar{display:none}
-.safe-bottom{padding-bottom:env(safe-area-inset-bottom)}
-</style>
-</head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>SDM Question Bank</title>
 
-<div id="drawerOverlay" class="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm hidden lg:hidden"></div>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#eff6ff",
+              100: "#dbeafe",
+              500: "#3b82f6",
+              600: "#2563eb",
+              700: "#1d4ed8"
+            }
+          }
+        }
+      }
+    };
+  </script>
 
-<header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-<div class="max-w-7xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center gap-2">
-<button id="drawerBtn" class="lg:hidden w-10 h-10 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center hidden" aria-label="Sections"><i class="fa-solid fa-bars"></i></button>
-<div class="bg-brand-600 text-white p-2 rounded-lg shrink-0"><i class="fa-solid fa-layer-group"></i></div>
-<div class="min-w-0 flex-1">
-<h1 class="font-bold text-sm sm:text-base truncate">Question Bank</h1>
-<p class="text-[11px] sm:text-xs text-slate-500 truncate">JSON driven • multi-file • multi-answer</p>
-</div>
-<button id="themeToggle" class="w-10 h-10 shrink-0 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center" aria-label="Theme"><i class="fa-solid fa-moon dark:hidden"></i><i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i></button>
-</div>
-<div class="w-full bg-slate-200 dark:bg-slate-800 h-1"><div id="globalProgressBar" class="bg-gradient-to-r from-blue-500 to-emerald-500 h-1 transition-all" style="width:0%"></div></div>
-</header>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 
-<main class="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-<!-- COLLAPSIBLE CONFIGURATION PANEL -->
-<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-<button id="configToggle" class="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition select-none" aria-expanded="false">
-<div class="flex items-center gap-2"><i class="fa-solid fa-sliders text-brand-600 dark:text-brand-400 text-xs"></i> <span>Configuration</span></div>
-<i id="configChevron" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-200"></i>
-</button>
-
-<div id="configPanel" class="hidden border-t border-slate-200 dark:border-slate-800">
-<div class="p-3 sm:p-4 space-y-3">
-<div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2">
-<button id="loadJsonBtn" class="min-h-[44px] px-4 bg-brand-600 hover:bg-blue-500 active:scale-[.98] transition text-white rounded-lg text-sm font-semibold"><i class="fa-solid fa-folder-open mr-2"></i>Load JSON file(s)</button>
-<input type="file" id="jsonFileInput" accept=".json,application/json" multiple hidden>
-<label class="flex items-center justify-center gap-2 min-h-[44px] px-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-sm cursor-pointer select-none">
-<input type="checkbox" id="mergeMode" class="w-4 h-4 accent-blue-600" checked><span>Merge with current</span>
-</label>
-<button id="exportJsonBtn" class="min-h-[44px] px-3 bg-slate-100 dark:bg-slate-800 active:scale-[.98] transition rounded-lg text-sm hidden"><i class="fa-solid fa-download mr-1"></i>Export</button>
-<button id="clearAllBtn" class="min-h-[44px] px-3 bg-red-50 dark:bg-red-950/40 text-red-600 rounded-lg text-sm hidden"><i class="fa-solid fa-trash mr-1"></i>Clear all</button>
-</div>
-<p class="text-[11px] text-slate-400">Same question across files → one card with all answers (counted once). Matching ignores case, punctuation, spacing, quotes and leading numbering. Desktop: drag &amp; drop supported.</p>
-
-<div id="sourcesPanel" class="hidden pt-3 border-t border-slate-200 dark:border-slate-800">
-<p class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2"><i class="fa-solid fa-database mr-1"></i>Loaded sources</p>
-<div id="sourcesList" class="flex flex-wrap gap-2"></div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- METRICS -->
-<section id="metricsSection" class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 hidden">
-<div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-brand-500 text-lg sm:text-xl"><i class="fa-solid fa-list-check"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Unique Qs</p><h3 id="metricTotal" class="text-xl sm:text-2xl font-extrabold">0</h3></div></div>
-<div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-emerald-500 text-lg sm:text-xl"><i class="fa-solid fa-graduation-cap"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Mastered</p><h3 class="text-xl sm:text-2xl font-extrabold text-emerald-600"><span id="metricMastered">0</span><span id="metricMasteredTotal" class="text-xs text-slate-400 font-normal">/0</span></h3></div></div>
-<div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-amber-500 text-lg sm:text-xl"><i class="fa-solid fa-star"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Saved</p><h3 id="metricBookmarked" class="text-xl sm:text-2xl font-extrabold text-amber-600">0</h3></div></div>
-<div class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border flex items-center gap-3"><div class="text-indigo-500 text-lg sm:text-xl"><i class="fa-solid fa-percent"></i></div><div><p class="text-[10px] sm:text-xs uppercase text-slate-500 font-semibold">Done</p><h3 id="metricPercent" class="text-xl sm:text-2xl font-extrabold text-indigo-600">0%</h3></div></div>
-</section>
-
-<!-- FILTERS -->
-<section id="filtersSection" class="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-xl border hidden">
-<div class="flex flex-col md:flex-row gap-2 md:gap-3">
-<div class="relative flex-1"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i><input id="searchInput" placeholder="Search by keyword in any question or answer..." class="w-full min-h-[44px] pl-9 pr-9 bg-slate-100 dark:bg-slate-800 rounded-lg outline-none border border-transparent focus:border-brand-500"><button id="clearSearch" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg text-slate-400 hover:text-slate-600 hidden" aria-label="Clear"><i class="fa-solid fa-xmark"></i></button></div>
-<select id="statusFilter" class="min-h-[44px] px-3 bg-slate-100 dark:bg-slate-800 rounded-lg w-full md:w-auto">
-<option value="all">All statuses</option><option value="bookmarked">⭐ Saved</option><option value="mastered">✅ Mastered</option><option value="unmastered">⏳ Remaining</option><option value="multi">📑 Multiple answers</option>
-</select>
-</div>
-</section>
-
-<div id="workspace" class="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6 hidden">
-<aside id="drawer" class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 overflow-y-auto transition-transform duration-300 -translate-x-full lg:sticky lg:top-24 lg:translate-x-0 lg:z-auto lg:w-auto lg:max-w-none lg:h-auto lg:max-h-[calc(100vh-7rem)] lg:rounded-xl lg:border lg:shadow-sm">
-<div class="flex items-center justify-between mb-3 lg:hidden">
-<span class="text-xs font-bold uppercase tracking-wider text-slate-500">Sections</span>
-<button id="closeDrawer" class="w-10 h-10 -mr-1 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-</div>
-<div id="sectionsSidebar" class="space-y-2"></div>
-</aside>
-<div id="questionsContainer" class="lg:col-span-3 space-y-3"></div>
-</div>
-
-<div id="emptyState" class="hidden bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-8 sm:p-10 text-center">
-<div class="mx-auto w-16 h-16 rounded-2xl bg-brand-50 dark:bg-blue-950/40 text-brand-500 flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-file-import"></i></div>
-<h2 class="text-lg font-bold mb-1">No questions loaded yet</h2>
-<p id="emptyMsg" class="text-sm text-slate-500 max-w-md mx-auto mb-5">Load one or more JSON files to build your bank. Import several files with the same questions to compare multiple answers side by side.</p>
-<div class="flex flex-col sm:flex-row gap-2 justify-center">
-<button id="emptyLoadBtn" class="min-h-[44px] px-5 bg-brand-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold active:scale-95 transition"><i class="fa-solid fa-folder-open mr-2"></i>Load JSON file(s)</button>
-</div>
-</div>
-</main>
-
-<footer class="safe-bottom mt-10 border-t border-slate-200 dark:border-slate-800 py-6 bg-white dark:bg-slate-900 text-center text-xs text-slate-500">
-Question Bank • interactive preparation engine
-</footer>
-
-<button id="toTop" class="fixed bottom-20 right-4 z-40 w-11 h-11 rounded-full bg-brand-600 text-white shadow-lg hidden items-center justify-center active:scale-90 transition" aria-label="Top"><i class="fa-solid fa-arrow-up"></i></button>
-<div id="toast" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm z-[90] hidden px-4 py-3 rounded-xl text-sm font-medium shadow-lg"></div>
-
-<script>
-/* ============================================================
-   ⭐ STARTER SET CONFIG — edit this list only
-   ============================================================ */
-const STARTER_FILES = ["InterviewAnswers-Original.json","InterviewAnswers-A.json","InterviewAnswers-B.json","Terminology.json"];
-/* ============================================================ */
-
-let DB=[];let sectionsList=[];let activeSection="all",searchTerm="",statusFilterValue="all",visibleCount=50;const PAGE=50;
-let openSet=new Set();let masteredSet=new Set(JSON.parse(localStorage.getItem("qb_mastered")||"[]"));let bookmarkedSet=new Set(JSON.parse(localStorage.getItem("qb_bookmarked")||"[]"));
-const fallbackSections=["Section 1","Section 2","Section 3","Section 4","Section 5","Section 6","Section 7"];
-
-const $=id=>document.getElementById(id);
-const els={metricTotal:$("metricTotal"),metricMastered:$("metricMastered"),metricMasteredTotal:$("metricMasteredTotal"),metricBookmarked:$("metricBookmarked"),metricPercent:$("metricPercent"),globalProgressBar:$("globalProgressBar"),searchInput:$("searchInput"),clearSearch:$("clearSearch"),statusFilter:$("statusFilter"),sectionsSidebar:$("sectionsSidebar"),questionsContainer:$("questionsContainer"),loadJsonBtn:$("loadJsonBtn"),jsonFileInput:$("jsonFileInput"),exportJsonBtn:$("exportJsonBtn"),clearAllBtn:$("clearAllBtn"),mergeMode:$("mergeMode"),sourcesPanel:$("sourcesPanel"),sourcesList:$("sourcesList"),metricsSection:$("metricsSection"),filtersSection:$("filtersSection"),workspace:$("workspace"),emptyState:$("emptyState"),emptyMsg:$("emptyMsg"),emptyLoadBtn:$("emptyLoadBtn"),toast:$("toast"),themeToggle:$("themeToggle"),drawer:$("drawer"),drawerOverlay:$("drawerOverlay"),drawerBtn:$("drawerBtn"),closeDrawer:$("closeDrawer"),toTop:$("toTop"),configToggle:$("configToggle"),configPanel:$("configPanel"),configChevron:$("configChevron")};
-
-function showToast(msg,type="info"){els.toast.textContent=msg;els.toast.className=`fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm z-[90] px-4 py-3 rounded-xl text-sm font-medium shadow-lg ${type==="error"?"bg-red-600 text-white":"bg-slate-900 text-white dark:bg-white dark:text-slate-900"}`;clearTimeout(showToast._t);showToast._t=setTimeout(()=>els.toast.classList.add("hidden"),3400);}
-function saveProgress(){localStorage.setItem("qb_mastered",JSON.stringify([...masteredSet]));localStorage.setItem("qb_bookmarked",JSON.stringify([...bookmarkedSet]));}
-function saveBank(){localStorage.setItem("qb_bank",JSON.stringify({items:DB,sections:sectionsList}));}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
-function highlight(text,term){if(!term)return esc(text);const safe=esc(text);const t=term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");try{return safe.replace(new RegExp("("+t+")","ig"),"<mark>$1</mark>");}catch(e){return safe;}}
-function buildKey(q){return String(q).toLowerCase().replace(/<[^>]*>/g," ").replace(/&[a-z]+;/g," ").replace(/[\u2018\u2019\u201C\u201D]/g,"'").replace(/^\s*(?:q?\d+[).:\-]\s*)/,"").replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();}
-function makeItem(q,answers,sectionTitle,hint,id){const cleanId=(id!==undefined&&id!==null&&String(id).trim()!=="")?String(id).trim():null;return{id:cleanId||autoId(),q:String(q).trim(),sectionTitle:sectionTitle||"General",hint:hint||String(answers[0]?.text||"").replace(/<[^>]*>/g,"").slice(0,140),answers};}
-let _autoSeq=0;function autoId(){_autoSeq++;return "Q"+String(_autoSeq).padStart(3,"0");}
-
-function normalizeJson(parsed,fileName){
-  let arr=null,sectionsFromFile=null;
-  if(Array.isArray(parsed))arr=parsed;
-  else if(parsed&&Array.isArray(parsed.data)){arr=parsed.data;sectionsFromFile=parsed.sections||parsed.sectionList||null;}
-  else if(parsed&&Array.isArray(parsed.questions)){arr=parsed.questions;sectionsFromFile=parsed.sections||null;}
-  else if(parsed&&Array.isArray(parsed.items)){arr=parsed.items;sectionsFromFile=parsed.sections||null;}
-  else throw new Error("must be array or {data|questions|items:[...]}");
-  if(!arr.length)throw new Error("file empty");
-  const items=[];
-  if(Array.isArray(arr[0])){
-    arr.forEach(row=>{const[id,c,q,a]=row;if(!q)return;const text=String(a||"").trim();if(!text)return;const sec=(sectionsFromFile&&sectionsFromFile[c])||fallbackSections[c]||`Section ${(c??0)+1}`;items.push(makeItem(q,[{source:fileName,text}],sec,undefined,id));});
-  }else{
-    arr.forEach(o=>{const q=o.q||o.question||o.title;if(!q)return;let answers=[];if(Array.isArray(o.answers)){answers=o.answers.map(x=>typeof x==="string"?{source:o.source||fileName,text:x}:{source:x.source||x.from||x.label||o.source||fileName,text:String(x.text||x.a||x.answer||"")}).filter(x=>x.text&&x.text.trim());}else{const t=o.a||o.answer||o.content||"";if(t)answers=[{source:o.source||o.file||fileName,text:String(t)}];}if(!answers.length)return;items.push(makeItem(q,answers,o.sectionTitle||o.section||o.category||"General",o.hint,o.id));});
-  }
-  if(!items.length)throw new Error("no questions with answers found");return items;
-}
-function mergeAnswer(item,text,source){const t=String(text||"").trim();if(!t)return;const i=item.answers.findIndex(x=>x.source===source);if(i>=0){item.answers[i].text=t;return;}if(item.answers.some(x=>x.text.trim()===t))return;item.answers.push({source,text:t});}
-function mergeItems(target,incoming){const index=new Map(target.map((it,i)=>[buildKey(it.q),i]));let added=0,merged=0;incoming.forEach(item=>{const k=buildKey(item.q);if(index.has(k)){const tgt=target[index.get(k)];item.answers.forEach(a=>mergeAnswer(tgt,a.text,a.source));if(tgt.sectionTitle==="General"&&item.sectionTitle&&item.sectionTitle!=="General")tgt.sectionTitle=item.sectionTitle;merged++;}else{target.push(item);index.set(k,target.length-1);added++;}});return{added,merged};}
-function recomputeSections(){const seen=[];DB.forEach(it=>{if(!seen.includes(it.sectionTitle))seen.push(it.sectionTitle);});sectionsList=seen;}
-function getSources(){const m=new Map();DB.forEach(it=>{it.answers.forEach(a=>{const s=m.get(a.source)||{answers:0,questions:new Set()};s.answers++;s.questions.add(it.id);m.set(a.source,s);});});return [...m.entries()].map(([name,v])=>({name,answers:v.answers,questions:v.questions.size}));}
-
-function ingest(sets){if(!els.mergeMode.checked)DB=[];let added=0,merged=0;sets.forEach(({items})=>{const r=mergeItems(DB,items);added+=r.added;merged+=r.merged;});recomputeSections();saveBank();openSet.clear();visibleCount=PAGE;activeSection="all";renderAll();return{added,merged};}
-function handleFiles(fileList){const files=[...fileList].filter(f=>f&&f.name.toLowerCase().endsWith(".json"));if(!files.length){showToast("Please choose .json file(s)","error");return;}Promise.all(files.map(f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>res({name:f.name,text:e.target.result});r.onerror=rej;r.readAsText(f);}))).then(results=>{const sets=[];results.forEach(({name,text})=>{try{sets.push({name,items:normalizeJson(JSON.parse(text),name)});}catch(err){showToast(name+": "+err.message,"error");}});if(!sets.length)return;const{added,merged}=ingest(sets);showToast(`${added} unique added, ${merged} merged — ${DB.length} total`);}).catch(()=>showToast("Could not read file(s)","error"));}
-
-async function loadStarter(silent){
-  if(window.location.protocol==="file:"){if(!silent)showToast("Running locally — starter files can't be fetched automatically. Use 'Load JSON file(s)' or deploy to GitHub Pages.","info");return false;}
-  if(!STARTER_FILES.length){if(!silent)showToast("No starter files configured in STARTER_FILES array.","info");return false;}
-  try{const sets=[];els.emptyMsg.textContent="Loading starter set…";for(const url of STARTER_FILES){try{const res=await fetch(url,{cache:"no-store"});if(!res.ok)throw new Error("HTTP "+res.status);const name=url.split("/").pop()||"starter";sets.push({name,items:normalizeJson(await res.json(),name)});}catch(e){if(!silent)showToast("Starter '"+url+"': "+e.message,"error");}}if(!sets.length)return false;const prev=els.mergeMode.checked;els.mergeMode.checked=false;const{added}=ingest(sets);els.mergeMode.checked=prev;showToast(`Loaded starter set — ${added} questions`);return true;}catch(e){if(!silent)showToast("Could not load starter set","error");return false;}
-}
-
-function removeSource(name){if(!confirm(`Remove source "${name}"? Its answers will be deleted, and any question left with no answers will be removed.`))return;DB.forEach(it=>{it.answers=it.answers.filter(a=>a.source!==name);});const before=DB.length;DB=DB.filter(it=>it.answers.length>0);const dropped=before-DB.length;recomputeSections();saveBank();openSet.clear();visibleCount=PAGE;renderAll();showToast(`Removed "${name}". ${dropped} question(s) dropped. ${DB.length} total`);}
-function tryLoadFromStorage(){try{const raw=localStorage.getItem("qb_bank");if(!raw)return false;const p=JSON.parse(raw);if(!p.items||!p.items.length)return false;DB=p.items;sectionsList=p.sections||[];recomputeSections();return true;}catch(e){return false;}}
-
-function sectionNumOf(it){return String(sectionsList.indexOf(it.sectionTitle)+1).padStart(2,"0");}
-function getFiltered(){
-  const term=searchTerm.toLowerCase().trim();
-  return DB.filter(it=>{
-    if(activeSection!=="all"&&sectionNumOf(it)!==activeSection)return false;
-    if(statusFilterValue==="bookmarked"&&!bookmarkedSet.has(it.id))return false;
-    if(statusFilterValue==="mastered"&&!masteredSet.has(it.id))return false;
-    if(statusFilterValue==="unmastered"&&masteredSet.has(it.id))return false;
-    if(statusFilterValue==="multi"&&it.answers.length<2)return false;
-    if(term){const blob=(it.q+" "+it.sectionTitle+" "+it.answers.map(a=>a.text).join(" ")).toLowerCase();if(!blob.includes(term))return false;}
-    return true;
-  });
-}
-function showUI(hasData){
-  els.metricsSection.classList.toggle("hidden",!hasData);
-  els.filtersSection.classList.toggle("hidden",!hasData);
-  els.workspace.classList.toggle("hidden",!hasData);
-  els.emptyState.classList.toggle("hidden",hasData);
-  els.exportJsonBtn.classList.toggle("hidden",!hasData);
-  els.clearAllBtn.classList.toggle("hidden",!hasData);
-  if(hasData){els.drawerBtn.classList.remove("hidden");}else{els.drawerBtn.classList.add("hidden");}
-}
-function renderMetrics(){
-  const total=DB.length,m=[...masteredSet].filter(id=>DB.some(d=>d.id===id)).length,pct=total?Math.round(m/total*100):0;
-  els.metricTotal.textContent=total;els.metricMastered.textContent=m;els.metricMasteredTotal.textContent="/"+total;
-  els.metricBookmarked.textContent=[...bookmarkedSet].filter(id=>DB.some(d=>d.id===id)).length;
-  els.metricPercent.textContent=pct+"%";els.globalProgressBar.style.width=pct+"%";
-}
-function renderSources(){
-  const sources=getSources();
-  if(!sources.length){els.sourcesPanel.classList.add("hidden");return;}
-  els.sourcesPanel.classList.remove("hidden");
-  els.sourcesList.innerHTML=sources.map(s=>`
-    <span class="inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-xs">
-      <i class="fa-regular fa-file-lines text-slate-400"></i>
-      <span class="font-medium truncate max-w-[180px]">${esc(s.name)}</span>
-      <span class="text-slate-400">${s.questions} Qs</span>
-      <button data-remove-source="${esc(s.name)}" class="w-6 h-6 rounded-full bg-red-100 dark:bg-red-950/50 text-red-600 flex items-center justify-center active:scale-90 transition" aria-label="Remove"><i class="fa-solid fa-xmark text-[10px]"></i></button>
-    </span>`).join("");
-  els.sourcesList.querySelectorAll("[data-remove-source]").forEach(b=>b.addEventListener("click",()=>removeSource(b.getAttribute("data-remove-source"))));
-}
-function renderSidebar(){
-  const groups={};DB.forEach(it=>{const k=sectionNumOf(it);if(!groups[k])groups[k]={title:it.sectionTitle,count:0,mastered:0};groups[k].count++;if(masteredSet.has(it.id))groups[k].mastered++;});
-  const keys=Object.keys(groups).sort();
-  const btn=(k,label,count,mastered,active)=>`<button data-section="${k}" class="section-btn w-full min-h-[44px] text-left px-3 py-2 rounded-xl text-sm transition active:scale-[.98] ${active?"bg-brand-600 text-white font-semibold shadow":"bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800"}"><span class="flex justify-between items-center gap-2"><span class="truncate">${label}</span><span class="text-[11px] shrink-0 ${active?"text-white/80":"text-slate-400"}">${mastered}/${count}</span></span>${k!=="all"?`<span class="block mt-1.5 h-1 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden"><span class="block h-full bg-emerald-500" style="width:${count?Math.round(mastered/count*100):0}%"></span></span>`:""}</button>`;
-  els.sectionsSidebar.innerHTML=btn("all","All Sections",DB.length,masteredSet.size,activeSection==="all")+keys.map(k=>{const g=groups[k];return btn(k,`${k} — ${esc(g.title)}`,g.count,g.mastered,activeSection===k);}).join("");
-  els.sectionsSidebar.querySelectorAll(".section-btn").forEach(b=>b.addEventListener("click",()=>{activeSection=b.dataset.section;visibleCount=PAGE;renderSidebar();renderQuestions();if(window.innerWidth<1024)closeDrawerFn();}));
-}
-const barColors=["border-l-blue-500","border-l-emerald-500","border-l-violet-500","border-l-amber-500","border-l-rose-500","border-l-cyan-500"];
-function answerBlocks(it){
-  const many=it.answers.length>1;
-  return it.answers.map((ans,i)=>`
-    <div class="${i>0?"mt-3 pt-3 border-t border-dashed border-slate-200 dark:border-slate-700":""}">
-      ${many?`<div class="flex items-center gap-2 mb-1.5 min-w-0"><span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shrink-0">Answer ${i+1}</span><span class="text-[10px] text-slate-400 truncate"><i class="fa-regular fa-file-lines mr-1"></i>${esc(ans.source)}</span></div>`:""}
-      <div class="text-sm leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border-l-4 ${barColors[i%barColors.length]}">${highlight(ans.text,searchTerm)}</div>
-    </div>`).join("");
-}
-function renderQuestions(){
-  if(!DB.length){showUI(false);els.questionsContainer.innerHTML="";els.emptyMsg.textContent="Load one or more JSON files to build your bank. Import several files with the same questions to compare multiple answers side by side.";return;}
-  showUI(true);
-  const filtered=getFiltered();
-  const shown=filtered.slice(0,visibleCount);
-  const remaining=filtered.length-shown.length;
-  let html=`<div class="flex items-center justify-between gap-2 sticky top-[57px] sm:top-[65px] z-20 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur py-2 -mt-1">
-    <p class="text-xs sm:text-sm text-slate-500">Showing <b>${shown.length}</b> of ${filtered.length}${searchTerm?` for “${esc(searchTerm)}”`:""}</p>
-    <div class="flex gap-1.5"><button id="expandAll" class="min-h-[36px] px-3 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 active:scale-95 transition">Expand</button><button id="collapseAll" class="min-h-[36px] px-3 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 active:scale-95 transition">Collapse</button></div></div>`;
-  if(!filtered.length){html+=`<div class="bg-white dark:bg-slate-900 p-10 rounded-xl border border-dashed text-center text-slate-500">No questions or answers match “${esc(searchTerm)}”.</div>`;}
-  else{
-    html+=shown.map(it=>{
-      const isM=masteredSet.has(it.id),isB=bookmarkedSet.has(it.id),many=it.answers.length>1;
-      return `<div data-card data-id="${it.id}" class="bg-white dark:bg-slate-900 rounded-xl border ${isM?"border-emerald-300 dark:border-emerald-700":"border-slate-200 dark:border-slate-800"} shadow-sm overflow-hidden">
-        <div class="p-3.5 sm:p-4">
-          <div class="flex items-start justify-between gap-2">
-            <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-              <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 shrink-0">${esc(it.id)}</span>
-              ${many?`<span class="text-[11px] px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-900 shrink-0"><i class="fa-solid fa-layer-group mr-1"></i>${it.answers.length} answers</span>`:""}
-              <span class="text-[11px] text-slate-500 truncate">${esc(it.sectionTitle)}</span>
-            </div>
-            <div class="flex gap-1.5 shrink-0">
-              <button data-action="bookmark" data-id="${it.id}" aria-label="Bookmark" class="w-10 h-10 -m-1 rounded-xl flex items-center justify-center active:scale-90 transition ${isB?"text-amber-500":"text-slate-300 dark:text-slate-600"}"><i class="fa-${isB?"solid":"regular"} fa-star"></i></button>
-              <button data-action="mastered" data-id="${it.id}" aria-label="Mastered" class="w-10 h-10 -m-1 rounded-xl flex items-center justify-center active:scale-90 transition ${isM?"text-emerald-500":"text-slate-300 dark:text-slate-600"}"><i class="fa-solid fa-circle-check"></i></button>
-            </div>
-          </div>
-          <h3 class="mt-2.5 font-semibold text-[15px] sm:text-base leading-snug">${highlight(it.q,searchTerm)}</h3>
-          ${it.hint?`<p class="mt-1 text-xs text-slate-500 italic line-clamp-2">${highlight(it.hint,searchTerm)}</p>`:""}
-          <details data-id="${it.id}" class="mt-2.5 group"${openSet.has(it.id)?" open":""}>
-            <summary class="list-none flex items-center gap-2 min-h-[40px] text-sm font-semibold text-brand-600 dark:text-blue-400 cursor-pointer select-none"><i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i><span class="group-open:hidden">Show ${many?it.answers.length+" answers":"answer"}</span><span class="hidden group-open:inline">Hide</span></summary>
-            <div class="mt-1">${answerBlocks(it)}</div>
-          </details>
-        </div></div>`;
-    }).join("");
-    if(remaining>0)html+=`<button id="loadMoreBtn" class="w-full min-h-[48px] rounded-xl bg-brand-600 text-white font-semibold text-sm active:scale-[.99] transition">Load ${Math.min(PAGE,remaining)} more <span class="opacity-75">(${remaining} left)</span></button>`;
-  }
-  els.questionsContainer.innerHTML=html;
-  els.questionsContainer.querySelectorAll("details[data-id]").forEach(d=>d.addEventListener("toggle",()=>{d.open?openSet.add(d.dataset.id):openSet.delete(d.dataset.id);}));
-  els.questionsContainer.querySelectorAll("[data-action]").forEach(btn=>btn.addEventListener("click",()=>{
-    const id=btn.dataset.id;
-    if(btn.dataset.action==="bookmark")bookmarkedSet.has(id)?bookmarkedSet.delete(id):bookmarkedSet.add(id);
-    else masteredSet.has(id)?masteredSet.delete(id):masteredSet.add(id);
-    saveProgress();renderMetrics();renderSidebar();
-    const card=els.questionsContainer.querySelector(`[data-card][data-id="${id}"]`);
-    if(card){const isM=masteredSet.has(id),isB=bookmarkedSet.has(id);
-      const bb=card.querySelector('[data-action="bookmark"]'),mb=card.querySelector('[data-action="mastered"]');
-      bb.innerHTML=`<i class="fa-${isB?"solid":"regular"} fa-star"></i>`;
-      bb.className=`w-10 h-10 -m-1 rounded-xl flex items-center justify-center active:scale-90 transition ${isB?"text-amber-500":"text-slate-300 dark:text-slate-600"}`;
-      mb.className=`w-10 h-10 -m-1 rounded-xl flex items-center justify-center active:scale-90 transition ${isM?"text-emerald-500":"text-slate-300 dark:text-slate-600"}`;
-      card.className=`bg-white dark:bg-slate-900 rounded-xl border ${isM?"border-emerald-300 dark:border-emerald-700":"border-slate-200 dark:border-slate-800"} shadow-sm overflow-hidden`;
+    body {
+      font-family: "Inter", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
     }
-  }));
-  $("loadMoreBtn")?.addEventListener("click",()=>{visibleCount+=PAGE;renderQuestions();});
-  $("expandAll")?.addEventListener("click",()=>els.questionsContainer.querySelectorAll("details[data-id]").forEach(d=>{d.open=true;openSet.add(d.dataset.id);}));
-  $("collapseAll")?.addEventListener("click",()=>els.questionsContainer.querySelectorAll("details[data-id]").forEach(d=>{d.open=false;openSet.delete(d.dataset.id);}));
-}
-function renderAll(){renderSources();if(!DB.length){showUI(false);return;}renderMetrics();renderSidebar();renderQuestions();}
 
-function openDrawerFn(){els.drawer.classList.remove("-translate-x-full");els.drawerOverlay.classList.remove("hidden");document.body.style.overflow="hidden";}
-function closeDrawerFn(){els.drawer.classList.add("-translate-x-full");els.drawerOverlay.classList.add("hidden");document.body.style.overflow="";}
-els.drawerBtn.addEventListener("click",openDrawerFn);
-els.closeDrawer.addEventListener("click",closeDrawerFn);
-els.drawerOverlay.addEventListener("click",closeDrawerFn);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawerFn();});
-window.addEventListener("resize",()=>{if(window.innerWidth>=1024)closeDrawerFn();});
+    button, a, select, input, summary, details {
+      touch-action: manipulation;
+    }
 
-els.searchInput.addEventListener("input",e=>{searchTerm=e.target.value;els.clearSearch.classList.toggle("hidden",!searchTerm);visibleCount=PAGE;renderQuestions();});
-els.clearSearch.addEventListener("click",()=>{searchTerm="";els.searchInput.value="";els.clearSearch.classList.add("hidden");renderQuestions();els.searchInput.focus();});
-els.statusFilter.addEventListener("change",e=>{statusFilterValue=e.target.value;visibleCount=PAGE;renderQuestions();});
-els.loadJsonBtn.addEventListener("click",()=>els.jsonFileInput.click());
-els.emptyLoadBtn.addEventListener("click",()=>els.jsonFileInput.click());
-els.jsonFileInput.addEventListener("change",e=>{handleFiles(e.target.files);e.target.value="";});
-els.exportJsonBtn.addEventListener("click",()=>{
-  const out=DB.map(o=>({id:o.id,q:o.q,sectionTitle:o.sectionTitle,answers:o.answers}));
-  const blob=new Blob([JSON.stringify(out,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="questions-export.json";a.click();URL.revokeObjectURL(url);
-  showToast("Exported "+out.length+" questions");
-});
-els.clearAllBtn.addEventListener("click",()=>{
-  if(!confirm("Clear ALL loaded questions and sources?"))return;
-  DB=[];sectionsList=[];openSet.clear();visibleCount=PAGE;activeSection="all";
-  localStorage.removeItem("qb_bank");renderAll();
-  showToast("Cleared.");
-});
-els.themeToggle.addEventListener("click",()=>{document.documentElement.classList.toggle("dark");localStorage.setItem("qb_theme",document.documentElement.classList.contains("dark")?"dark":"light");});
-els.configToggle.addEventListener("click",()=>{
-  const panel=els.configPanel;
-  const expanded=panel.classList.contains("hidden")?false:true;
-  panel.classList.toggle("hidden",expanded);
-  els.configToggle.setAttribute("aria-expanded",String(!expanded));
-  els.configChevron.style.transform=expanded?"rotate(0deg)":"rotate(180deg)";
-});
-window.addEventListener("dragover",e=>e.preventDefault());
-window.addEventListener("drop",e=>{e.preventDefault();if(e.dataTransfer.files.length)handleFiles(e.dataTransfer.files);});
-window.addEventListener("scroll",()=>{if(window.scrollY>500){els.toTop.classList.remove("hidden");els.toTop.classList.add("flex");}else{els.toTop.classList.add("hidden");els.toTop.classList.remove("flex");}},{passive:true});
-els.toTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+    input, select {
+      font-size: 16px; /* prevents iOS focus zoom */
+    }
 
-/* ============== init ============== */
-if(localStorage.getItem("qb_theme")==="light")document.documentElement.classList.remove("dark");
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
 
-/* ensure collapsed state and chevron direction by default */
-els.configPanel.classList.add("hidden");
-els.configToggle.setAttribute("aria-expanded","false");
-els.configChevron.style.transform="rotate(0deg)";
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 99px;
+    }
 
-(async function init(){
-  const loadedLocal=tryLoadFromStorage();
-  if(loadedLocal){renderAll();return;}
-  if(window.location.protocol!=="file:" && STARTER_FILES.length){
-    await loadStarter(true);
-    renderAll();
-  } else {
-    showUI(false);
-    renderAll();
-  }
-})();
-</script>
+    .dark ::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+
+    mark {
+      background: #fde68a;
+      color: #111827;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    .dark mark {
+      background: rgba(245, 158, 11, .28);
+      color: #fde68a;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- Mobile drawer overlay -->
+  <div id="drawerOverlay" class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm lg:hidden"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/95">
+    <div class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-3 sm:h-16 sm:px-4">
+
+      <button
+        id="drawerBtn"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 lg:hidden"
+        aria-label="Open sections"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="shrink-0 rounded-lg bg-brand-600 p-2 text-white">
+        <i class="fa-solid fa-cubes-stacked"></i>
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <h1 class="truncate text-sm font-bold sm:text-base">SDM Question Bank</h1>
+        <p class="truncate text-[11px] text-slate-500 sm:text-xs">
+          Search questions and answers • Multi-source support
+        </p>
+      </div>
+
+      <button
+        id="themeToggle"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800"
+        aria-label="Toggle theme"
+      >
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden text-amber-400 dark:inline"></i>
+      </button>
+    </div>
+
+    <div class="h-1 w-full bg-slate-200 dark:bg-slate-800">
+      <div
+        id="globalProgressBar"
+        class="h-1 bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-300"
+        style="width: 0%"
+      ></div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl space-y-4 px-3 py-4 sm:space-y-6 sm:px-4 sm:py-6">
+
+    <!-- Update Banner -->
+    <section
+      id="updateBanner"
+      class="hidden rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30"
+    >
+      <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div class="min-w-0">
+          <h2 class="flex items-center gap-2 text-sm font-bold text-amber-800 dark:text-amber-300">
+            <i class="fa-solid fa-circle-arrow-up"></i>
+            Update available
+          </h2>
+          <p id="updateBannerText" class="mt-1 text-xs text-amber-700 dark:text-amber-200"></p>
+        </div>
+
+        <div class="flex shrink-0 gap-2">
+          <button
+            id="updateNowBtn"
+            class="min-h-[42px] rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white hover:bg-brand-500"
+          >
+            <i class="fa-solid fa-rotate mr-1"></i>
+            Update now
+          </button>
+
+          <button
+            id="dismissUpdateBtn"
+            class="min-h-[42px] rounded-lg bg-white px-3 text-sm text-slate-600 shadow-sm hover:bg-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+          >
+            Later
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collapsible Configuration -->
+    <section class="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+      <button
+        id="configToggleBtn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="configPanel"
+        class="flex min-h-[50px] w-full items-center justify-between px-4 py-3 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/60"
+      >
+        <span class="flex items-center gap-2 text-sm font-semibold">
+          <i class="fa-solid fa-sliders text-slate-400"></i>
+          Configuration
+          <span
+            id="sourceCountBadge"
+            class="hidden rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+          ></span>
+        </span>
+
+        <span class="flex items-center gap-2 text-xs text-slate-500">
+          <span id="configToggleLabel">Expand</span>
+          <i id="configToggleIcon" class="fa-solid fa-chevron-down transition-transform duration-200"></i>
+        </span>
+      </button>
+
+      <div id="configPanel" class="hidden border-t border-slate-200 dark:border-slate-800">
+        <div class="space-y-4 p-3 sm:p-4">
+
+          <!-- Configuration Actions -->
+          <section class="rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/40">
+            <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+
+              <button
+                id="loadJsonBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition hover:bg-brand-500 active:scale-[.98]"
+              >
+                <i class="fa-solid fa-folder-open mr-2"></i>
+                Load JSON file(s)
+              </button>
+
+              <label
+                class="flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-slate-200 px-3 text-sm dark:bg-slate-800"
+              >
+                <input id="mergeMode" type="checkbox" class="h-4 w-4 accent-blue-600" checked>
+                <span>Merge with current</span>
+              </label>
+
+              <button
+                id="exportJsonBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-slate-200 px-3 text-sm transition hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+              >
+                <i class="fa-solid fa-download mr-1"></i>
+                Export
+              </button>
+
+              <button
+                id="refreshStarterBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-emerald-50 px-3 text-sm text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60"
+              >
+                <i class="fa-solid fa-rotate mr-1"></i>
+                Refresh starter content
+              </button>
+
+              <button
+                id="clearAllBtn"
+                class="hidden min-h-[44px] rounded-lg bg-amber-50 px-3 text-sm text-amber-700 transition hover:bg-amber-100 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-950/60"
+              >
+                <i class="fa-solid fa-trash mr-1"></i>
+                Clear all sources
+              </button>
+
+              <button
+                id="restoreDefaultBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-red-50 px-3 text-sm text-red-600 transition hover:bg-red-100 dark:bg-red-950/40 dark:hover:bg-red-950/60"
+              >
+                <i class="fa-solid fa-arrows-rotate mr-1"></i>
+                Restore default
+              </button>
+            </div>
+
+            <input
+              id="jsonFileInput"
+              type="file"
+              accept=".json,application/json"
+              multiple
+              hidden
+            >
+
+            <p class="mt-3 text-[11px] leading-relaxed text-slate-400">
+              The same question across multiple files is counted once and shown in one card with multiple answers.
+              Matching ignores letter case, punctuation, spacing, quotation marks and starting question numbers.
+            </p>
+          </section>
+
+          <!-- Sources -->
+          <section
+            id="sourcesSection"
+            class="hidden rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/40"
+          >
+            <div class="mb-3 flex items-center justify-between">
+              <h2 class="flex items-center gap-2 text-sm font-semibold">
+                <i class="fa-solid fa-database text-slate-400"></i>
+                Loaded Sources
+              </h2>
+              <span id="sourcesCount" class="text-xs text-slate-500"></span>
+            </div>
+
+            <div id="sourcesList" class="space-y-2"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
+      <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4">
+        <div class="text-lg text-brand-500 sm:text-xl"><i class="fa-solid fa-list-check"></i></div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">Unique Questions</p>
+          <h3 id="metricTotal" class="text-xl font-extrabold sm:text-2xl">0</h3>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4">
+        <div class="text-lg text-emerald-500 sm:text-xl"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">Mastered</p>
+          <h3 class="text-xl font-extrabold text-emerald-600 sm:text-2xl">
+            <span id="metricMastered">0</span>
+            <span id="metricMasteredTotal" class="text-xs font-normal text-slate-400">/0</span>
+          </h3>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4">
+        <div class="text-lg text-amber-500 sm:text-xl"><i class="fa-solid fa-star"></i></div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">Saved</p>
+          <h3 id="metricBookmarked" class="text-xl font-extrabold text-amber-600 sm:text-2xl">0</h3>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4">
+        <div class="text-lg text-indigo-500 sm:text-xl"><i class="fa-solid fa-percent"></i></div>
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">Done</p>
+          <h3 id="metricPercent" class="text-xl font-extrabold text-indigo-600 sm:text-2xl">0%</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search -->
+    <section class="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4">
+      <div class="flex flex-col gap-2 md:flex-row md:gap-3">
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400"></i>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search in any question or answer..."
+            class="min-h-[44px] w-full rounded-lg border border-transparent bg-slate-100 py-2 pl-9 pr-3 outline-none transition focus:border-brand-500 dark:bg-slate-800"
+          >
+        </div>
+
+        <select
+          id="statusFilter"
+          class="min-h-[44px] w-full rounded-lg bg-slate-100 px-3 outline-none dark:bg-slate-800 md:w-auto"
+        >
+          <option value="all">All statuses</option>
+          <option value="bookmarked">⭐ Saved</option>
+          <option value="mastered">✅ Mastered</option>
+          <option value="unmastered">⏳ Remaining</option>
+          <option value="multi">📑 Multiple answers</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-6">
+
+      <!-- Sidebar / Drawer -->
+      <aside
+        id="drawer"
+        class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] -translate-x-full overflow-y-auto border-r border-slate-200 bg-white p-4 transition-transform duration-300 dark:border-slate-800 dark:bg-slate-900 lg:sticky lg:top-24 lg:z-auto lg:h-fit lg:max-h-[calc(100dvh-7rem)] lg:w-auto lg:max-w-none lg:translate-x-0 lg:rounded-xl lg:border lg:shadow-sm"
+      >
+        <div class="mb-3 flex items-center justify-between lg:hidden">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Sections</span>
+          <button
+            id="closeDrawer"
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800"
+            aria-label="Close sections"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div id="sectionsSidebar" class="space-y-2"></div>
+      </aside>
+
+      <!-- Questions -->
+      <section class="space-y-3 lg:col-span-3">
+        <div id="questionsContainer"></div>
+
+        <div
+          id="emptyState"
+          class="hidden rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900"
+        >
+          <i class="fa-regular fa-folder-open mb-4 text-4xl opacity-60"></i>
+          <h2 class="mb-1 font-semibold">No questions loaded</h2>
+          <p class="text-sm">Use Configuration to load JSON files or restore the starter bundle.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="safe-bottom mt-10 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-900">
+    SDM Question Bank • Multi-source question and answer study tool
+  </footer>
+
+  <!-- Back to top -->
+  <button
+    id="toTop"
+    class="fixed bottom-20 right-4 z-40 hidden h-11 w-11 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg transition active:scale-90"
+    aria-label="Back to top"
+  >
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Toast -->
+  <div
+    id="toast"
+    class="fixed bottom-4 left-4 right-4 z-[90] hidden rounded-xl px-4 py-3 text-sm font-medium shadow-lg sm:left-auto sm:right-4 sm:max-w-sm"
+  ></div>
+
+  <script>
+  (() => {
+    /* ==========================================================
+       CONFIGURATION
+       ========================================================== */
+
+    /*
+      Put these files in the same folder as index.html.
+
+      Example:
+      /
+        index.html
+        version.json
+        InterviewAnswers-Original.json
+        InterviewAnswers-A.json
+        InterviewAnswers-B.json
+        Terminology.json
+    */
+    const STARTER_BASE_PATH = "./";
+
+    const STARTER_FILES = [
+      "InterviewAnswers-Original.json",
+      "InterviewAnswers-A.json",
+      "InterviewAnswers-B.json",
+      "Terminology.json"
+    ];
+
+    /*
+      Increase these whenever you deploy changes.
+
+      APP_VERSION:
+      - Change when index.html design / CSS / JS logic changes.
+
+      STARTER_BUNDLE_VERSION:
+      - Change when starter JSON data changes.
+      - New HTML will refresh starter content while preserving progress.
+    */
+    const APP_VERSION = "2026-08-29";
+    const STARTER_BUNDLE_VERSION = "2026-08-29";
+
+    /*
+      version.json is used to tell currently-open older pages that
+      an update is available.
+    */
+    const VERSION_FILE = "./version.json";
+
+    const PAGE_SIZE = 50;
+
+    const STORAGE = {
+      sources: "sdm_sources_v8",
+      removedStarterFiles: "sdm_removed_starter_files_v1",
+      mastered: "sdm_mastered_question_keys_v3",
+      bookmarked: "sdm_bookmarked_question_keys_v3",
+      theme: "sdm_theme_v1",
+      configCollapsed: "sdm_config_collapsed_v1",
+      starterVersion: "sdm_starter_bundle_version_v3",
+      dismissedUpdateVersion: "sdm_dismissed_update_version_v1"
+    };
+
+    const answerBorderColors = [
+      "border-l-blue-500",
+      "border-l-emerald-500",
+      "border-l-violet-500",
+      "border-l-amber-500",
+      "border-l-rose-500",
+      "border-l-cyan-500"
+    ];
+
+    /* ==========================================================
+       STATE
+       ========================================================== */
+
+    let sources = [];
+    let DB = [];
+    let sectionsList = [];
+    let questionKeyToIndex = new Map();
+
+    let activeSection = "all";
+    let searchTerm = "";
+    let statusFilterValue = "all";
+    let visibleCount = PAGE_SIZE;
+    let openSet = new Set();
+
+    let masteredSet = new Set(
+      JSON.parse(localStorage.getItem(STORAGE.mastered) || "[]")
+    );
+
+    let bookmarkedSet = new Set(
+      JSON.parse(localStorage.getItem(STORAGE.bookmarked) || "[]")
+    );
+
+    let removedStarterFiles = new Set(
+      JSON.parse(localStorage.getItem(STORAGE.removedStarterFiles) || "[]")
+    );
+
+    /* ==========================================================
+       DOM HELPERS
+       ========================================================== */
+
+    const $ = id => document.getElementById(id);
+
+    const els = {
+      drawerOverlay: $("drawerOverlay"),
+      drawer: $("drawer"),
+      drawerBtn: $("drawerBtn"),
+      closeDrawer: $("closeDrawer"),
+
+      themeToggle: $("themeToggle"),
+
+      updateBanner: $("updateBanner"),
+      updateBannerText: $("updateBannerText"),
+      updateNowBtn: $("updateNowBtn"),
+      dismissUpdateBtn: $("dismissUpdateBtn"),
+
+      configToggleBtn: $("configToggleBtn"),
+      configPanel: $("configPanel"),
+      configToggleLabel: $("configToggleLabel"),
+      configToggleIcon: $("configToggleIcon"),
+      sourceCountBadge: $("sourceCountBadge"),
+
+      loadJsonBtn: $("loadJsonBtn"),
+      jsonFileInput: $("jsonFileInput"),
+      mergeMode: $("mergeMode"),
+      exportJsonBtn: $("exportJsonBtn"),
+      refreshStarterBtn: $("refreshStarterBtn"),
+      clearAllBtn: $("clearAllBtn"),
+      restoreDefaultBtn: $("restoreDefaultBtn"),
+
+      sourcesSection: $("sourcesSection"),
+      sourcesList: $("sourcesList"),
+      sourcesCount: $("sourcesCount"),
+
+      metricTotal: $("metricTotal"),
+      metricMastered: $("metricMastered"),
+      metricMasteredTotal: $("metricMasteredTotal"),
+      metricBookmarked: $("metricBookmarked"),
+      metricPercent: $("metricPercent"),
+      globalProgressBar: $("globalProgressBar"),
+
+      searchInput: $("searchInput"),
+      statusFilter: $("statusFilter"),
+
+      sectionsSidebar: $("sectionsSidebar"),
+      questionsContainer: $("questionsContainer"),
+      emptyState: $("emptyState"),
+
+      toTop: $("toTop"),
+      toast: $("toast")
+    };
+
+    /* ==========================================================
+       UTILITY FUNCTIONS
+       ========================================================== */
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function highlight(text, term) {
+      if (!term) return esc(text);
+
+      const safeText = esc(text);
+      const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      try {
+        return safeText.replace(
+          new RegExp("(" + escapedTerm + ")", "ig"),
+          "<mark>$1</mark>"
+        );
+      } catch {
+        return safeText;
+      }
+    }
+
+    function normalizeQuestion(question) {
+      let value = String(question ?? "").toLowerCase().trim();
+
+      /* Removes Q001, 1., 01), Question 5:, etc. */
+      value = value.replace(/^(question\s*)?(q\s*)?\d+[\s.\-):]+/i, "");
+
+      /* Normalize quotation marks */
+      value = value.replace(/[‘’“”'"`]/g, "");
+
+      /* Remove punctuation but retain letters/numbers */
+      value = value.replace(/[^\p{L}\p{N}\s]/gu, " ");
+
+      /* Normalize spaces */
+      value = value.replace(/\s+/g, " ").trim();
+
+      return value;
+    }
+
+    function generatedId(index) {
+      return "Q" + String(index + 1).padStart(3, "0");
+    }
+
+    function getFileName(path) {
+      return String(path).split("/").pop() || String(path);
+    }
+
+    function isNewerVersion(remoteVersion, localVersion) {
+      if (!remoteVersion || !localVersion) return false;
+      return String(remoteVersion) > String(localVersion);
+    }
+
+    function showToast(message, type = "info") {
+      els.toast.textContent = message;
+
+      els.toast.className =
+        "fixed bottom-4 left-4 right-4 z-[90] rounded-xl px-4 py-3 text-sm font-medium shadow-lg sm:left-auto sm:right-4 sm:max-w-sm " +
+        (type === "error"
+          ? "bg-red-600 text-white"
+          : "bg-slate-900 text-white dark:bg-white dark:text-slate-900");
+
+      clearTimeout(showToast.timer);
+
+      showToast.timer = setTimeout(() => {
+        els.toast.classList.add("hidden");
+      }, 3500);
+    }
+
+    function saveProgress() {
+      localStorage.setItem(STORAGE.mastered, JSON.stringify([...masteredSet]));
+      localStorage.setItem(STORAGE.bookmarked, JSON.stringify([...bookmarkedSet]));
+    }
+
+    function saveRemovedStarterFiles() {
+      localStorage.setItem(
+        STORAGE.removedStarterFiles,
+        JSON.stringify([...removedStarterFiles])
+      );
+    }
+
+    function saveSources() {
+      localStorage.setItem(STORAGE.sources, JSON.stringify(sources));
+      saveRemovedStarterFiles();
+    }
+
+    function saveStarterVersion() {
+      localStorage.setItem(STORAGE.starterVersion, STARTER_BUNDLE_VERSION);
+    }
+
+    function setConfigCollapsed(collapsed) {
+      els.configPanel.classList.toggle("hidden", collapsed);
+      els.configToggleBtn.setAttribute("aria-expanded", String(!collapsed));
+      els.configToggleLabel.textContent = collapsed ? "Expand" : "Collapse";
+      els.configToggleIcon.classList.toggle("rotate-180", !collapsed);
+      localStorage.setItem(STORAGE.configCollapsed, collapsed ? "1" : "0");
+    }
+
+    function initializeConfigState() {
+      const saved = localStorage.getItem(STORAGE.configCollapsed);
+      const collapsed = saved === null ? true : saved === "1";
+      setConfigCollapsed(collapsed);
+    }
+
+    function visibleMasteredCount() {
+      const validKeys = new Set(DB.map(item => item.key));
+      let count = 0;
+
+      masteredSet.forEach(key => {
+        if (validKeys.has(key)) count++;
+      });
+
+      return count;
+    }
+
+    function visibleBookmarkedCount() {
+      const validKeys = new Set(DB.map(item => item.key));
+      let count = 0;
+
+      bookmarkedSet.forEach(key => {
+        if (validKeys.has(key)) count++;
+      });
+
+      return count;
+    }
+
+    /* ==========================================================
+       JSON PARSING
+       ========================================================== */
+
+    function parseJsonPayload(jsonText, fileName) {
+      let parsed;
+
+      try {
+        parsed = JSON.parse(jsonText);
+      } catch {
+        throw new Error("Invalid JSON.");
+      }
+
+      let records = null;
+
+      if (Array.isArray(parsed)) {
+        records = parsed;
+      } else if (parsed && Array.isArray(parsed.questions)) {
+        records = parsed.questions;
+      } else if (parsed && Array.isArray(parsed.data)) {
+        records = parsed.data;
+      } else if (parsed && Array.isArray(parsed.DB)) {
+        records = parsed.DB;
+      } else {
+        throw new Error("Expected an array, { questions: [] }, { data: [] }, or { DB: [] }.");
+      }
+
+      if (!records.length) {
+        throw new Error("JSON file is empty.");
+      }
+
+      const items = records.map((record, index) => {
+        /*
+          Supports array form:
+          [id, sectionIndex, question, answer]
+        */
+        if (Array.isArray(record)) {
+          const [id, sectionIndex, question, answer] = record;
+
+          if (!question) return null;
+
+          return {
+            id: id !== undefined && id !== null ? String(id).trim() : undefined,
+            q: String(question).trim(),
+            sectionTitle: typeof sectionIndex === "number"
+              ? "Section " + (sectionIndex + 1)
+              : "General",
+            answers: answer ? [{ text: String(answer).trim() }] : []
+          };
+        }
+
+        const question =
+          record.q ||
+          record.question ||
+          record.title ||
+          record.Question ||
+          "";
+
+        if (!question || !String(question).trim()) {
+          return null;
+        }
+
+        let answers = [];
+
+        if (Array.isArray(record.answers)) {
+          answers = record.answers
+            .map(answer => {
+              if (typeof answer === "string") {
+                return { text: answer.trim() };
+              }
+
+              return {
+                text: String(
+                  answer.text ||
+                  answer.answer ||
+                  answer.a ||
+                  answer.content ||
+                  ""
+                ).trim()
+              };
+            })
+            .filter(answer => answer.text);
+        } else {
+          const answer =
+            record.a ||
+            record.answer ||
+            record.content ||
+            record.Answer ||
+            "";
+
+          if (String(answer).trim()) {
+            answers = [{ text: String(answer).trim() }];
+          }
+        }
+
+        return {
+          id: record.id !== undefined && record.id !== null
+            ? String(record.id).trim()
+            : undefined,
+
+          q: String(question).trim(),
+
+          sectionTitle:
+            record.sectionTitle ||
+            record.section ||
+            record.topic ||
+            "General",
+
+          answers
+        };
+      }).filter(Boolean);
+
+      if (!items.length) {
+        throw new Error("No valid question objects found.");
+      }
+
+      return items;
+    }
+
+    /* ==========================================================
+       SOURCE / DATABASE MANAGEMENT
+       ========================================================== */
+
+    function loadSourcesFromStorage() {
+      const rawSources = localStorage.getItem(STORAGE.sources);
+
+      /*
+        null means first open.
+        "[]" means user intentionally cleared all sources.
+      */
+      if (rawSources === null) {
+        return false;
+      }
+
+      try {
+        const parsed = JSON.parse(rawSources);
+        sources = Array.isArray(parsed) ? parsed : [];
+      } catch {
+        sources = [];
+      }
+
+      return true;
+    }
+
+    function rebuildDatabase() {
+      DB = [];
+      questionKeyToIndex = new Map();
+      sectionsList = [];
+
+      let autoIdCounter = 0;
+
+      /*
+        First pass:
+        Create one unique question card for every normalized question.
+      */
+      sources.forEach(source => {
+        if (!source || !Array.isArray(source.data)) return;
+
+        source.data.forEach(questionItem => {
+          const key = normalizeQuestion(questionItem.q);
+
+          if (!key) return;
+
+          const specifiedId =
+            questionItem.id !== undefined &&
+            questionItem.id !== null &&
+            String(questionItem.id).trim()
+              ? String(questionItem.id).trim()
+              : null;
+
+          if (!questionKeyToIndex.has(key)) {
+            const id = specifiedId || generatedId(autoIdCounter++);
+
+            DB.push({
+              key,
+              id,
+              q: String(questionItem.q).trim(),
+              sectionTitle: questionItem.sectionTitle || "General",
+              answers: [],
+              generatedId: !specifiedId,
+              hint: ""
+            });
+
+            questionKeyToIndex.set(key, DB.length - 1);
+          } else {
+            const existing = DB[questionKeyToIndex.get(key)];
+
+            /*
+              If first file lacked an ID but a later matching source
+              has one, use that original provided ID.
+            */
+            if (existing.generatedId && specifiedId) {
+              existing.id = specifiedId;
+              existing.generatedId = false;
+            }
+
+            /*
+              Upgrade generic section when later source has better section.
+            */
+            if (
+              (!existing.sectionTitle || existing.sectionTitle === "General") &&
+              questionItem.sectionTitle
+            ) {
+              existing.sectionTitle = questionItem.sectionTitle;
+            }
+          }
+        });
+      });
+
+      /*
+        Second pass:
+        Attach all answers under their unique question.
+      */
+      sources.forEach(source => {
+        if (!source || !Array.isArray(source.data)) return;
+
+        source.data.forEach(questionItem => {
+          const key = normalizeQuestion(questionItem.q);
+
+          if (!key || !questionKeyToIndex.has(key)) return;
+
+          const dbQuestion = DB[questionKeyToIndex.get(key)];
+
+          let answerList = [];
+
+          if (Array.isArray(questionItem.answers)) {
+            answerList = questionItem.answers
+              .map(answer => {
+                if (typeof answer === "string") {
+                  return { text: answer.trim() };
+                }
+
+                return {
+                  text: String(
+                    answer.text ||
+                    answer.answer ||
+                    answer.a ||
+                    answer.content ||
+                    ""
+                  ).trim()
+                };
+              })
+              .filter(answer => answer.text);
+          }
+
+          answerList.forEach(answer => {
+            const duplicateAnswer = dbQuestion.answers.some(existing =>
+              existing.source === source.name &&
+              existing.text === answer.text
+            );
+
+            if (!duplicateAnswer) {
+              dbQuestion.answers.push({
+                source: source.name,
+                text: answer.text
+              });
+            }
+          });
+        });
+      });
+
+      DB.forEach(question => {
+        const firstAnswer = question.answers[0]?.text || "";
+        question.hint =
+          firstAnswer.length > 170
+            ? firstAnswer.slice(0, 170) + "..."
+            : firstAnswer;
+      });
+
+      sectionsList = [...new Set(
+        DB.map(question => question.sectionTitle || "General")
+      )].sort((a, b) => a.localeCompare(b));
+
+      if (
+        activeSection !== "all" &&
+        !sectionsList.includes(activeSection)
+      ) {
+        activeSection = "all";
+      }
+
+      visibleCount = PAGE_SIZE;
+      openSet.clear();
+    }
+
+    function setSourcesAfterImport(importedSources, merge) {
+      if (merge) {
+        importedSources.forEach(newSource => {
+          const existingIndex = sources.findIndex(
+            source => source.name === newSource.name
+          );
+
+          if (existingIndex >= 0) {
+            sources[existingIndex] = newSource;
+          } else {
+            sources.push(newSource);
+          }
+        });
+      } else {
+        /*
+          Replace all visible sources with only imported user sources.
+          The user can Restore Default if they want starter files again.
+        */
+        sources = importedSources;
+      }
+
+      rebuildDatabase();
+      saveSources();
+      renderAll();
+    }
+
+    async function fetchStarterSources() {
+      if (location.protocol === "file:") {
+        showToast(
+          "Starter loading requires GitHub Pages or a local web server. file:// blocks fetch requests.",
+          "error"
+        );
+        return [];
+      }
+
+      const loaded = [];
+
+      for (const fileName of STARTER_FILES) {
+        /*
+          Do not restore a starter source that the user intentionally removed.
+        */
+        if (removedStarterFiles.has(fileName)) {
+          continue;
+        }
+
+        const url =
+          STARTER_BASE_PATH +
+          fileName +
+          "?starterVersion=" +
+          encodeURIComponent(STARTER_BUNDLE_VERSION);
+
+        try {
+          const response = await fetch(url, {
+            cache: "no-store"
+          });
+
+          if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+          }
+
+          const text = await response.text();
+          const items = parseJsonPayload(text, fileName);
+
+          loaded.push({
+            name: fileName,
+            kind: "starter",
+            data: items
+          });
+        } catch (error) {
+          console.error("Failed to load starter source:", fileName, error);
+        }
+      }
+
+      return loaded;
+    }
+
+    async function loadStarterForFirstTime() {
+      const starterSources = await fetchStarterSources();
+
+      if (!starterSources.length) {
+        return false;
+      }
+
+      sources = starterSources;
+
+      rebuildDatabase();
+      saveSources();
+      saveStarterVersion();
+
+      return true;
+    }
+
+    async function refreshStarterBundle({ silent = false } = {}) {
+      if (!sources.some(source => source.kind === "starter")) {
+        if (!silent) {
+          showToast("No starter sources are currently loaded.", "error");
+        }
+        return false;
+      }
+
+      const existingStarterNames = new Set(
+        sources
+          .filter(source => source.kind === "starter")
+          .map(source => source.name)
+      );
+
+      const fetchedSources = await fetchStarterSources();
+
+      if (!fetchedSources.length) {
+        if (!silent) {
+          showToast("Starter content could not be refreshed.", "error");
+        }
+        return false;
+      }
+
+      /*
+        Preserve user sources.
+        Preserve removed starter sources.
+        Add newly configured starter files if they were not removed.
+      */
+      const userSources = sources.filter(source => source.kind !== "starter");
+
+      const currentStarters = fetchedSources.filter(source => {
+        /*
+          Fetch includes all configured files except removed ones.
+          Existing users also receive new starter files after app update.
+        */
+        return !removedStarterFiles.has(source.name);
+      });
+
+      sources = [...currentStarters, ...userSources];
+
+      rebuildDatabase();
+      saveSources();
+      saveStarterVersion();
+      renderAll();
+
+      if (!silent) {
+        showToast("Starter content refreshed. Progress was preserved.");
+      }
+
+      return true;
+    }
+
+    function removeSource(sourceName) {
+      const source = sources.find(item => item.name === sourceName);
+
+      if (!source) return;
+
+      if (!confirm(`Remove "${sourceName}" from this device?`)) {
+        return;
+      }
+
+      /*
+        Keep a record that starter source was intentionally removed.
+        This prevents it being re-added during refresh/version update.
+      */
+      if (source.kind === "starter") {
+        removedStarterFiles.add(sourceName);
+      }
+
+      sources = sources.filter(item => item.name !== sourceName);
+
+      rebuildDatabase();
+      saveSources();
+      renderAll();
+
+      showToast(`Removed ${sourceName}`);
+    }
+
+    function clearAllSources() {
+      if (!sources.length) return;
+
+      if (!confirm(
+        "Clear all sources? Your mastered and saved progress will remain, but no questions will be shown."
+      )) {
+        return;
+      }
+
+      /*
+        Clear source list but do not erase progress.
+        Also mark all starter sources as removed so refresh does not restore them.
+      */
+      STARTER_FILES.forEach(fileName => removedStarterFiles.add(fileName));
+
+      sources = [];
+      DB = [];
+      sectionsList = [];
+      questionKeyToIndex.clear();
+      openSet.clear();
+
+      saveSources();
+      renderAll();
+
+      showToast("All sources cleared. Progress was kept.");
+    }
+
+    async function restoreDefaultState() {
+      const proceed = confirm(
+        "Restore default state?\n\nThis will remove all imported files, restore starter files, clear mastered progress, clear saved questions, reset configuration, and reset the app like a first-time visit."
+      );
+
+      if (!proceed) return;
+
+      localStorage.removeItem(STORAGE.sources);
+      localStorage.removeItem(STORAGE.removedStarterFiles);
+      localStorage.removeItem(STORAGE.mastered);
+      localStorage.removeItem(STORAGE.bookmarked);
+      localStorage.removeItem(STORAGE.starterVersion);
+      localStorage.removeItem(STORAGE.dismissedUpdateVersion);
+      localStorage.removeItem(STORAGE.configCollapsed);
+
+      sources = [];
+      DB = [];
+      sectionsList = [];
+      questionKeyToIndex.clear();
+
+      masteredSet = new Set();
+      bookmarkedSet = new Set();
+      removedStarterFiles = new Set();
+
+      activeSection = "all";
+      searchTerm = "";
+      statusFilterValue = "all";
+      visibleCount = PAGE_SIZE;
+      openSet.clear();
+
+      els.searchInput.value = "";
+      els.statusFilter.value = "all";
+      els.mergeMode.checked = true;
+
+      setConfigCollapsed(true);
+
+      const starterLoaded = await loadStarterForFirstTime();
+
+      renderAll();
+
+      if (starterLoaded) {
+        showToast("Default state restored.");
+      } else {
+        showToast(
+          "Default reset completed, but starter JSON files could not be loaded.",
+          "error"
+        );
+      }
+    }
+
+    /* ==========================================================
+       FILTERING
+       ========================================================== */
+
+    function getFilteredQuestions() {
+      const term = searchTerm.toLowerCase();
+
+      return DB.filter(question => {
+        if (
+          activeSection !== "all" &&
+          question.sectionTitle !== activeSection
+        ) {
+          return false;
+        }
+
+        if (
+          statusFilterValue === "bookmarked" &&
+          !bookmarkedSet.has(question.key)
+        ) {
+          return false;
+        }
+
+        if (
+          statusFilterValue === "mastered" &&
+          !masteredSet.has(question.key)
+        ) {
+          return false;
+        }
+
+        if (
+          statusFilterValue === "unmastered" &&
+          masteredSet.has(question.key)
+        ) {
+          return false;
+        }
+
+        if (
+          statusFilterValue === "multi" &&
+          question.answers.length < 2
+        ) {
+          return false;
+        }
+
+        /*
+          Searches:
+          - Question ID
+          - Question text
+          - Section name
+          - Every answer from every source
+        */
+        if (term) {
+          const answerText = question.answers
+            .map(answer => answer.text)
+            .join(" ");
+
+          const searchBlob = (
+            question.id + " " +
+            question.q + " " +
+            question.sectionTitle + " " +
+            answerText
+          ).toLowerCase();
+
+          if (!searchBlob.includes(term)) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+    }
+
+    /* ==========================================================
+       RENDERING
+       ========================================================== */
+
+    function renderMetrics() {
+      const total = DB.length;
+      const mastered = visibleMasteredCount();
+      const bookmarked = visibleBookmarkedCount();
+      const percent = total ? Math.round((mastered / total) * 100) : 0;
+
+      els.metricTotal.textContent = total;
+      els.metricMastered.textContent = mastered;
+      els.metricMasteredTotal.textContent = "/" + total;
+      els.metricBookmarked.textContent = bookmarked;
+      els.metricPercent.textContent = percent + "%";
+      els.globalProgressBar.style.width = percent + "%";
+    }
+
+    function renderSourceBadge() {
+      if (!sources.length) {
+        els.sourceCountBadge.classList.add("hidden");
+        return;
+      }
+
+      els.sourceCountBadge.textContent =
+        sources.length + " source" + (sources.length === 1 ? "" : "s");
+
+      els.sourceCountBadge.classList.remove("hidden");
+    }
+
+    function renderSources() {
+      renderSourceBadge();
+
+      if (!sources.length) {
+        els.sourcesSection.classList.add("hidden");
+        els.clearAllBtn.classList.add("hidden");
+        return;
+      }
+
+      els.sourcesSection.classList.remove("hidden");
+      els.clearAllBtn.classList.remove("hidden");
+
+      els.sourcesCount.textContent =
+        sources.length + " source" + (sources.length === 1 ? "" : "s");
+
+      els.sourcesList.innerHTML = sources.map((source, index) => {
+        const questionCount = Array.isArray(source.data)
+          ? source.data.length
+          : 0;
+
+        const typeClass = source.kind === "starter"
+          ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
+          : "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300";
+
+        return `
+          <div class="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-file-lines text-xs text-slate-400"></i>
+                <p class="truncate text-sm font-medium">${esc(source.name)}</p>
+                <span class="rounded-full px-2 py-0.5 text-[10px] font-semibold ${typeClass}">
+                  ${esc(source.kind || "user")}
+                </span>
+              </div>
+
+              <p class="mt-1 text-xs text-slate-500">
+                ${questionCount} question${questionCount === 1 ? "" : "s"}
+              </p>
+            </div>
+
+            <button
+              data-remove-source-index="${index}"
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-red-500 transition hover:bg-red-50 active:scale-90 dark:hover:bg-red-950/40"
+              aria-label="Remove source"
+              title="Remove source"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        `;
+      }).join("");
+
+      els.sourcesList
+        .querySelectorAll("[data-remove-source-index]")
+        .forEach(button => {
+          button.addEventListener("click", () => {
+            const index = Number(button.dataset.removeSourceIndex);
+            const source = sources[index];
+
+            if (source) {
+              removeSource(source.name);
+            }
+          });
+        });
+    }
+
+    function renderSidebar() {
+      if (!DB.length) {
+        els.sectionsSidebar.innerHTML = `
+          <div class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-center text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900">
+            No sections available
+          </div>
+        `;
+        return;
+      }
+
+      const groups = {};
+
+      DB.forEach(question => {
+        const section = question.sectionTitle || "General";
+
+        if (!groups[section]) {
+          groups[section] = {
+            count: 0,
+            mastered: 0
+          };
+        }
+
+        groups[section].count++;
+
+        if (masteredSet.has(question.key)) {
+          groups[section].mastered++;
+        }
+      });
+
+      const sectionNames = Object.keys(groups).sort((a, b) =>
+        a.localeCompare(b)
+      );
+
+      let html = `
+        <button
+          data-section="all"
+          class="section-btn min-h-[44px] w-full rounded-xl px-3 py-2 text-left text-sm transition active:scale-[.98] ${
+            activeSection === "all"
+              ? "bg-brand-600 font-semibold text-white shadow"
+              : "border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+          }"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <span>All Sections</span>
+            <span class="text-[11px] ${activeSection === "all" ? "text-white/80" : "text-slate-400"}">
+              ${DB.length}
+            </span>
+          </div>
+        </button>
+      `;
+
+      sectionNames.forEach(sectionName => {
+        const group = groups[sectionName];
+        const active = activeSection === sectionName;
+
+        html += `
+          <button
+            data-section="${esc(sectionName)}"
+            class="section-btn min-h-[44px] w-full rounded-xl px-3 py-2 text-left text-sm transition active:scale-[.98] ${
+              active
+                ? "bg-brand-600 font-semibold text-white shadow"
+                : "border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+            }"
+          >
+            <div class="flex items-center justify-between gap-2">
+              <span class="truncate">${esc(sectionName)}</span>
+              <span class="shrink-0 text-[11px] ${active ? "text-white/80" : "text-slate-400"}">
+                ${group.mastered}/${group.count}
+              </span>
+            </div>
+          </button>
+        `;
+      });
+
+      els.sectionsSidebar.innerHTML = html;
+
+      els.sectionsSidebar.querySelectorAll(".section-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          activeSection = button.dataset.section;
+          visibleCount = PAGE_SIZE;
+
+          renderSidebar();
+          renderQuestions();
+
+          if (window.innerWidth < 1024) {
+            closeDrawer();
+          }
+        });
+      });
+    }
+
+    function renderAnswerBlocks(question) {
+      const multipleAnswers = question.answers.length > 1;
+
+      return question.answers.map((answer, index) => `
+        <div class="${index > 0 ? "mt-3 border-t border-dashed border-slate-200 pt-3 dark:border-slate-700" : ""}">
+          ${
+            multipleAnswers
+              ? `
+                <div class="mb-1.5 flex min-w-0 items-center gap-2">
+                  <span class="shrink-0 rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-white dark:bg-white dark:text-slate-900">
+                    Answer ${index + 1}
+                  </span>
+
+                  <span class="truncate text-[10px] text-slate-400" title="${esc(answer.source)}">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    ${esc(answer.source)}
+                  </span>
+                </div>
+              `
+              : `
+                <div class="mb-1.5 flex min-w-0 items-center gap-2">
+                  <span class="truncate text-[10px] text-slate-400" title="${esc(answer.source)}">
+                    <i class="fa-regular fa-file-lines mr-1"></i>
+                    ${esc(answer.source)}
+                  </span>
+                </div>
+              `
+          }
+
+          <div class="whitespace-pre-wrap break-words rounded-lg border-l-4 bg-slate-50 p-3 text-sm leading-relaxed dark:bg-slate-800/60 ${answerBorderColors[index % answerBorderColors.length]}">
+            ${highlight(answer.text, searchTerm)}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderQuestions() {
+      const filtered = getFilteredQuestions();
+      const shown = filtered.slice(0, visibleCount);
+      const remaining = filtered.length - shown.length;
+
+      if (!DB.length) {
+        els.questionsContainer.innerHTML = "";
+        els.emptyState.classList.remove("hidden");
+        return;
+      }
+
+      els.emptyState.classList.add("hidden");
+
+      let html = `
+        <div class="sticky top-[57px] z-20 -mt-1 flex items-center justify-between gap-2 bg-slate-50/95 py-2 backdrop-blur dark:bg-slate-950/95 sm:top-[65px]">
+          <p class="text-xs text-slate-500 sm:text-sm">
+            Showing <b>${shown.length}</b> of <b>${filtered.length}</b> unique question${filtered.length === 1 ? "" : "s"}
+          </p>
+
+          <div class="flex gap-1.5">
+            <button
+              id="expandAll"
+              class="min-h-[36px] rounded-lg border border-slate-200 bg-white px-3 text-xs transition active:scale-95 dark:border-slate-800 dark:bg-slate-900"
+            >
+              Expand
+            </button>
+
+            <button
+              id="collapseAll"
+              class="min-h-[36px] rounded-lg border border-slate-200 bg-white px-3 text-xs transition active:scale-95 dark:border-slate-800 dark:bg-slate-900"
+            >
+              Collapse
+            </button>
+          </div>
+        </div>
+      `;
+
+      if (!filtered.length) {
+        html += `
+          <div class="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900">
+            No questions match your current search or filter.
+          </div>
+        `;
+      } else {
+        html += shown.map(question => {
+          const isMastered = masteredSet.has(question.key);
+          const isBookmarked = bookmarkedSet.has(question.key);
+          const hasMultipleAnswers = question.answers.length > 1;
+
+          return `
+            <article
+              data-question-key="${esc(question.key)}"
+              class="overflow-hidden rounded-xl border bg-white shadow-sm transition dark:bg-slate-900 ${
+                isMastered
+                  ? "border-emerald-300 dark:border-emerald-700"
+                  : "border-slate-200 dark:border-slate-800"
+              }"
+            >
+              <div class="p-3.5 sm:p-4">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="flex min-w-0 flex-wrap items-center gap-1.5">
+                    <span
+                      class="shrink-0 rounded-full bg-slate-900 px-2 py-0.5 text-[11px] font-bold text-white dark:bg-white dark:text-slate-900"
+                      title="Question ID"
+                    >
+                      ${esc(question.id)}
+                    </span>
+
+                    ${
+                      hasMultipleAnswers
+                        ? `
+                          <span class="shrink-0 rounded-full border border-violet-200 bg-violet-50 px-2 py-0.5 text-[11px] text-violet-700 dark:border-violet-900 dark:bg-violet-950/40 dark:text-violet-300">
+                            <i class="fa-solid fa-layer-group mr-1"></i>
+                            ${question.answers.length} answers
+                          </span>
+                        `
+                        : ""
+                    }
+
+                    <span
+                      class="truncate text-[11px] text-slate-500"
+                      title="${esc(question.sectionTitle)}"
+                    >
+                      ${esc(question.sectionTitle)}
+                    </span>
+                  </div>
+
+                  <div class="flex shrink-0 gap-1.5">
+                    <button
+                      data-action="bookmark"
+                      data-question-key="${esc(question.key)}"
+                      aria-label="Bookmark question"
+                      class="flex h-10 w-10 -m-1 items-center justify-center rounded-xl transition active:scale-90 ${
+                        isBookmarked
+                          ? "text-amber-500"
+                          : "text-slate-300 hover:text-amber-400 dark:text-slate-600"
+                      }"
+                    >
+                      <i class="fa-${isBookmarked ? "solid" : "regular"} fa-star"></i>
+                    </button>
+
+                    <button
+                      data-action="mastered"
+                      data-question-key="${esc(question.key)}"
+                      aria-label="Mark question as mastered"
+                      class="flex h-10 w-10 -m-1 items-center justify-center rounded-xl transition active:scale-90 ${
+                        isMastered
+                          ? "text-emerald-500"
+                          : "text-slate-300 hover:text-emerald-400 dark:text-slate-600"
+                      }"
+                    >
+                      <i class="fa-solid fa-circle-check"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <h3 class="mt-2.5 text-[15px] font-semibold leading-snug sm:text-base">
+                  ${highlight(question.q, searchTerm)}
+                </h3>
+
+                ${
+                  question.hint
+                    ? `
+                      <p class="mt-1 line-clamp-2 text-xs italic text-slate-500">
+                        ${highlight(question.hint, searchTerm)}
+                      </p>
+                    `
+                    : ""
+                }
+
+                <details
+                  data-question-id="${esc(question.id)}"
+                  class="group mt-2.5"
+                  ${openSet.has(question.id) ? "open" : ""}
+                >
+                  <summary class="flex min-h-[40px] cursor-pointer list-none items-center gap-2 select-none text-sm font-semibold text-brand-600 dark:text-blue-400">
+                    <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+                    <span class="group-open:hidden">
+                      Show ${hasMultipleAnswers ? question.answers.length + " answers" : "answer"}
+                    </span>
+                    <span class="hidden group-open:inline">
+                      Hide answer${hasMultipleAnswers ? "s" : ""}
+                    </span>
+                  </summary>
+
+                  <div class="mt-1">
+                    ${renderAnswerBlocks(question)}
+                  </div>
+                </details>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        if (remaining > 0) {
+          html += `
+            <button
+              id="loadMoreBtn"
+              class="min-h-[48px] w-full rounded-xl bg-brand-600 text-sm font-semibold text-white transition hover:bg-brand-500 active:scale-[.99]"
+            >
+              Load ${Math.min(PAGE_SIZE, remaining)} more
+              <span class="opacity-80">(${remaining} left)</span>
+            </button>
+          `;
+        }
+      }
+
+      els.questionsContainer.innerHTML = html;
+
+      els.questionsContainer
+        .querySelectorAll("details[data-question-id]")
+        .forEach(details => {
+          details.addEventListener("toggle", () => {
+            const id = details.dataset.questionId;
+
+            if (details.open) {
+              openSet.add(id);
+            } else {
+              openSet.delete(id);
+            }
+          });
+        });
+
+      els.questionsContainer
+        .querySelectorAll("[data-action]")
+        .forEach(button => {
+          button.addEventListener("click", () => {
+            const key = button.dataset.questionKey;
+            const action = button.dataset.action;
+
+            if (action === "bookmark") {
+              if (bookmarkedSet.has(key)) {
+                bookmarkedSet.delete(key);
+              } else {
+                bookmarkedSet.add(key);
+              }
+            }
+
+            if (action === "mastered") {
+              if (masteredSet.has(key)) {
+                masteredSet.delete(key);
+              } else {
+                masteredSet.add(key);
+              }
+            }
+
+            saveProgress();
+            renderMetrics();
+            renderSidebar();
+            renderQuestions();
+          });
+        });
+
+      $("loadMoreBtn")?.addEventListener("click", () => {
+        visibleCount += PAGE_SIZE;
+        renderQuestions();
+      });
+
+      $("expandAll")?.addEventListener("click", () => {
+        els.questionsContainer
+          .querySelectorAll("details[data-question-id]")
+          .forEach(details => {
+            details.open = true;
+            openSet.add(details.dataset.questionId);
+          });
+      });
+
+      $("collapseAll")?.addEventListener("click", () => {
+        els.questionsContainer
+          .querySelectorAll("details[data-question-id]")
+          .forEach(details => {
+            details.open = false;
+            openSet.delete(details.dataset.questionId);
+          });
+      });
+    }
+
+    function renderAll() {
+      renderSources();
+      renderMetrics();
+      renderSidebar();
+      renderQuestions();
+    }
+
+    /* ==========================================================
+       IMPORT / EXPORT
+       ========================================================== */
+
+    function handleImportedFiles(fileList) {
+      const files = [...fileList].filter(file =>
+        file &&
+        file.name &&
+        file.name.toLowerCase().endsWith(".json")
+      );
+
+      if (!files.length) {
+        showToast("Please select valid .json files.", "error");
+        return;
+      }
+
+      const readers = files.map(file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = event => {
+          resolve({
+            name: file.name,
+            text: event.target.result
+          });
+        };
+
+        reader.onerror = reject;
+        reader.readAsText(file);
+      }));
+
+      Promise.all(readers)
+        .then(results => {
+          const importedSources = [];
+
+          results.forEach(({ name, text }) => {
+            try {
+              const parsedItems = parseJsonPayload(text, name);
+
+              /*
+                If user imports starter file manually, treat as user source.
+              */
+              importedSources.push({
+                name,
+                kind: "user",
+                data: parsedItems
+              });
+            } catch (error) {
+              showToast(name + ": " + error.message, "error");
+            }
+          });
+
+          if (!importedSources.length) return;
+
+          setSourcesAfterImport(
+            importedSources,
+            els.mergeMode.checked
+          );
+
+          showToast(
+            `Loaded ${importedSources.length} file(s) • ${DB.length} unique questions`
+          );
+        })
+        .catch(() => {
+          showToast("Could not read the selected JSON file(s).", "error");
+        });
+    }
+
+    function exportCurrentBank() {
+      const exportData = DB.map(question => ({
+        id: question.id,
+        q: question.q,
+        sectionTitle: question.sectionTitle,
+        answers: question.answers.map(answer => ({
+          source: answer.source,
+          text: answer.text
+        }))
+      }));
+
+      const blob = new Blob(
+        [JSON.stringify(exportData, null, 2)],
+        { type: "application/json" }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "sdm-question-bank-export.json";
+      link.click();
+
+      URL.revokeObjectURL(url);
+
+      showToast(`Exported ${exportData.length} unique questions.`);
+    }
+
+    /* ==========================================================
+       APP / DESIGN VERSION UPDATE CHECK
+       ========================================================== */
+
+    async function checkForUpdates() {
+      if (location.protocol === "file:") return;
+
+      try {
+        const url = VERSION_FILE + "?check=" + Date.now();
+
+        const response = await fetch(url, {
+          cache: "no-store"
+        });
+
+        if (!response.ok) return;
+
+        const remoteVersion = await response.json();
+
+        const remoteAppVersion = remoteVersion.appVersion || "";
+        const remoteStarterVersion =
+          remoteVersion.starterBundleVersion || "";
+
+        const appUpdateAvailable = isNewerVersion(
+          remoteAppVersion,
+          APP_VERSION
+        );
+
+        const starterUpdateAvailable = isNewerVersion(
+          remoteStarterVersion,
+          STARTER_BUNDLE_VERSION
+        );
+
+        if (!appUpdateAvailable && !starterUpdateAvailable) {
+          return;
+        }
+
+        const updateKey =
+          remoteAppVersion + "|" + remoteStarterVersion;
+
+        const dismissedKey = localStorage.getItem(
+          STORAGE.dismissedUpdateVersion
+        );
+
+        if (dismissedKey === updateKey) {
+          return;
+        }
+
+        const messages = [];
+
+        if (appUpdateAvailable) {
+          messages.push(
+            "A newer app version is available with updated design or functionality."
+          );
+        }
+
+        if (starterUpdateAvailable) {
+          messages.push(
+            "New starter questions, answers or sections are also available."
+          );
+        }
+
+        if (remoteVersion.message) {
+          messages.push(remoteVersion.message);
+        }
+
+        els.updateBannerText.textContent = messages.join(" ");
+        els.updateBanner.dataset.updateKey = updateKey;
+        els.updateBanner.classList.remove("hidden");
+
+      } catch (error) {
+        console.warn("Unable to check updates:", error);
+      }
+    }
+
+    function updateAppNow() {
+      /*
+        Reloads index.html with a changing query parameter.
+        This fetches the latest HTML/CSS/JS design from GitHub Pages.
+
+        localStorage stays intact:
+        - mastered progress stays
+        - bookmarks stay
+        - sources stay
+      */
+      const url = new URL(window.location.href);
+
+      url.searchParams.set("update", Date.now());
+
+      window.location.href = url.toString();
+    }
+
+    /* ==========================================================
+       DRAWER
+       ========================================================== */
+
+    function openDrawer() {
+      els.drawer.classList.remove("-translate-x-full");
+      els.drawerOverlay.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDrawer() {
+      els.drawer.classList.add("-translate-x-full");
+      els.drawerOverlay.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    /* ==========================================================
+       INITIALIZATION
+       ========================================================== */
+
+    async function initializeApp() {
+      if (localStorage.getItem(STORAGE.theme) === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+
+      initializeConfigState();
+
+      const storedStateExists = loadSourcesFromStorage();
+
+      /*
+        Returning visitor:
+        Restore exactly their local source state.
+      */
+      if (storedStateExists) {
+        rebuildDatabase();
+        renderAll();
+
+        /*
+          If the HTML was updated and STARTER_BUNDLE_VERSION changed,
+          fetch newer starter content automatically.
+
+          Progress stays unchanged.
+
+          Removed starter source(s) remain removed because
+          removedStarterFiles are respected.
+        */
+        const storedStarterVersion =
+          localStorage.getItem(STORAGE.starterVersion) || "";
+
+        const currentlyHasStarterSources = sources.some(
+          source => source.kind === "starter"
+        );
+
+        if (
+          currentlyHasStarterSources &&
+          storedStarterVersion !== STARTER_BUNDLE_VERSION
+        ) {
+          const refreshed = await refreshStarterBundle({ silent: true });
+
+          if (refreshed) {
+            showToast("Starter content was updated. Your progress was kept.");
+          }
+        }
+
+        checkForUpdates();
+        return;
+      }
+
+      /*
+        First-ever visit:
+        Automatically fetch starter files.
+      */
+      const starterLoaded = await loadStarterForFirstTime();
+
+      renderAll();
+
+      if (starterLoaded) {
+        showToast("Starter bundle loaded.");
+      } else if (location.protocol === "file:") {
+        els.emptyState.classList.remove("hidden");
+        els.emptyState.innerHTML = `
+          <i class="fa-regular fa-folder-open mb-4 text-4xl opacity-60"></i>
+          <h2 class="mb-1 font-semibold">Starter files cannot load from file://</h2>
+          <p class="text-sm">
+            Open this app through GitHub Pages, Live Server, or a local HTTP server.
+            You can still use Configuration to manually choose JSON files.
+          </p>
+        `;
+      } else {
+        els.emptyState.classList.remove("hidden");
+        els.emptyState.innerHTML = `
+          <i class="fa-solid fa-triangle-exclamation mb-4 text-4xl text-amber-500"></i>
+          <h2 class="mb-1 font-semibold">Starter files could not be loaded</h2>
+          <p class="text-sm">
+            Check that the starter JSON files exist beside index.html and that their names match STARTER_FILES.
+          </p>
+        `;
+      }
+
+      checkForUpdates();
+    }
+
+    /* ==========================================================
+       EVENT LISTENERS
+       ========================================================== */
+
+    els.configToggleBtn.addEventListener("click", () => {
+      const isCollapsed = els.configPanel.classList.contains("hidden");
+      setConfigCollapsed(!isCollapsed);
+    });
+
+    els.loadJsonBtn.addEventListener("click", () => {
+      els.jsonFileInput.click();
+    });
+
+    els.jsonFileInput.addEventListener("change", event => {
+      handleImportedFiles(event.target.files);
+      event.target.value = "";
+    });
+
+    els.exportJsonBtn.addEventListener("click", exportCurrentBank);
+
+    els.refreshStarterBtn.addEventListener("click", () => {
+      refreshStarterBundle();
+    });
+
+    els.clearAllBtn.addEventListener("click", clearAllSources);
+
+    els.restoreDefaultBtn.addEventListener("click", restoreDefaultState);
+
+    els.searchInput.addEventListener("input", event => {
+      searchTerm = event.target.value;
+      visibleCount = PAGE_SIZE;
+      renderQuestions();
+    });
+
+    els.statusFilter.addEventListener("change", event => {
+      statusFilterValue = event.target.value;
+      visibleCount = PAGE_SIZE;
+      renderQuestions();
+    });
+
+    els.themeToggle.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+
+      localStorage.setItem(
+        STORAGE.theme,
+        document.documentElement.classList.contains("dark")
+          ? "dark"
+          : "light"
+      );
+    });
+
+    els.updateNowBtn.addEventListener("click", updateAppNow);
+
+    els.dismissUpdateBtn.addEventListener("click", () => {
+      const updateKey = els.updateBanner.dataset.updateKey;
+
+      if (updateKey) {
+        localStorage.setItem(
+          STORAGE.dismissedUpdateVersion,
+          updateKey
+        );
+      }
+
+      els.updateBanner.classList.add("hidden");
+    });
+
+    els.drawerBtn.addEventListener("click", openDrawer);
+    els.closeDrawer.addEventListener("click", closeDrawer);
+    els.drawerOverlay.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeDrawer();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1024) {
+        closeDrawer();
+      }
+    });
+
+    /*
+      Desktop drag-and-drop JSON support.
+    */
+    window.addEventListener("dragover", event => {
+      event.preventDefault();
+    });
+
+    window.addEventListener("drop", event => {
+      event.preventDefault();
+
+      if (
+        event.dataTransfer.files &&
+        event.dataTransfer.files.length
+      ) {
+        handleImportedFiles(event.dataTransfer.files);
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 500) {
+        els.toTop.classList.remove("hidden");
+        els.toTop.classList.add("flex");
+      } else {
+        els.toTop.classList.add("hidden");
+        els.toTop.classList.remove("flex");
+      }
+    }, { passive: true });
+
+    els.toTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    initializeApp();
+  })();
+  </script>
 </body>
 </html>
