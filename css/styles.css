@@ -1,0 +1,517 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+button,
+a,
+select,
+input,
+summary,
+details {
+  touch-action: manipulation;
+}
+
+input,
+select {
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 99px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+mark {
+  background: #fde68a;
+  color: #111827;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.dark mark {
+  background: rgba(245, 158, 11, 0.28);
+  color: #fde68a;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+#questionsContainer article {
+  text-align: left;
+}
+
+.answer-text {
+  text-align: left !important;
+  text-indent: 0 !important;
+  white-space: pre-wrap;
+}
+
+.answer-text mark {
+  text-align: inherit;
+}
+
+/* ==========================================================
+   DRIVING MODE STYLES
+   ========================================================== */
+
+.driving-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0f172a;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.driving-overlay.light-drive {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.driving-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #334155;
+  flex-shrink: 0;
+}
+
+.light-drive .driving-header {
+  border-bottom-color: #e2e8f0;
+}
+
+.driving-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow-y: auto;
+  text-align: center;
+  gap: 16px;
+}
+
+.driving-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  border-top: 1px solid #334155;
+  flex-shrink: 0;
+}
+
+.light-drive .driving-controls {
+  border-top-color: #e2e8f0;
+}
+
+.drive-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.drive-btn:active {
+  transform: scale(0.92);
+}
+
+.drive-btn-sm {
+  width: 56px;
+  height: 56px;
+  font-size: 20px;
+  background: #334155;
+  color: #f1f5f9;
+}
+
+.light-drive .drive-btn-sm {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.drive-btn-lg {
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
+  background: #2563eb;
+  color: #fff;
+}
+
+.drive-btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.drive-btn-success {
+  background: #16a34a;
+  color: #fff;
+}
+
+.driving-question-text {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.5;
+  max-width: 90vw;
+}
+
+.driving-answer-text {
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.7;
+  max-width: 90vw;
+  opacity: 0.92;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.driving-status-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.driving-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #334155;
+  flex-shrink: 0;
+}
+
+.light-drive .driving-progress-bar {
+  background: #e2e8f0;
+}
+
+.driving-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  transition: width 0.3s;
+}
+
+.driving-section-picker {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.driving-section-list {
+  background: #1e293b;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.light-drive .driving-section-list {
+  background: #fff;
+}
+
+.driving-section-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.15s;
+  border: none;
+  background: none;
+  color: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.driving-section-item:hover {
+  background: #334155;
+}
+
+.light-drive .driving-section-item:hover {
+  background: #f1f5f9;
+}
+
+.driving-section-item.active-section {
+  background: #2563eb;
+  color: #fff;
+}
+
+.drive-auto-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.drive-auto-indicator .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: pulse-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.drive-countdown-ring {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.drive-countdown-ring svg {
+  transform: rotate(-90deg);
+  width: 48px;
+  height: 48px;
+}
+
+.drive-countdown-ring circle {
+  fill: none;
+  stroke-width: 3;
+}
+
+.drive-countdown-ring .ring-bg {
+  stroke: #475569;
+}
+
+.light-drive .drive-countdown-ring .ring-bg {
+  stroke: #cbd5e1;
+}
+
+.drive-countdown-ring .ring-fg {
+  stroke: #3b82f6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.drive-countdown-num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .drive-btn-sm {
+    width: 64px;
+    height: 64px;
+    font-size: 22px;
+  }
+  .drive-btn-lg {
+    width: 88px;
+    height: 88px;
+    font-size: 32px;
+  }
+  .driving-question-text {
+    font-size: 1.2rem;
+  }
+  .driving-answer-text {
+    font-size: 0.98rem;
+  }
+}
+/* ==========================================================
+   ENHANCED DRIVING MODE HEADER (Mobile + Desktop)
+   ========================================================== */
+
+.driving-header {
+  padding: 10px 12px;
+  gap: 8px;
+}
+
+.drive-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.drive-header-brand-icon {
+  font-size: 1.15rem;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.drive-header-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drive-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.drive-header-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: transform 0.1s, background 0.2s, opacity 0.2s;
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: #f1f5f9;
+  background: #334155;
+}
+
+.drive-header-btn:active {
+  transform: scale(0.94);
+}
+
+.drive-header-btn:hover {
+  opacity: 0.9;
+}
+
+.drive-header-btn i {
+  font-size: 0.9rem;
+}
+
+.drive-header-btn-label {
+  display: inline;
+}
+
+.light-drive .drive-header-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Colored variants */
+.drive-header-btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+.light-drive .drive-header-btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.drive-header-btn-success {
+  background: #16a34a;
+  color: #fff;
+}
+.light-drive .drive-header-btn-success {
+  background: #16a34a;
+  color: #fff;
+}
+
+.drive-header-btn-warning {
+  background: #7c3aed;
+  color: #fff;
+}
+.light-drive .drive-header-btn-warning {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.drive-header-btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+.light-drive .drive-header-btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.drive-header-btn.is-off {
+  opacity: 0.55;
+}
+
+/* On smaller screens, hide labels and keep only icons */
+@media (max-width: 640px) {
+  .driving-header {
+    padding: 10px 10px;
+    gap: 6px;
+  }
+  .drive-header-title {
+    font-size: 0.85rem;
+  }
+  .drive-header-btn {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 12px;
+    font-size: 0.9rem;
+  }
+  .drive-header-btn i {
+    font-size: 1rem;
+  }
+  .drive-header-btn-label {
+    display: none;
+  }
+  .drive-header-actions {
+    gap: 6px;
+  }
+}
+
+/* On very narrow phones, tighten more */
+@media (max-width: 380px) {
+  .drive-header-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .drive-header-title {
+    font-size: 0.8rem;
+  }
+}
