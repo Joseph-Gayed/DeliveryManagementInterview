@@ -1,2402 +1,6324 @@
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="app-version" content="2026-08-29.1">
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#0f172a" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>SDM Question Bank</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="app-version" content="2026-08-29.2">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                50: "#eff6ff",
-                100: "#dbeafe",
-                500: "#3b82f6",
-                600: "#2563eb",
-                700: "#1d4ed8",
-              },
-            },
-          },
-        },
-      };
-    </script>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+  <title>SDM Question Bank</title>
 
-      body {
-        font-family: "Inter", sans-serif;
-        -webkit-tap-highlight-color: transparent;
-        overscroll-behavior-y: none;
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#eff6ff",
+              100: "#dbeafe",
+              500: "#3b82f6",
+              600: "#2563eb",
+              700: "#1d4ed8"
+            }
+          }
+        }
       }
+    };
+  </script>
 
-      button,
-      a,
-      select,
-      input,
-      summary,
-      details {
-        touch-action: manipulation;
-      }
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
 
-      input,
-      select {
-        font-size: 16px; /* prevents iOS focus zoom */
-      }
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-      ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-      }
+    html {
+      scroll-behavior: auto;
+    }
 
-      ::-webkit-scrollbar-thumb {
-        background: #94a3b8;
-        border-radius: 99px;
-      }
+    body {
+      font-family: "Inter", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
+    }
 
-      .dark ::-webkit-scrollbar-thumb {
-        background: #475569;
-      }
+    button,
+    a,
+    select,
+    input,
+    summary,
+    details {
+      touch-action: manipulation;
+    }
 
-      mark {
-        background: #fde68a;
-        color: #111827;
-        border-radius: 3px;
-        padding: 0 2px;
-      }
+    input,
+    select {
+      font-size: 16px;
+    }
 
-      .dark mark {
-        background: rgba(245, 158, 11, 0.28);
-        color: #fde68a;
-      }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
 
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 99px;
+    }
 
-      .safe-bottom {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
 
-      #questionsContainer article {
-        text-align: left;
-      }
+    mark {
+      background: #fde68a;
+      color: #111827;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
 
-      .answer-text {
-        text-align: left !important;
-        text-indent: 0 !important;
-        white-space: pre-wrap;
-      }
+    .dark mark {
+      background: rgba(245, 158, 11, 0.28);
+      color: #fde68a;
+    }
 
-      .answer-text mark {
-        text-align: inherit;
-      }
-    </style>
-  </head>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
 
-  <body
-    class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100"
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    #questionsContainer article {
+      text-align: left;
+    }
+
+    .answer-text {
+      text-align: left !important;
+      text-indent: 0 !important;
+      white-space: pre-wrap;
+    }
+
+    .answer-text mark {
+      text-align: inherit;
+    }
+  </style>
+</head>
+
+<body
+  class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100"
+>
+
+  <!-- Mobile drawer overlay -->
+  <div
+    id="drawerOverlay"
+    class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm lg:hidden"
+  ></div>
+
+  <!-- Header -->
+  <header
+    class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/95"
   >
-    <!-- Mobile drawer overlay -->
     <div
-      id="drawerOverlay"
-      class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm lg:hidden"
-    ></div>
+      class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-3 sm:h-16 sm:px-4"
+    >
+      <button
+        id="drawerBtn"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 lg:hidden"
+        aria-label="Open sections"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-    <!-- Header -->
-    <header
-      class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/95"
+      <div class="shrink-0 rounded-lg bg-brand-600 p-2 text-white">
+        <i class="fa-solid fa-cubes-stacked"></i>
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <h1 class="truncate text-sm font-bold sm:text-base">
+          SDM Question Bank
+        </h1>
+
+        <p class="truncate text-[11px] text-slate-500 sm:text-xs">
+          Search questions and answers • Multi-source support
+        </p>
+      </div>
+
+      <button
+        id="themeToggle"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800"
+        aria-label="Toggle theme"
+      >
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden text-amber-400 dark:inline"></i>
+      </button>
+    </div>
+
+    <div class="h-1 w-full bg-slate-200 dark:bg-slate-800">
+      <div
+        id="globalProgressBar"
+        class="h-1 bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-300"
+        style="width:0%"
+      ></div>
+    </div>
+  </header>
+
+  <main
+    class="mx-auto max-w-7xl space-y-4 px-3 py-4 sm:space-y-6 sm:px-4 sm:py-6"
+  >
+
+    <!-- Update Banner -->
+    <section
+      id="updateBanner"
+      class="hidden rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30"
     >
       <div
-        class="mx-auto flex h-14 max-w-7xl items-center gap-2 px-3 sm:h-16 sm:px-4"
+        class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
       >
-        <button
-          id="drawerBtn"
-          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 lg:hidden"
-          aria-label="Open sections"
-        >
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="min-w-0">
+          <h2
+            class="flex items-center gap-2 text-sm font-bold text-amber-800 dark:text-amber-300"
+          >
+            <i class="fa-solid fa-circle-arrow-up"></i>
+            Update available
+          </h2>
 
-        <div class="shrink-0 rounded-lg bg-brand-600 p-2 text-white">
-          <i class="fa-solid fa-cubes-stacked"></i>
+          <p
+            id="updateBannerText"
+            class="mt-1 text-xs leading-5 text-amber-700 dark:text-amber-200"
+          ></p>
         </div>
 
-        <div class="min-w-0 flex-1">
-          <h1 class="truncate text-sm font-bold sm:text-base">
-            SDM Question Bank
-          </h1>
-          <p class="truncate text-[11px] text-slate-500 sm:text-xs">
-            Search questions and answers • Multi-source support
+        <div class="flex shrink-0 gap-2">
+          <button
+            id="updateNowBtn"
+            class="min-h-[42px] rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white hover:bg-brand-500 disabled:cursor-wait disabled:opacity-70"
+          >
+            <i class="fa-solid fa-rotate mr-1"></i>
+            Update now
+          </button>
+
+          <button
+            id="dismissUpdateBtn"
+            class="min-h-[42px] rounded-lg bg-white px-3 text-sm text-slate-600 shadow-sm hover:bg-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+          >
+            Later
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collapsible Configuration -->
+    <section
+      class="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+    >
+      <button
+        id="configToggleBtn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="configPanel"
+        class="flex min-h-[50px] w-full items-center justify-between px-4 py-3 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/60"
+      >
+        <span class="flex items-center gap-2 text-sm font-semibold">
+          <i class="fa-solid fa-sliders text-slate-400"></i>
+
+          Configuration
+
+          <span
+            id="sourceCountBadge"
+            class="hidden rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+          ></span>
+        </span>
+
+        <span class="flex items-center gap-2 text-xs text-slate-500">
+          <span id="configToggleLabel">Expand</span>
+
+          <i
+            id="configToggleIcon"
+            class="fa-solid fa-chevron-down transition-transform duration-200"
+          ></i>
+        </span>
+      </button>
+
+      <div
+        id="configPanel"
+        class="hidden border-t border-slate-200 dark:border-slate-800"
+      >
+        <div class="space-y-4 p-3 sm:p-4">
+
+          <!-- Configuration actions -->
+          <section
+            class="rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/40"
+          >
+            <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+
+              <button
+                id="loadJsonBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition hover:bg-brand-500 active:scale-[.98]"
+              >
+                <i class="fa-solid fa-folder-open mr-2"></i>
+                Load JSON file(s)
+              </button>
+
+              <label
+                class="flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-slate-200 px-3 text-sm dark:bg-slate-800"
+              >
+                <input
+                  id="mergeMode"
+                  type="checkbox"
+                  class="h-4 w-4 accent-blue-600"
+                  checked
+                />
+
+                <span>Merge with current</span>
+              </label>
+
+              <button
+                id="exportJsonBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-slate-200 px-3 text-sm transition hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+              >
+                <i class="fa-solid fa-download mr-1"></i>
+                Export
+              </button>
+
+              <button
+                id="refreshStarterBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-emerald-50 px-3 text-sm text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60"
+              >
+                <i class="fa-solid fa-rotate mr-1"></i>
+                Refresh starter content
+              </button>
+
+              <button
+                id="clearAllBtn"
+                class="hidden min-h-[44px] rounded-lg bg-amber-50 px-3 text-sm text-amber-700 transition hover:bg-amber-100 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-950/60"
+              >
+                <i class="fa-solid fa-trash mr-1"></i>
+                Clear all sources
+              </button>
+
+              <button
+                id="restoreDefaultBtn"
+                class="flex min-h-[44px] items-center justify-center rounded-lg bg-red-50 px-3 text-sm text-red-600 transition hover:bg-red-100 dark:bg-red-950/40 dark:hover:bg-red-950/60"
+              >
+                <i class="fa-solid fa-arrows-rotate mr-1"></i>
+                Restore default
+              </button>
+            </div>
+
+            <input
+              id="jsonFileInput"
+              type="file"
+              accept=".json,application/json"
+              multiple
+              hidden
+            />
+
+            <p class="mt-3 text-[11px] leading-relaxed text-slate-400">
+              The same question across multiple files is counted once and shown
+              in one card with multiple answers. Matching ignores letter case,
+              punctuation, spacing, quotation marks and starting question
+              numbers.
+            </p>
+          </section>
+
+          <!-- Sources -->
+          <section
+            id="sourcesSection"
+            class="hidden rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/40"
+          >
+            <div class="mb-3 flex items-center justify-between">
+              <h2 class="flex items-center gap-2 text-sm font-semibold">
+                <i class="fa-solid fa-database text-slate-400"></i>
+                Loaded Sources
+              </h2>
+
+              <span
+                id="sourcesCount"
+                class="text-xs text-slate-500"
+              ></span>
+            </div>
+
+            <div id="sourcesList" class="space-y-2"></div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics -->
+    <section class="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
+
+      <div
+        class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
+      >
+        <div class="text-lg text-brand-500 sm:text-xl">
+          <i class="fa-solid fa-list-check"></i>
+        </div>
+
+        <div>
+          <p
+            class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
+          >
+            Unique Questions
+          </p>
+
+          <h3
+            id="metricTotal"
+            class="text-xl font-extrabold sm:text-2xl"
+          >
+            0
+          </h3>
+        </div>
+      </div>
+
+      <div
+        class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
+      >
+        <div class="text-lg text-emerald-500 sm:text-xl">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+
+        <div>
+          <p
+            class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
+          >
+            Mastered
+          </p>
+
+          <h3
+            class="text-xl font-extrabold text-emerald-600 sm:text-2xl"
+          >
+            <span id="metricMastered">0</span>
+
+            <span
+              id="metricMasteredTotal"
+              class="text-xs font-normal text-slate-400"
+            >/0</span>
+          </h3>
+        </div>
+      </div>
+
+      <div
+        class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
+      >
+        <div class="text-lg text-amber-500 sm:text-xl">
+          <i class="fa-solid fa-star"></i>
+        </div>
+
+        <div>
+          <p
+            class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
+          >
+            Saved
+          </p>
+
+          <h3
+            id="metricBookmarked"
+            class="text-xl font-extrabold text-amber-600 sm:text-2xl"
+          >
+            0
+          </h3>
+        </div>
+      </div>
+
+      <div
+        class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
+      >
+        <div class="text-lg text-indigo-500 sm:text-xl">
+          <i class="fa-solid fa-percent"></i>
+        </div>
+
+        <div>
+          <p
+            class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
+          >
+            Done
+          </p>
+
+          <h3
+            id="metricPercent"
+            class="text-xl font-extrabold text-indigo-600 sm:text-2xl"
+          >
+            0%
+          </h3>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Search -->
+    <section
+      class="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
+    >
+      <div class="flex flex-col gap-2 md:flex-row md:gap-3">
+
+        <div class="relative flex-1">
+          <i
+            class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400"
+          ></i>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search in any question, hint or answer..."
+            class="min-h-[44px] w-full rounded-lg border border-transparent bg-slate-100 py-2 pl-9 pr-3 outline-none transition focus:border-brand-500 dark:bg-slate-800"
+          />
+        </div>
+
+        <select
+          id="statusFilter"
+          class="min-h-[44px] w-full rounded-lg bg-slate-100 px-3 outline-none dark:bg-slate-800 md:w-auto"
+        >
+          <option value="all">All statuses</option>
+          <option value="bookmarked">⭐ Saved</option>
+          <option value="mastered">✅ Mastered</option>
+          <option value="unmastered">⏳ Remaining</option>
+          <option value="multi">📑 Multiple answers</option>
+        </select>
+
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-6">
+
+      <!-- Sidebar / Drawer -->
+      <aside
+        id="drawer"
+        class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] -translate-x-full overflow-y-auto border-r border-slate-200 bg-white p-4 transition-transform duration-300 dark:border-slate-800 dark:bg-slate-900 lg:sticky lg:top-24 lg:z-auto lg:h-fit lg:max-h-[calc(100dvh-7rem)] lg:w-auto lg:max-w-none lg:translate-x-0 lg:rounded-xl lg:border lg:shadow-sm"
+      >
+        <div class="mb-3 flex items-center justify-between lg:hidden">
+          <span
+            class="text-xs font-bold uppercase tracking-wider text-slate-500"
+          >
+            Sections
+          </span>
+
+          <button
+            id="closeDrawer"
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800"
+            aria-label="Close sections"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div
+          id="sectionsSidebar"
+          class="space-y-2"
+        ></div>
+      </aside>
+
+      <!-- Questions -->
+      <section class="lg:col-span-3">
+        <div
+          id="questionsContainer"
+          class="space-y-4"
+        ></div>
+
+        <div
+          id="emptyState"
+          class="hidden rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900"
+        >
+          <i
+            class="fa-regular fa-folder-open mb-4 text-4xl opacity-60"
+          ></i>
+
+          <h2 class="mb-1 font-semibold">
+            No questions loaded
+          </h2>
+
+          <p class="text-sm">
+            Use Configuration to load JSON files or restore the starter bundle.
           </p>
         </div>
-
-        <button
-          id="themeToggle"
-          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800"
-          aria-label="Toggle theme"
-        >
-          <i class="fa-solid fa-moon dark:hidden"></i>
-          <i class="fa-solid fa-sun hidden text-amber-400 dark:inline"></i>
-        </button>
-      </div>
-
-      <div class="h-1 w-full bg-slate-200 dark:bg-slate-800">
-        <div
-          id="globalProgressBar"
-          class="h-1 bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-300"
-          style="width: 0%"
-        ></div>
-      </div>
-    </header>
-
-    <main
-      class="mx-auto max-w-7xl space-y-4 px-3 py-4 sm:space-y-6 sm:px-4 sm:py-6"
-    >
-      <!-- Update Banner -->
-      <section
-        id="updateBanner"
-        class="hidden rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30"
-      >
-        <div
-          class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
-        >
-          <div class="min-w-0">
-            <h2
-              class="flex items-center gap-2 text-sm font-bold text-amber-800 dark:text-amber-300"
-            >
-              <i class="fa-solid fa-circle-arrow-up"></i>
-              Update available
-            </h2>
-            <p
-              id="updateBannerText"
-              class="mt-1 text-xs text-amber-700 dark:text-amber-200"
-            ></p>
-          </div>
-
-          <div class="flex shrink-0 gap-2">
-            <button
-              id="updateNowBtn"
-              class="min-h-[42px] rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white hover:bg-brand-500"
-            >
-              <i class="fa-solid fa-rotate mr-1"></i>
-              Update now
-            </button>
-
-            <button
-              id="dismissUpdateBtn"
-              class="min-h-[42px] rounded-lg bg-white px-3 text-sm text-slate-600 shadow-sm hover:bg-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-            >
-              Later
-            </button>
-          </div>
-        </div>
       </section>
 
-      <!-- Collapsible Configuration -->
-      <section
-        class="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
-      >
-        <button
-          id="configToggleBtn"
-          type="button"
-          aria-expanded="false"
-          aria-controls="configPanel"
-          class="flex min-h-[50px] w-full items-center justify-between px-4 py-3 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/60"
-        >
-          <span class="flex items-center gap-2 text-sm font-semibold">
-            <i class="fa-solid fa-sliders text-slate-400"></i>
-            Configuration
-            <span
-              id="sourceCountBadge"
-              class="hidden rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-400"
-            ></span>
-          </span>
-
-          <span class="flex items-center gap-2 text-xs text-slate-500">
-            <span id="configToggleLabel">Expand</span>
-            <i
-              id="configToggleIcon"
-              class="fa-solid fa-chevron-down transition-transform duration-200"
-            ></i>
-          </span>
-        </button>
-
-        <div
-          id="configPanel"
-          class="hidden border-t border-slate-200 dark:border-slate-800"
-        >
-          <div class="space-y-4 p-3 sm:p-4">
-            <!-- Configuration Actions -->
-            <section
-              class="rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/40"
-            >
-              <div class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
-                <button
-                  id="loadJsonBtn"
-                  class="flex min-h-[44px] items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition hover:bg-brand-500 active:scale-[.98]"
-                >
-                  <i class="fa-solid fa-folder-open mr-2"></i>
-                  Load JSON file(s)
-                </button>
-
-                <label
-                  class="flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-slate-200 px-3 text-sm dark:bg-slate-800"
-                >
-                  <input
-                    id="mergeMode"
-                    type="checkbox"
-                    class="h-4 w-4 accent-blue-600"
-                    checked
-                  />
-                  <span>Merge with current</span>
-                </label>
-
-                <button
-                  id="exportJsonBtn"
-                  class="flex min-h-[44px] items-center justify-center rounded-lg bg-slate-200 px-3 text-sm transition hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700"
-                >
-                  <i class="fa-solid fa-download mr-1"></i>
-                  Export
-                </button>
-
-                <button
-                  id="refreshStarterBtn"
-                  class="flex min-h-[44px] items-center justify-center rounded-lg bg-emerald-50 px-3 text-sm text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:hover:bg-emerald-950/60"
-                >
-                  <i class="fa-solid fa-rotate mr-1"></i>
-                  Refresh starter content
-                </button>
-
-                <button
-                  id="clearAllBtn"
-                  class="hidden min-h-[44px] rounded-lg bg-amber-50 px-3 text-sm text-amber-700 transition hover:bg-amber-100 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-950/60"
-                >
-                  <i class="fa-solid fa-trash mr-1"></i>
-                  Clear all sources
-                </button>
-
-                <button
-                  id="restoreDefaultBtn"
-                  class="flex min-h-[44px] items-center justify-center rounded-lg bg-red-50 px-3 text-sm text-red-600 transition hover:bg-red-100 dark:bg-red-950/40 dark:hover:bg-red-950/60"
-                >
-                  <i class="fa-solid fa-arrows-rotate mr-1"></i>
-                  Restore default
-                </button>
-              </div>
-
-              <input
-                id="jsonFileInput"
-                type="file"
-                accept=".json,application/json"
-                multiple
-                hidden
-              />
-
-              <p class="mt-3 text-[11px] leading-relaxed text-slate-400">
-                The same question across multiple files is counted once and
-                shown in one card with multiple answers. Matching ignores letter
-                case, punctuation, spacing, quotation marks and starting
-                question numbers.
-              </p>
-            </section>
-
-            <!-- Sources -->
-            <section
-              id="sourcesSection"
-              class="hidden rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/40"
-            >
-              <div class="mb-3 flex items-center justify-between">
-                <h2 class="flex items-center gap-2 text-sm font-semibold">
-                  <i class="fa-solid fa-database text-slate-400"></i>
-                  Loaded Sources
-                </h2>
-                <span id="sourcesCount" class="text-xs text-slate-500"></span>
-              </div>
-
-              <div id="sourcesList" class="space-y-2"></div>
-            </section>
-          </div>
-        </div>
-      </section>
-
-      <!-- Metrics -->
-      <section class="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
-        <div
-          class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
-        >
-          <div class="text-lg text-brand-500 sm:text-xl">
-            <i class="fa-solid fa-list-check"></i>
-          </div>
-          <div>
-            <p
-              class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
-            >
-              Unique Questions
-            </p>
-            <h3 id="metricTotal" class="text-xl font-extrabold sm:text-2xl">
-              0
-            </h3>
-          </div>
-        </div>
-
-        <div
-          class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
-        >
-          <div class="text-lg text-emerald-500 sm:text-xl">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
-          <div>
-            <p
-              class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
-            >
-              Mastered
-            </p>
-            <h3 class="text-xl font-extrabold text-emerald-600 sm:text-2xl">
-              <span id="metricMastered">0</span>
-              <span
-                id="metricMasteredTotal"
-                class="text-xs font-normal text-slate-400"
-                >/0</span
-              >
-            </h3>
-          </div>
-        </div>
-
-        <div
-          class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
-        >
-          <div class="text-lg text-amber-500 sm:text-xl">
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <div>
-            <p
-              class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
-            >
-              Saved
-            </p>
-            <h3
-              id="metricBookmarked"
-              class="text-xl font-extrabold text-amber-600 sm:text-2xl"
-            >
-              0
-            </h3>
-          </div>
-        </div>
-
-        <div
-          class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
-        >
-          <div class="text-lg text-indigo-500 sm:text-xl">
-            <i class="fa-solid fa-percent"></i>
-          </div>
-          <div>
-            <p
-              class="text-[10px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs"
-            >
-              Done
-            </p>
-            <h3
-              id="metricPercent"
-              class="text-xl font-extrabold text-indigo-600 sm:text-2xl"
-            >
-              0%
-            </h3>
-          </div>
-        </div>
-      </section>
-
-      <!-- Search -->
-      <section
-        class="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900 sm:p-4"
-      >
-        <div class="flex flex-col gap-2 md:flex-row md:gap-3">
-          <div class="relative flex-1">
-            <i
-              class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400"
-            ></i>
-            <input
-              id="searchInput"
-              type="search"
-              placeholder="Search in any question or answer..."
-              class="min-h-[44px] w-full rounded-lg border border-transparent bg-slate-100 py-2 pl-9 pr-3 outline-none transition focus:border-brand-500 dark:bg-slate-800"
-            />
-          </div>
-
-          <select
-            id="statusFilter"
-            class="min-h-[44px] w-full rounded-lg bg-slate-100 px-3 outline-none dark:bg-slate-800 md:w-auto"
-          >
-            <option value="all">All statuses</option>
-            <option value="bookmarked">⭐ Saved</option>
-            <option value="mastered">✅ Mastered</option>
-            <option value="unmastered">⏳ Remaining</option>
-            <option value="multi">📑 Multiple answers</option>
-          </select>
-        </div>
-      </section>
-
-      <!-- Main Content -->
-      <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-6">
-        <!-- Sidebar / Drawer -->
-        <aside
-          id="drawer"
-          class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] -translate-x-full overflow-y-auto border-r border-slate-200 bg-white p-4 transition-transform duration-300 dark:border-slate-800 dark:bg-slate-900 lg:sticky lg:top-24 lg:z-auto lg:h-fit lg:max-h-[calc(100dvh-7rem)] lg:w-auto lg:max-w-none lg:translate-x-0 lg:rounded-xl lg:border lg:shadow-sm"
-        >
-          <div class="mb-3 flex items-center justify-between lg:hidden">
-            <span
-              class="text-xs font-bold uppercase tracking-wider text-slate-500"
-              >Sections</span
-            >
-            <button
-              id="closeDrawer"
-              class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800"
-              aria-label="Close sections"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <div id="sectionsSidebar" class="space-y-2"></div>
-        </aside>
-
-        <!-- Questions -->
-        <section class="lg:col-span-3">
-          <div id="questionsContainer" class="space-y-4"></div>
-
-          <div
-            id="emptyState"
-            class="hidden rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900"
-          >
-            <i class="fa-regular fa-folder-open mb-4 text-4xl opacity-60"></i>
-            <h2 class="mb-1 font-semibold">No questions loaded</h2>
-            <p class="text-sm">
-              Use Configuration to load JSON files or restore the starter
-              bundle.
-            </p>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <footer
-      class="safe-bottom mt-10 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-900"
-    >
-      SDM Question Bank • Multi-source question and answer study tool
-    </footer>
-
-    <!-- Back to top -->
-    <button
-      id="toTop"
-      class="fixed bottom-20 right-4 z-40 hidden h-11 w-11 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg transition active:scale-90"
-      aria-label="Back to top"
-    >
-      <i class="fa-solid fa-arrow-up"></i>
-    </button>
-
-    <!-- Toast -->
-    <div
-      id="toast"
-      class="fixed bottom-4 left-4 right-4 z-[90] hidden rounded-xl px-4 py-3 text-sm font-medium shadow-lg sm:left-auto sm:right-4 sm:max-w-sm"
-    ></div>
-
-    <script>
-      (() => {
-        /* ==========================================================
-       CONFIGURATION
-       ========================================================== */
-
-        /*
-      Put these files in the same folder as index.html.
-
-      Example:
-      /
-        index.html
-        version.json
-        InterviewAnswers-Original.json
-        InterviewAnswers-A.json
-        InterviewAnswers-B.json
-        Terminology.json
-    */
-        const STARTER_BASE_PATH = "./";
-
-        const STARTER_FILES = [
-          "InterviewAnswers-Original.json",
-          "InterviewAnswers-A.json",
-          "InterviewAnswers-B.json",
-          "Terminology.json",
-        ];
-
-        /*
-      Increase these whenever you deploy changes.
-
-      APP_VERSION:
-      - Change when index.html design / CSS / JS logic changes.
-
-      STARTER_BUNDLE_VERSION:
-      - Change when starter JSON data changes.
-      - New HTML will refresh starter content while preserving progress.
-    */
-        const APP_VERSION = "2026-08-29.1";
-        const STARTER_BUNDLE_VERSION = "2026-08-29.1";
-
-        /*
-      version.json is used to tell currently-open older pages that
-      an update is available.
-    */
-        const VERSION_FILE = "./version.json";
-
-        const PAGE_SIZE = 50;
-
-        const STORAGE = {
-          sources: "sdm_sources_v8",
-          removedStarterFiles: "sdm_removed_starter_files_v1",
-          mastered: "sdm_mastered_question_keys_v3",
-          bookmarked: "sdm_bookmarked_question_keys_v3",
-          theme: "sdm_theme_v1",
-          configCollapsed: "sdm_config_collapsed_v1",
-          starterVersion: "sdm_starter_bundle_version_v3",
-          dismissedUpdateVersion: "sdm_dismissed_update_version_v1",
-        };
-
-        const answerBorderColors = [
-          "border-l-blue-500",
-          "border-l-emerald-500",
-          "border-l-violet-500",
-          "border-l-amber-500",
-          "border-l-rose-500",
-          "border-l-cyan-500",
-        ];
-
-        /* ==========================================================
-       STATE
-       ========================================================== */
-
-        let sources = [];
-        let DB = [];
-        let sectionsList = [];
-        let questionKeyToIndex = new Map();
-
-        let activeSection = "all";
-        let searchTerm = "";
-        let statusFilterValue = "all";
-        let visibleCount = PAGE_SIZE;
-        let openSet = new Set();
-
-        let masteredSet = new Set(
-          JSON.parse(localStorage.getItem(STORAGE.mastered) || "[]"),
-        );
-
-        let bookmarkedSet = new Set(
-          JSON.parse(localStorage.getItem(STORAGE.bookmarked) || "[]"),
-        );
-
-        let removedStarterFiles = new Set(
-          JSON.parse(localStorage.getItem(STORAGE.removedStarterFiles) || "[]"),
-        );
-
-        /* ==========================================================
-       DOM HELPERS
-       ========================================================== */
-
-        const $ = (id) => document.getElementById(id);
-
-        const els = {
-          drawerOverlay: $("drawerOverlay"),
-          drawer: $("drawer"),
-          drawerBtn: $("drawerBtn"),
-          closeDrawer: $("closeDrawer"),
-
-          themeToggle: $("themeToggle"),
-
-          updateBanner: $("updateBanner"),
-          updateBannerText: $("updateBannerText"),
-          updateNowBtn: $("updateNowBtn"),
-          dismissUpdateBtn: $("dismissUpdateBtn"),
-
-          configToggleBtn: $("configToggleBtn"),
-          configPanel: $("configPanel"),
-          configToggleLabel: $("configToggleLabel"),
-          configToggleIcon: $("configToggleIcon"),
-          sourceCountBadge: $("sourceCountBadge"),
-
-          loadJsonBtn: $("loadJsonBtn"),
-          jsonFileInput: $("jsonFileInput"),
-          mergeMode: $("mergeMode"),
-          exportJsonBtn: $("exportJsonBtn"),
-          refreshStarterBtn: $("refreshStarterBtn"),
-          clearAllBtn: $("clearAllBtn"),
-          restoreDefaultBtn: $("restoreDefaultBtn"),
-
-          sourcesSection: $("sourcesSection"),
-          sourcesList: $("sourcesList"),
-          sourcesCount: $("sourcesCount"),
-
-          metricTotal: $("metricTotal"),
-          metricMastered: $("metricMastered"),
-          metricMasteredTotal: $("metricMasteredTotal"),
-          metricBookmarked: $("metricBookmarked"),
-          metricPercent: $("metricPercent"),
-          globalProgressBar: $("globalProgressBar"),
-
-          searchInput: $("searchInput"),
-          statusFilter: $("statusFilter"),
-
-          sectionsSidebar: $("sectionsSidebar"),
-          questionsContainer: $("questionsContainer"),
-          emptyState: $("emptyState"),
-
-          toTop: $("toTop"),
-          toast: $("toast"),
-        };
-
-        /* ==========================================================
-       UTILITY FUNCTIONS
-       ========================================================== */
-        function cleanText(value) {
-          return String(value ?? "")
-            .replace(/&nbsp;/gi, " ")
-            .replace(/\u00A0/g, " ")
-            .replace(/[\u200B-\u200D\uFEFF]/g, "")
-            .replace(/\r\n?/g, "\n")
-            .split("\n")
-            .map((line) => line.replace(/\t/g, "    ").trim())
-            .join("\n")
-            .replace(/\n{3,}/g, "\n\n")
-            .trim();
-        }
-
-        function esc(value) {
-          return String(value ?? "").replace(
-            /[&<>"']/g,
-            (char) =>
-              ({
-                "&": "&amp;",
-                "<": "&lt;",
-                ">": "&gt;",
-                '"': "&quot;",
-                "'": "&#039;",
-              })[char],
-          );
-        }
-
-        function highlight(text, term) {
-          if (!term) return esc(text);
-
-          const safeText = esc(text);
-          const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-          try {
-            return safeText.replace(
-              new RegExp("(" + escapedTerm + ")", "ig"),
-              "<mark>$1</mark>",
-            );
-          } catch {
-            return safeText;
-          }
-        }
-
-        function normalizeQuestion(question) {
-          let value = cleanText(question).toLowerCase();
-
-          value = value.replace(/^(question\s*)?(q\s*)?\d+[\s.\-):]+/i, "");
-          value = value.replace(/[‘’“”'"`]/g, "");
-          value = value.replace(/[^\p{L}\p{N}\s]/gu, " ");
-          value = value.replace(/\s+/g, " ").trim();
-
-          return value;
-        }
-
-        function generatedId(index) {
-          return "Q" + String(index + 1).padStart(3, "0");
-        }
-
-        function getFileName(path) {
-          return String(path).split("/").pop() || String(path);
-        }
-
-        function parseVersion(version) {
-          const value = String(version || "").trim();
-
-          /*
-    Supported:
-      2026-08-30
-      2026-08-30.1
-      2026-08-30.10
+    </div>
+  </main>
+
+  <footer
+    class="safe-bottom mt-10 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-900"
+  >
+    SDM Question Bank • Multi-source question and answer study tool
+  </footer>
+
+  <!-- Back to top -->
+  <button
+    id="toTop"
+    class="fixed bottom-20 right-4 z-40 hidden h-11 w-11 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg transition active:scale-90"
+    aria-label="Back to top"
+  >
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Toast -->
+  <div
+    id="toast"
+    class="fixed bottom-4 left-4 right-4 z-[90] hidden rounded-xl px-4 py-3 text-sm font-medium shadow-lg sm:left-auto sm:right-4 sm:max-w-sm"
+  ></div>
+
+
+<script>
+(() => {
+
+  /* ==========================================================
+     CONFIGURATION
+     ========================================================== */
+
+  const STARTER_BASE_PATH = "./";
+
+  const STARTER_FILES = [
+    "InterviewAnswers-Original.json",
+    "InterviewAnswers-A.json",
+    "InterviewAnswers-B.json",
+    "Terminology.json"
+  ];
+
+  /*
+    Important:
+
+    - APP_VERSION must match:
+      <meta name="app-version" content="...">
+
+    - Change APP_VERSION when index.html/CSS/JS changes.
+
+    - Change STARTER_BUNDLE_VERSION when starter JSON changes.
+
+    Revision format supports:
+      2026-08-29.1
+      2026-08-29.2
+      2026-08-29.10
   */
-          const match = value.match(/^(\d{4})-(\d{2})-(\d{2})(?:\.(\d+))?$/);
+  const APP_VERSION = "2026-08-29.2";
+  const STARTER_BUNDLE_VERSION = "2026-08-29.1";
 
-          if (!match) {
-            return null;
-          }
+  const VERSION_FILE = "./version.json";
 
-          return {
-            year: Number(match[1]),
-            month: Number(match[2]),
-            day: Number(match[3]),
-            revision: Number(match[4] || 0),
-          };
-        }
+  const PAGE_SIZE = 50;
 
-        function compareVersions(a, b) {
-          const va = parseVersion(a);
-          const vb = parseVersion(b);
+  const STORAGE = {
+    sources: "sdm_sources_v8",
 
-          if (!va || !vb) {
-            /*      Fallback for an unexpected version format.*/
-            return String(a || "").localeCompare(String(b || ""), undefined, {
-              numeric: true,
-            });
-          }
+    removedStarterFiles:
+      "sdm_removed_starter_files_v1",
 
-          const fields = ["year", "month", "day", "revision"];
+    mastered:
+      "sdm_mastered_question_keys_v3",
 
-          for (const field of fields) {
-            if (va[field] > vb[field]) return 1;
-            if (va[field] < vb[field]) return -1;
-          }
+    bookmarked:
+      "sdm_bookmarked_question_keys_v3",
 
-          return 0;
-        }
+    theme:
+      "sdm_theme_v1",
 
-        function isNewerVersion(remoteVersion, localVersion) {
-          return compareVersions(remoteVersion, localVersion) > 0;
-        }
+    configCollapsed:
+      "sdm_config_collapsed_v1",
 
-        function showToast(message, type = "info") {
-          els.toast.textContent = message;
+    starterVersion:
+      "sdm_starter_bundle_version_v3",
 
-          els.toast.className =
-            "fixed bottom-4 left-4 right-4 z-[90] rounded-xl px-4 py-3 text-sm font-medium shadow-lg sm:left-auto sm:right-4 sm:max-w-sm " +
-            (type === "error"
-              ? "bg-red-600 text-white"
-              : "bg-slate-900 text-white dark:bg-white dark:text-slate-900");
+    dismissedUpdateVersion:
+      "sdm_dismissed_update_version_v1",
 
-          clearTimeout(showToast.timer);
-
-          showToast.timer = setTimeout(() => {
-            els.toast.classList.add("hidden");
-          }, 3500);
-        }
-
-        function saveProgress() {
-          localStorage.setItem(
-            STORAGE.mastered,
-            JSON.stringify([...masteredSet]),
-          );
-          localStorage.setItem(
-            STORAGE.bookmarked,
-            JSON.stringify([...bookmarkedSet]),
-          );
-        }
-
-        function saveRemovedStarterFiles() {
-          localStorage.setItem(
-            STORAGE.removedStarterFiles,
-            JSON.stringify([...removedStarterFiles]),
-          );
-        }
-
-        function saveSources() {
-          localStorage.setItem(STORAGE.sources, JSON.stringify(sources));
-          saveRemovedStarterFiles();
-        }
-
-        function saveStarterVersion() {
-          localStorage.setItem(STORAGE.starterVersion, STARTER_BUNDLE_VERSION);
-        }
-
-        function setConfigCollapsed(collapsed) {
-          els.configPanel.classList.toggle("hidden", collapsed);
-          els.configToggleBtn.setAttribute("aria-expanded", String(!collapsed));
-          els.configToggleLabel.textContent = collapsed ? "Expand" : "Collapse";
-          els.configToggleIcon.classList.toggle("rotate-180", !collapsed);
-          localStorage.setItem(STORAGE.configCollapsed, collapsed ? "1" : "0");
-        }
-
-        function initializeConfigState() {
-          const saved = localStorage.getItem(STORAGE.configCollapsed);
-          const collapsed = saved === null ? true : saved === "1";
-          setConfigCollapsed(collapsed);
-        }
-
-        function visibleMasteredCount() {
-          const validKeys = new Set(DB.map((item) => item.key));
-          let count = 0;
-
-          masteredSet.forEach((key) => {
-            if (validKeys.has(key)) count++;
-          });
-
-          return count;
-        }
-
-        function visibleBookmarkedCount() {
-          const validKeys = new Set(DB.map((item) => item.key));
-          let count = 0;
-
-          bookmarkedSet.forEach((key) => {
-            if (validKeys.has(key)) count++;
-          });
-
-          return count;
-        }
-
-        /* ==========================================================
-       JSON PARSING
-       ========================================================== */
-
-        function parseJsonPayload(jsonText, fileName) {
-          let parsed;
-
-          try {
-            parsed = JSON.parse(jsonText);
-          } catch {
-            throw new Error("Invalid JSON.");
-          }
-
-          let records = null;
-
-          if (Array.isArray(parsed)) {
-            records = parsed;
-          } else if (parsed && Array.isArray(parsed.questions)) {
-            records = parsed.questions;
-          } else if (parsed && Array.isArray(parsed.data)) {
-            records = parsed.data;
-          } else if (parsed && Array.isArray(parsed.DB)) {
-            records = parsed.DB;
-          } else {
-            throw new Error(
-              "Expected an array, { questions: [] }, { data: [] }, or { DB: [] }.",
-            );
-          }
-
-          if (!records.length) {
-            throw new Error("JSON file is empty.");
-          }
-
-          const items = records
-            .map((record, index) => {
-              /*
-      Supports array form:
-      [id, sectionIndex, question, answer, hint]
+    /*
+      New reading-position persistence.
     */
-              if (Array.isArray(record)) {
-                const [id, sectionIndex, question, answer, hint] = record;
+    readingPosition:
+      "sdm_reading_position_v1"
+  };
 
-                if (!question || !cleanText(question)) return null;
 
-                return {
-                  id:
-                    id !== undefined && id !== null ? cleanText(id) : undefined,
-                  q: cleanText(question),
-                  sectionTitle:
-                    typeof sectionIndex === "number"
-                      ? "Section " + (sectionIndex + 1)
-                      : "General",
-                  hint: hint ? cleanText(hint) : "",
-                  answers: answer ? [{ text: cleanText(answer) }] : [],
-                };
-              }
+  const answerBorderColors = [
+    "border-l-blue-500",
+    "border-l-emerald-500",
+    "border-l-violet-500",
+    "border-l-amber-500",
+    "border-l-rose-500",
+    "border-l-cyan-500"
+  ];
 
-              const question =
-                record.q ||
-                record.question ||
-                record.title ||
-                record.Question ||
-                "";
 
-              if (!question || !cleanText(question)) {
+  /* ==========================================================
+     STATE
+     ========================================================== */
+
+  let sources = [];
+
+  let DB = [];
+
+  let sectionsList = [];
+
+  let questionKeyToIndex =
+    new Map();
+
+
+  let activeSection = "all";
+
+  let searchTerm = "";
+
+  let statusFilterValue = "all";
+
+  let visibleCount =
+    PAGE_SIZE;
+
+  let openSet =
+    new Set();
+
+
+  let pendingRemoteVersion =
+    null;
+
+
+  let masteredSet =
+    new Set(
+      JSON.parse(
+        localStorage.getItem(
+          STORAGE.mastered
+        ) || "[]"
+      )
+    );
+
+
+  let bookmarkedSet =
+    new Set(
+      JSON.parse(
+        localStorage.getItem(
+          STORAGE.bookmarked
+        ) || "[]"
+      )
+    );
+
+
+  let removedStarterFiles =
+    new Set(
+      JSON.parse(
+        localStorage.getItem(
+          STORAGE.removedStarterFiles
+        ) || "[]"
+      )
+    );
+
+
+  /*
+    Prevent saving a new reading position while
+    restoring the previous position.
+  */
+  let restoringReadingPosition =
+    false;
+
+
+  /*
+    Used to avoid writing localStorage constantly
+    during every scroll event.
+  */
+  let readingSaveTimer =
+    null;
+
+
+  /* ==========================================================
+     DOM
+     ========================================================== */
+
+  const $ =
+    id =>
+      document.getElementById(id);
+
+
+  const els = {
+
+    drawerOverlay:
+      $("drawerOverlay"),
+
+    drawer:
+      $("drawer"),
+
+    drawerBtn:
+      $("drawerBtn"),
+
+    closeDrawer:
+      $("closeDrawer"),
+
+
+    themeToggle:
+      $("themeToggle"),
+
+
+    updateBanner:
+      $("updateBanner"),
+
+    updateBannerText:
+      $("updateBannerText"),
+
+    updateNowBtn:
+      $("updateNowBtn"),
+
+    dismissUpdateBtn:
+      $("dismissUpdateBtn"),
+
+
+    configToggleBtn:
+      $("configToggleBtn"),
+
+    configPanel:
+      $("configPanel"),
+
+    configToggleLabel:
+      $("configToggleLabel"),
+
+    configToggleIcon:
+      $("configToggleIcon"),
+
+    sourceCountBadge:
+      $("sourceCountBadge"),
+
+
+    loadJsonBtn:
+      $("loadJsonBtn"),
+
+    jsonFileInput:
+      $("jsonFileInput"),
+
+    mergeMode:
+      $("mergeMode"),
+
+    exportJsonBtn:
+      $("exportJsonBtn"),
+
+    refreshStarterBtn:
+      $("refreshStarterBtn"),
+
+    clearAllBtn:
+      $("clearAllBtn"),
+
+    restoreDefaultBtn:
+      $("restoreDefaultBtn"),
+
+
+    sourcesSection:
+      $("sourcesSection"),
+
+    sourcesList:
+      $("sourcesList"),
+
+    sourcesCount:
+      $("sourcesCount"),
+
+
+    metricTotal:
+      $("metricTotal"),
+
+    metricMastered:
+      $("metricMastered"),
+
+    metricMasteredTotal:
+      $("metricMasteredTotal"),
+
+    metricBookmarked:
+      $("metricBookmarked"),
+
+    metricPercent:
+      $("metricPercent"),
+
+    globalProgressBar:
+      $("globalProgressBar"),
+
+
+    searchInput:
+      $("searchInput"),
+
+    statusFilter:
+      $("statusFilter"),
+
+
+    sectionsSidebar:
+      $("sectionsSidebar"),
+
+    questionsContainer:
+      $("questionsContainer"),
+
+    emptyState:
+      $("emptyState"),
+
+
+    toTop:
+      $("toTop"),
+
+    toast:
+      $("toast")
+  };
+
+
+  /* ==========================================================
+     TEXT CLEANING
+     ========================================================== */
+
+  function cleanText(value) {
+
+    return String(
+      value ?? ""
+    )
+
+      /*
+        Literal HTML-style NBSP.
+      */
+      .replace(
+        /&nbsp;/gi,
+        " "
+      )
+
+      /*
+        Unicode non-breaking spaces.
+      */
+      .replace(
+        /\u00A0/g,
+        " "
+      )
+
+      /*
+        Zero-width characters / BOM.
+      */
+      .replace(
+        /[\u200B-\u200D\uFEFF]/g,
+        ""
+      )
+
+      /*
+        Normalize line endings.
+      */
+      .replace(
+        /\r\n?/g,
+        "\n"
+      )
+
+      /*
+        Remove leading/trailing whitespace
+        from every individual line.
+
+        This fixes the visual answer indentation.
+      */
+      .split("\n")
+
+      .map(
+        line =>
+          line
+            .replace(/\t/g, " ")
+            .trim()
+      )
+
+      .join("\n")
+
+      /*
+        Avoid excessive blank lines.
+      */
+      .replace(
+        /\n{3,}/g,
+        "\n\n"
+      )
+
+      /*
+        Final leading/trailing cleanup.
+      */
+      .trim();
+  }
+
+
+  function esc(value) {
+
+    return String(
+      value ?? ""
+    ).replace(
+
+      /[&<>"']/g,
+
+      char => ({
+
+        "&": "&amp;",
+
+        "<": "&lt;",
+
+        ">": "&gt;",
+
+        '"': "&quot;",
+
+        "'": "&#039;"
+
+      })[char]
+    );
+  }
+
+
+  function highlight(
+    text,
+    term
+  ) {
+
+    if (!term) {
+
+      return esc(text);
+
+    }
+
+
+    const safeText =
+      esc(text);
+
+
+    const escapedTerm =
+      term.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+      );
+
+
+    try {
+
+      return safeText.replace(
+
+        new RegExp(
+          "(" +
+          escapedTerm +
+          ")",
+          "ig"
+        ),
+
+        "<mark>$1</mark>"
+      );
+
+    } catch {
+
+      return safeText;
+
+    }
+  }
+
+
+  /* ==========================================================
+     QUESTION IDENTITY
+     ========================================================== */
+
+  function normalizeQuestion(
+    question
+  ) {
+
+    let value =
+      cleanText(
+        question
+      ).toLowerCase();
+
+
+    /*
+      Remove Q001 / Question 5 / etc.
+    */
+    value =
+      value.replace(
+
+        /^(question\s*)?(q\s*)?\d+[\s.\-):]+/i,
+
+        ""
+      );
+
+
+    value =
+      value.replace(
+        /[‘’“”'"`]/g,
+        ""
+      );
+
+
+    value =
+      value.replace(
+        /[^\p{L}\p{N}\s]/gu,
+        " "
+      );
+
+
+    value =
+      value.replace(
+        /\s+/g,
+        " "
+      ).trim();
+
+
+    return value;
+  }
+
+
+  function generatedId(
+    index
+  ) {
+
+    return (
+      "Q" +
+      String(
+        index + 1
+      ).padStart(
+        3,
+        "0"
+      )
+    );
+  }
+
+
+  /* ==========================================================
+     VERSION COMPARISON
+     ========================================================== */
+
+  function parseVersion(
+    version
+  ) {
+
+    const value =
+      String(
+        version || ""
+      ).trim();
+
+
+    /*
+      Supported:
+
+      2026-08-29
+      2026-08-29.1
+      2026-08-29.2
+      2026-08-29.10
+    */
+    const match =
+      value.match(
+
+        /^(\d{4})-(\d{2})-(\d{2})(?:\.(\d+))?$/
+
+      );
+
+
+    if (!match) {
+
+      return null;
+
+    }
+
+
+    return {
+
+      year:
+        Number(
+          match[1]
+        ),
+
+      month:
+        Number(
+          match[2]
+        ),
+
+      day:
+        Number(
+          match[3]
+        ),
+
+      revision:
+        Number(
+          match[4] || 0
+        )
+
+    };
+  }
+
+
+  function compareVersions(
+    a,
+    b
+  ) {
+
+    const va =
+      parseVersion(a);
+
+    const vb =
+      parseVersion(b);
+
+
+    if (
+      !va ||
+      !vb
+    ) {
+
+      return String(
+        a || ""
+      ).localeCompare(
+
+        String(
+          b || ""
+        ),
+
+        undefined,
+
+        {
+          numeric: true
+        }
+      );
+    }
+
+
+    const fields = [
+
+      "year",
+
+      "month",
+
+      "day",
+
+      "revision"
+
+    ];
+
+
+    for (
+      const field
+      of fields
+    ) {
+
+      if (
+        va[field] >
+        vb[field]
+      ) {
+
+        return 1;
+
+      }
+
+
+      if (
+        va[field] <
+        vb[field]
+      ) {
+
+        return -1;
+
+      }
+    }
+
+
+    return 0;
+  }
+
+
+  function isNewerVersion(
+    remoteVersion,
+    localVersion
+  ) {
+
+    return (
+      compareVersions(
+        remoteVersion,
+        localVersion
+      ) > 0
+    );
+  }
+
+
+  /* ==========================================================
+     GENERIC UI HELPERS
+     ========================================================== */
+
+  function showToast(
+    message,
+    type = "info"
+  ) {
+
+    els.toast.textContent =
+      message;
+
+
+    els.toast.className =
+
+      "fixed bottom-4 left-4 right-4 z-[90] rounded-xl px-4 py-3 text-sm font-medium shadow-lg sm:left-auto sm:right-4 sm:max-w-sm " +
+
+      (
+        type === "error"
+
+          ? "bg-red-600 text-white"
+
+          : "bg-slate-900 text-white dark:bg-white dark:text-slate-900"
+      );
+
+
+    clearTimeout(
+      showToast.timer
+    );
+
+
+    showToast.timer =
+      setTimeout(
+        () => {
+
+          els.toast
+            .classList
+            .add("hidden");
+
+        },
+
+        3500
+      );
+  }
+
+
+  function sleep(ms) {
+
+    return new Promise(
+
+      resolve =>
+        setTimeout(
+          resolve,
+          ms
+        )
+
+    );
+  }
+
+
+  /* ==========================================================
+     STORAGE
+     ========================================================== */
+
+  function saveProgress() {
+
+    localStorage.setItem(
+
+      STORAGE.mastered,
+
+      JSON.stringify(
+        [...masteredSet]
+      )
+    );
+
+
+    localStorage.setItem(
+
+      STORAGE.bookmarked,
+
+      JSON.stringify(
+        [...bookmarkedSet]
+      )
+    );
+  }
+
+
+  function saveRemovedStarterFiles() {
+
+    localStorage.setItem(
+
+      STORAGE.removedStarterFiles,
+
+      JSON.stringify(
+        [...removedStarterFiles]
+      )
+    );
+  }
+
+
+  function saveSources() {
+
+    localStorage.setItem(
+
+      STORAGE.sources,
+
+      JSON.stringify(
+        sources
+      )
+    );
+
+
+    saveRemovedStarterFiles();
+  }
+
+
+  function saveStarterVersion(
+    version =
+      STARTER_BUNDLE_VERSION
+  ) {
+
+    localStorage.setItem(
+
+      STORAGE.starterVersion,
+
+      version
+    );
+  }
+
+
+  /* ==========================================================
+     CONFIGURATION COLLAPSE
+     ========================================================== */
+
+  function setConfigCollapsed(
+    collapsed
+  ) {
+
+    els.configPanel
+      .classList
+      .toggle(
+        "hidden",
+        collapsed
+      );
+
+
+    els.configToggleBtn
+      .setAttribute(
+        "aria-expanded",
+        String(
+          !collapsed
+        )
+      );
+
+
+    els.configToggleLabel
+      .textContent =
+        collapsed
+          ? "Expand"
+          : "Collapse";
+
+
+    els.configToggleIcon
+      .classList
+      .toggle(
+        "rotate-180",
+        !collapsed
+      );
+
+
+    localStorage.setItem(
+
+      STORAGE.configCollapsed,
+
+      collapsed
+        ? "1"
+        : "0"
+    );
+  }
+
+
+  function initializeConfigState() {
+
+    const saved =
+      localStorage.getItem(
+        STORAGE.configCollapsed
+      );
+
+
+    const collapsed =
+      saved === null
+        ? true
+        : saved === "1";
+
+
+    setConfigCollapsed(
+      collapsed
+    );
+  }
+
+
+  /* ==========================================================
+     READING POSITION / CONTINUE WHERE I LEFT OFF
+     ========================================================== */
+
+  function loadReadingPosition() {
+
+    try {
+
+      const raw =
+        localStorage.getItem(
+          STORAGE.readingPosition
+        );
+
+
+      if (!raw) {
+
+        return null;
+
+      }
+
+
+      const parsed =
+        JSON.parse(raw);
+
+
+      if (
+        !parsed ||
+        !parsed.questionKey
+      ) {
+
+        return null;
+
+      }
+
+
+      return parsed;
+
+    } catch {
+
+      return null;
+
+    }
+  }
+
+
+  function saveReadingPositionNow() {
+
+    if (
+      restoringReadingPosition
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+      Do not replace the normal reading position
+      while the user is viewing search/filter results.
+    */
+    if (
+      searchTerm ||
+      statusFilterValue !== "all" ||
+      activeSection !== "all"
+    ) {
+
+      return;
+
+    }
+
+
+    const cards = [
+      ...els.questionsContainer
+        .querySelectorAll(
+          "article[data-question-key]"
+        )
+    ];
+
+
+    if (
+      !cards.length
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+      Pick the first question whose lower edge is below
+      the header area.
+
+      This is effectively the current question the user
+      is reading at the top of the viewport.
+    */
+    const referenceY =
+      window.innerWidth < 640
+        ? 75
+        : 85;
+
+
+    let currentCard =
+      cards[0];
+
+
+    for (
+      const card
+      of cards
+    ) {
+
+      const rect =
+        card.getBoundingClientRect();
+
+
+      if (
+        rect.bottom >
+        referenceY
+      ) {
+
+        currentCard =
+          card;
+
+        break;
+      }
+    }
+
+
+    const rect =
+      currentCard
+        .getBoundingClientRect();
+
+
+    const questionKey =
+      currentCard
+        .dataset
+        .questionKey;
+
+
+    if (
+      !questionKey
+    ) {
+
+      return;
+
+    }
+
+
+    const position = {
+
+      questionKey,
+
+      /*
+        Preserve where the card was positioned relative
+        to the top of the viewport.
+      */
+      offset:
+        rect.top,
+
+      savedAt:
+        Date.now()
+
+    };
+
+
+    localStorage.setItem(
+
+      STORAGE.readingPosition,
+
+      JSON.stringify(
+        position
+      )
+    );
+  }
+
+
+  function scheduleReadingPositionSave() {
+
+    if (
+      restoringReadingPosition
+    ) {
+
+      return;
+
+    }
+
+
+    clearTimeout(
+      readingSaveTimer
+    );
+
+
+    readingSaveTimer =
+      setTimeout(
+        saveReadingPositionNow,
+        180
+      );
+  }
+
+
+  function prepareReadingPositionForRestore() {
+
+    const saved =
+      loadReadingPosition();
+
+
+    if (
+      !saved ||
+      !saved.questionKey
+    ) {
+
+      return null;
+
+    }
+
+
+    /*
+      Find saved question in the complete DB.
+    */
+    const index =
+      DB.findIndex(
+        question =>
+          question.key ===
+          saved.questionKey
+      );
+
+
+    if (
+      index < 0
+    ) {
+
+      return null;
+
+    }
+
+
+    /*
+      If the question is question 190, render enough
+      items before scrolling to it.
+
+      Without this the app would render only first 50.
+    */
+    if (
+      index >=
+      visibleCount
+    ) {
+
+      visibleCount =
+        Math.ceil(
+          (index + 1) /
+          PAGE_SIZE
+        ) *
+        PAGE_SIZE;
+    }
+
+
+    return saved;
+  }
+
+
+  async function restoreReadingPosition(
+    saved
+  ) {
+
+    if (
+      !saved ||
+      !saved.questionKey
+    ) {
+
+      return;
+    }
+
+
+    restoringReadingPosition =
+      true;
+
+
+    /*
+      Wait until browser finishes painting the rendered
+      question list.
+    */
+    await new Promise(
+      resolve =>
+        requestAnimationFrame(
+          () =>
+            requestAnimationFrame(
+              resolve
+            )
+        )
+    );
+
+
+    const cards = [
+      ...els.questionsContainer
+        .querySelectorAll(
+          "article[data-question-key]"
+        )
+    ];
+
+
+    const target =
+      cards.find(
+        card =>
+          card.dataset.questionKey ===
+          saved.questionKey
+      );
+
+
+    if (
+      !target
+    ) {
+
+      restoringReadingPosition =
+        false;
+
+      return;
+    }
+
+
+    /*
+      First place the question at top.
+    */
+    target.scrollIntoView({
+      block: "start",
+      behavior: "auto"
+    });
+
+
+    /*
+      Then reconstruct its previous relative viewport
+      location. Default to just below sticky header.
+    */
+    const desiredOffset =
+      Number.isFinite(
+        Number(saved.offset)
+      )
+        ? Number(saved.offset)
+        : 80;
+
+
+    const currentTop =
+      target
+        .getBoundingClientRect()
+        .top;
+
+
+    window.scrollBy(
+      0,
+      currentTop -
+      desiredOffset
+    );
+
+
+    /*
+      Give browser a moment before allowing normal
+      position tracking again.
+    */
+    setTimeout(
+      () => {
+
+        restoringReadingPosition =
+          false;
+
+      },
+
+      400
+    );
+  }
+
+
+  function clearReadingPosition() {
+
+    localStorage.removeItem(
+      STORAGE.readingPosition
+    );
+  }
+
+
+  /* ==========================================================
+     PROGRESS COUNTS
+     ========================================================== */
+
+  function visibleMasteredCount() {
+
+    const validKeys =
+      new Set(
+        DB.map(
+          item =>
+            item.key
+        )
+      );
+
+
+    let count = 0;
+
+
+    masteredSet.forEach(
+      key => {
+
+        if (
+          validKeys.has(key)
+        ) {
+
+          count++;
+
+        }
+      }
+    );
+
+
+    return count;
+  }
+
+
+  function visibleBookmarkedCount() {
+
+    const validKeys =
+      new Set(
+        DB.map(
+          item =>
+            item.key
+        )
+      );
+
+
+    let count = 0;
+
+
+    bookmarkedSet.forEach(
+      key => {
+
+        if (
+          validKeys.has(key)
+        ) {
+
+          count++;
+
+        }
+      }
+    );
+
+
+    return count;
+  }
+
+
+  /* ==========================================================
+     JSON PARSING
+     ========================================================== */
+
+  function parseJsonPayload(
+    jsonText,
+    fileName
+  ) {
+
+    let parsed;
+
+
+    try {
+
+      parsed =
+        JSON.parse(
+          jsonText
+        );
+
+    } catch {
+
+      throw new Error(
+        "Invalid JSON."
+      );
+    }
+
+
+    let records =
+      null;
+
+
+    if (
+      Array.isArray(parsed)
+    ) {
+
+      records =
+        parsed;
+
+    } else if (
+      parsed &&
+      Array.isArray(
+        parsed.questions
+      )
+    ) {
+
+      records =
+        parsed.questions;
+
+    } else if (
+      parsed &&
+      Array.isArray(
+        parsed.data
+      )
+    ) {
+
+      records =
+        parsed.data;
+
+    } else if (
+      parsed &&
+      Array.isArray(
+        parsed.DB
+      )
+    ) {
+
+      records =
+        parsed.DB;
+
+    } else {
+
+      throw new Error(
+        "Expected an array, { questions: [] }, { data: [] }, or { DB: [] }."
+      );
+    }
+
+
+    if (
+      !records.length
+    ) {
+
+      throw new Error(
+        "JSON file is empty."
+      );
+    }
+
+
+    const items =
+      records
+        .map(
+          record => {
+
+            /*
+              Array form:
+              [id, sectionIndex, question, answer, hint]
+            */
+            if (
+              Array.isArray(
+                record
+              )
+            ) {
+
+              const [
+                id,
+                sectionIndex,
+                question,
+                answer,
+                hint
+              ] =
+                record;
+
+
+              if (
+                !question ||
+                !cleanText(
+                  question
+                )
+              ) {
+
                 return null;
               }
 
-              const hint = record.hint || record.Hint || "";
-
-              let answers = [];
-
-              if (Array.isArray(record.answers)) {
-                answers = record.answers
-                  .map((answer) => {
-                    if (typeof answer === "string") {
-                      return { text: cleanText(answer) };
-                    }
-
-                    return {
-                      text: cleanText(
-                        answer.text ||
-                          answer.answer ||
-                          answer.a ||
-                          answer.content ||
-                          answer.Answer ||
-                          "",
-                      ),
-                    };
-                  })
-                  .filter((answer) => answer.text);
-              } else {
-                const answer =
-                  record.a ||
-                  record.answer ||
-                  record.content ||
-                  record.Answer ||
-                  "";
-
-                if (cleanText(answer)) {
-                  answers = [{ text: cleanText(answer) }];
-                }
-              }
 
               return {
+
                 id:
-                  record.id !== undefined && record.id !== null
-                    ? cleanText(record.id)
+                  id !== undefined &&
+                  id !== null
+
+                    ? cleanText(id)
+
                     : undefined,
 
-                q: cleanText(question),
 
-                sectionTitle: cleanText(
-                  record.sectionTitle ||
-                    record.section ||
-                    record.topic ||
-                    "General",
+                q:
+                  cleanText(
+                    question
+                  ),
+
+
+                sectionTitle:
+                  typeof sectionIndex ===
+                  "number"
+
+                    ? "Section " +
+                      (
+                        sectionIndex +
+                        1
+                      )
+
+                    : "General",
+
+
+                hint:
+                  hint
+                    ? cleanText(
+                        hint
+                      )
+                    : "",
+
+
+                answers:
+                  answer
+
+                    ? [
+                        {
+                          text:
+                            cleanText(
+                              answer
+                            )
+                        }
+                      ]
+
+                    : []
+
+              };
+            }
+
+
+            const question =
+
+              record.q ||
+
+              record.question ||
+
+              record.title ||
+
+              record.Question ||
+
+              "";
+
+
+            if (
+              !question ||
+              !cleanText(
+                question
+              )
+            ) {
+
+              return null;
+            }
+
+
+            /*
+              Hint comes ONLY from JSON hint/Hint.
+              No answer fallback.
+            */
+            const hint =
+
+              record.hint ||
+
+              record.Hint ||
+
+              "";
+
+
+            let answers =
+              [];
+
+
+            if (
+              Array.isArray(
+                record.answers
+              )
+            ) {
+
+              answers =
+                record.answers
+
+                  .map(
+                    answer => {
+
+                      if (
+                        typeof answer ===
+                        "string"
+                      ) {
+
+                        return {
+
+                          text:
+                            cleanText(
+                              answer
+                            )
+
+                        };
+                      }
+
+
+                      return {
+
+                        text:
+                          cleanText(
+
+                            answer.text ||
+
+                            answer.answer ||
+
+                            answer.a ||
+
+                            answer.content ||
+
+                            answer.Answer ||
+
+                            ""
+                          )
+
+                      };
+                    }
+                  )
+
+                  .filter(
+                    answer =>
+                      answer.text
+                  );
+
+            } else {
+
+              const answer =
+
+                record.a ||
+
+                record.answer ||
+
+                record.content ||
+
+                record.Answer ||
+
+                "";
+
+
+              if (
+                cleanText(
+                  answer
+                )
+              ) {
+
+                answers = [
+
+                  {
+                    text:
+                      cleanText(
+                        answer
+                      )
+                  }
+
+                ];
+              }
+            }
+
+
+            return {
+
+              id:
+                record.id !==
+                  undefined &&
+                record.id !==
+                  null
+
+                  ? cleanText(
+                      record.id
+                    )
+
+                  : undefined,
+
+
+              q:
+                cleanText(
+                  question
                 ),
 
-                hint: cleanText(hint),
 
-                answers,
-              };
-            })
-            .filter(Boolean);
+              sectionTitle:
+                cleanText(
 
-          if (!items.length) {
-            throw new Error("No valid question objects found.");
+                  record.sectionTitle ||
+
+                  record.section ||
+
+                  record.topic ||
+
+                  "General"
+                ),
+
+
+              hint:
+                cleanText(
+                  hint
+                ),
+
+
+              answers
+
+            };
           }
+        )
 
-          return items;
-        }
-        /* ==========================================================
-       SOURCE / DATABASE MANAGEMENT
-       ========================================================== */
+        .filter(
+          Boolean
+        );
 
-        function loadSourcesFromStorage() {
-          const rawSources = localStorage.getItem(STORAGE.sources);
 
-          /*
-        null means first open.
-        "[]" means user intentionally cleared all sources.
-      */
-          if (rawSources === null) {
-            return false;
-          }
+    if (
+      !items.length
+    ) {
 
-          try {
-            const parsed = JSON.parse(rawSources);
-            sources = Array.isArray(parsed) ? parsed : [];
-          } catch {
-            sources = [];
-          }
+      throw new Error(
+        "No valid question objects found."
+      );
+    }
 
-          return true;
-        }
 
-        function rebuildDatabase() {
-          DB = [];
-          questionKeyToIndex = new Map();
-          sectionsList = [];
+    return items;
+  }
 
-          let autoIdCounter = 0;
 
-          /*
-    First pass:
-    Create one unique question card for every normalized question.
-  */
-          sources.forEach((source) => {
-            if (!source || !Array.isArray(source.data)) return;
+  /* ==========================================================
+     SOURCES / DATABASE
+     ========================================================== */
 
-            source.data.forEach((questionItem) => {
-              const key = normalizeQuestion(questionItem.q);
+  function loadSourcesFromStorage() {
 
-              if (!key) return;
+    const rawSources =
+      localStorage.getItem(
+        STORAGE.sources
+      );
 
-              const specifiedId =
-                questionItem.id !== undefined &&
-                questionItem.id !== null &&
-                cleanText(questionItem.id)
-                  ? cleanText(questionItem.id)
-                  : null;
 
-              if (!questionKeyToIndex.has(key)) {
-                const id = specifiedId || generatedId(autoIdCounter++);
+    /*
+      null = first visit.
+      [] = user intentionally cleared sources.
+    */
+    if (
+      rawSources === null
+    ) {
 
-                DB.push({
-                  key,
-                  id,
-                  q: cleanText(questionItem.q),
-                  sectionTitle: cleanText(
-                    questionItem.sectionTitle || "General",
-                  ),
-                  hints: [],
-                  answers: [],
-                  generatedId: !specifiedId,
-                });
+      return false;
+    }
 
-                questionKeyToIndex.set(key, DB.length - 1);
-              } else {
-                const existing = DB[questionKeyToIndex.get(key)];
 
-                if (existing.generatedId && specifiedId) {
-                  existing.id = specifiedId;
-                  existing.generatedId = false;
-                }
+    try {
 
-                if (
-                  (!existing.sectionTitle ||
-                    existing.sectionTitle === "General") &&
-                  questionItem.sectionTitle
-                ) {
-                  existing.sectionTitle = cleanText(questionItem.sectionTitle);
-                }
-              }
-            });
-          });
+      const parsed =
+        JSON.parse(
+          rawSources
+        );
 
-          /*
-    Second pass:
-    Attach JSON hints and all answers under their unique question.
 
-    Hint behavior:
-    - hint only comes from JSON hint field
-    - if no hint exists, no hint UI block is displayed
-    - if multiple JSON files provide hints, we keep them internally
-      but display only the first one
-  */
-          sources.forEach((source) => {
-            if (!source || !Array.isArray(source.data)) return;
+      sources =
+        Array.isArray(parsed)
+          ? parsed
+          : [];
 
-            source.data.forEach((questionItem) => {
-              const key = normalizeQuestion(questionItem.q);
+    } catch {
 
-              if (!key || !questionKeyToIndex.has(key)) return;
+      sources = [];
 
-              const dbQuestion = DB[questionKeyToIndex.get(key)];
+    }
 
-              const hintText = cleanText(questionItem.hint || "");
 
-              if (hintText) {
-                const duplicateHint = dbQuestion.hints.some(
-                  (existing) => existing.text === hintText,
-                );
+    return true;
+  }
 
-                if (!duplicateHint) {
-                  dbQuestion.hints.push({
-                    source: source.name,
-                    text: hintText,
-                  });
-                }
-              }
 
-              let answerList = [];
+  function rebuildDatabase() {
 
-              if (Array.isArray(questionItem.answers)) {
-                answerList = questionItem.answers
-                  .map((answer) => {
-                    if (typeof answer === "string") {
-                      return { text: cleanText(answer) };
-                    }
+    DB = [];
 
-                    return {
-                      text: cleanText(
-                        answer.text ||
-                          answer.answer ||
-                          answer.a ||
-                          answer.content ||
-                          answer.Answer ||
-                          "",
-                      ),
-                    };
-                  })
-                  .filter((answer) => answer.text);
-              }
+    questionKeyToIndex =
+      new Map();
 
-              answerList.forEach((answer) => {
-                const duplicateAnswer = dbQuestion.answers.some(
-                  (existing) =>
-                    existing.source === source.name &&
-                    existing.text === answer.text,
-                );
+    sectionsList = [];
 
-                if (!duplicateAnswer) {
-                  dbQuestion.answers.push({
-                    source: source.name,
-                    text: answer.text,
-                  });
-                }
-              });
-            });
-          });
 
-          sectionsList = [
-            ...new Set(
-              DB.map((question) => question.sectionTitle || "General"),
-            ),
-          ].sort((a, b) => a.localeCompare(b));
+    let autoIdCounter = 0;
 
-          if (
-            activeSection !== "all" &&
-            !sectionsList.includes(activeSection)
-          ) {
-            activeSection = "all";
-          }
 
-          visibleCount = PAGE_SIZE;
-          openSet.clear();
+    /*
+      PASS 1:
+      Unique questions.
+    */
+    sources.forEach(
+      source => {
+
+        if (
+          !source ||
+          !Array.isArray(
+            source.data
+          )
+        ) {
+
+          return;
         }
 
-        function setSourcesAfterImport(importedSources, merge) {
-          if (merge) {
-            importedSources.forEach((newSource) => {
-              const existingIndex = sources.findIndex(
-                (source) => source.name === newSource.name,
+
+        source.data.forEach(
+          questionItem => {
+
+            const key =
+              normalizeQuestion(
+                questionItem.q
               );
 
-              if (existingIndex >= 0) {
-                sources[existingIndex] = newSource;
-              } else {
-                sources.push(newSource);
-              }
-            });
-          } else {
-            /*
-          Replace all visible sources with only imported user sources.
-          The user can Restore Default if they want starter files again.
-        */
-            sources = importedSources;
-          }
 
-          rebuildDatabase();
-          saveSources();
-          renderAll();
+            if (!key) {
+
+              return;
+
+            }
+
+
+            const specifiedId =
+
+              questionItem.id !==
+                undefined &&
+
+              questionItem.id !==
+                null &&
+
+              cleanText(
+                questionItem.id
+              )
+
+                ? cleanText(
+                    questionItem.id
+                  )
+
+                : null;
+
+
+            if (
+              !questionKeyToIndex
+                .has(key)
+            ) {
+
+              const id =
+
+                specifiedId ||
+
+                generatedId(
+                  autoIdCounter++
+                );
+
+
+              DB.push({
+
+                key,
+
+                id,
+
+                q:
+                  cleanText(
+                    questionItem.q
+                  ),
+
+                sectionTitle:
+                  cleanText(
+                    questionItem.sectionTitle ||
+                    "General"
+                  ),
+
+                hints: [],
+
+                answers: [],
+
+                generatedId:
+                  !specifiedId
+
+              });
+
+
+              questionKeyToIndex
+                .set(
+                  key,
+                  DB.length - 1
+                );
+
+            } else {
+
+              const existing =
+
+                DB[
+                  questionKeyToIndex
+                    .get(key)
+                ];
+
+
+              if (
+                existing.generatedId &&
+                specifiedId
+              ) {
+
+                existing.id =
+                  specifiedId;
+
+                existing.generatedId =
+                  false;
+              }
+
+
+              if (
+                (
+                  !existing.sectionTitle ||
+                  existing.sectionTitle ===
+                    "General"
+                ) &&
+                questionItem.sectionTitle
+              ) {
+
+                existing.sectionTitle =
+                  cleanText(
+                    questionItem.sectionTitle
+                  );
+              }
+            }
+          }
+        );
+      }
+    );
+
+
+    /*
+      PASS 2:
+      Hints + answers.
+    */
+    sources.forEach(
+      source => {
+
+        if (
+          !source ||
+          !Array.isArray(
+            source.data
+          )
+        ) {
+
+          return;
         }
 
-        async function fetchStarterSources() {
-          if (location.protocol === "file:") {
-            showToast(
-              "Starter loading requires GitHub Pages or a local web server. file:// blocks fetch requests.",
-              "error",
+
+        source.data.forEach(
+          questionItem => {
+
+            const key =
+              normalizeQuestion(
+                questionItem.q
+              );
+
+
+            if (
+              !key ||
+              !questionKeyToIndex
+                .has(key)
+            ) {
+
+              return;
+            }
+
+
+            const dbQuestion =
+
+              DB[
+                questionKeyToIndex
+                  .get(key)
+              ];
+
+
+            /*
+              Keep multiple distinct hints internally.
+
+              UI displays only first hint.
+            */
+            const hintText =
+              cleanText(
+                questionItem.hint ||
+                ""
+              );
+
+
+            if (
+              hintText
+            ) {
+
+              const duplicateHint =
+
+                dbQuestion.hints
+                  .some(
+                    existing =>
+                      existing.text ===
+                      hintText
+                  );
+
+
+              if (
+                !duplicateHint
+              ) {
+
+                dbQuestion.hints.push({
+
+                  source:
+                    source.name,
+
+                  text:
+                    hintText
+
+                });
+              }
+            }
+
+
+            let answerList =
+              [];
+
+
+            if (
+              Array.isArray(
+                questionItem.answers
+              )
+            ) {
+
+              answerList =
+
+                questionItem.answers
+
+                  .map(
+                    answer => {
+
+                      if (
+                        typeof answer ===
+                        "string"
+                      ) {
+
+                        return {
+
+                          text:
+                            cleanText(
+                              answer
+                            )
+
+                        };
+                      }
+
+
+                      return {
+
+                        text:
+                          cleanText(
+
+                            answer.text ||
+
+                            answer.answer ||
+
+                            answer.a ||
+
+                            answer.content ||
+
+                            answer.Answer ||
+
+                            ""
+                          )
+
+                      };
+                    }
+                  )
+
+                  .filter(
+                    answer =>
+                      answer.text
+                  );
+            }
+
+
+            answerList.forEach(
+              answer => {
+
+                const cleanAnswer =
+                  cleanText(
+                    answer.text
+                  );
+
+
+                if (
+                  !cleanAnswer
+                ) {
+
+                  return;
+                }
+
+
+                const duplicateAnswer =
+
+                  dbQuestion.answers
+                    .some(
+                      existing =>
+
+                        existing.source ===
+                          source.name &&
+
+                        existing.text ===
+                          cleanAnswer
+                    );
+
+
+                if (
+                  !duplicateAnswer
+                ) {
+
+                  dbQuestion.answers.push({
+
+                    source:
+                      source.name,
+
+                    text:
+                      cleanAnswer
+
+                  });
+                }
+              }
             );
-            return [];
           }
+        );
+      }
+    );
 
-          const loaded = [];
 
-          for (const fileName of STARTER_FILES) {
-            /*
-          Do not restore a starter source that the user intentionally removed.
-        */
-            if (removedStarterFiles.has(fileName)) {
-              continue;
-            }
+    sectionsList = [
 
-            const url =
-              STARTER_BASE_PATH +
-              fileName +
-              "?starterVersion=" +
-              encodeURIComponent(STARTER_BUNDLE_VERSION);
+      ...new Set(
 
-            try {
-              const response = await fetch(url, {
-                cache: "no-store",
-              });
+        DB.map(
+          question =>
+            question.sectionTitle ||
+            "General"
+        )
 
-              if (!response.ok) {
-                throw new Error("HTTP " + response.status);
-              }
+      )
 
-              const text = await response.text();
-              const items = parseJsonPayload(text, fileName);
+    ].sort(
+      (a, b) =>
+        a.localeCompare(b)
+    );
 
-              loaded.push({
-                name: fileName,
-                kind: "starter",
-                data: items,
-              });
-            } catch (error) {
-              console.error("Failed to load starter source:", fileName, error);
-            }
-          }
 
-          return loaded;
-        }
+    if (
+      activeSection !==
+        "all" &&
 
-        async function loadStarterForFirstTime() {
-          const starterSources = await fetchStarterSources();
+      !sectionsList
+        .includes(
+          activeSection
+        )
+    ) {
 
-          if (!starterSources.length) {
-            return false;
-          }
+      activeSection =
+        "all";
+    }
 
-          sources = starterSources;
 
-          rebuildDatabase();
-          saveSources();
-          saveStarterVersion();
+    visibleCount =
+      PAGE_SIZE;
 
-          return true;
-        }
 
-        async function refreshStarterBundle({ silent = false } = {}) {
-          if (!sources.some((source) => source.kind === "starter")) {
-            if (!silent) {
-              showToast("No starter sources are currently loaded.", "error");
-            }
-            return false;
-          }
+    openSet.clear();
+  }
 
-          const existingStarterNames = new Set(
-            sources
-              .filter((source) => source.kind === "starter")
-              .map((source) => source.name),
-          );
 
-          const fetchedSources = await fetchStarterSources();
+  function setSourcesAfterImport(
+    importedSources,
+    merge
+  ) {
 
-          if (!fetchedSources.length) {
-            if (!silent) {
-              showToast("Starter content could not be refreshed.", "error");
-            }
-            return false;
-          }
+    if (merge) {
 
-          /*
-        Preserve user sources.
-        Preserve removed starter sources.
-        Add newly configured starter files if they were not removed.
-      */
-          const userSources = sources.filter(
-            (source) => source.kind !== "starter",
-          );
+      importedSources.forEach(
+        newSource => {
 
-          const currentStarters = fetchedSources.filter((source) => {
-            /*
-          Fetch includes all configured files except removed ones.
-          Existing users also receive new starter files after app update.
-        */
-            return !removedStarterFiles.has(source.name);
-          });
+          const existingIndex =
 
-          sources = [...currentStarters, ...userSources];
+            sources.findIndex(
 
-          rebuildDatabase();
-          saveSources();
-          saveStarterVersion();
-          renderAll();
+              source =>
+                source.name ===
+                newSource.name
 
-          if (!silent) {
-            showToast("Starter content refreshed. Progress was preserved.");
-          }
+            );
 
-          return true;
-        }
-
-        function removeSource(sourceName) {
-          const source = sources.find((item) => item.name === sourceName);
-
-          if (!source) return;
-
-          if (!confirm(`Remove "${sourceName}" from this device?`)) {
-            return;
-          }
-
-          /*
-        Keep a record that starter source was intentionally removed.
-        This prevents it being re-added during refresh/version update.
-      */
-          if (source.kind === "starter") {
-            removedStarterFiles.add(sourceName);
-          }
-
-          sources = sources.filter((item) => item.name !== sourceName);
-
-          rebuildDatabase();
-          saveSources();
-          renderAll();
-
-          showToast(`Removed ${sourceName}`);
-        }
-
-        function clearAllSources() {
-          if (!sources.length) return;
 
           if (
-            !confirm(
-              "Clear all sources? Your mastered and saved progress will remain, but no questions will be shown.",
-            )
+            existingIndex >= 0
           ) {
-            return;
-          }
 
-          /*
-        Clear source list but do not erase progress.
-        Also mark all starter sources as removed so refresh does not restore them.
-      */
-          STARTER_FILES.forEach((fileName) =>
-            removedStarterFiles.add(fileName),
-          );
+            sources[
+              existingIndex
+            ] =
+              newSource;
 
-          sources = [];
-          DB = [];
-          sectionsList = [];
-          questionKeyToIndex.clear();
-          openSet.clear();
-
-          saveSources();
-          renderAll();
-
-          showToast("All sources cleared. Progress was kept.");
-        }
-
-        async function restoreDefaultState() {
-          const proceed = confirm(
-            "Restore default state?\n\nThis will remove all imported files, restore starter files, clear mastered progress, clear saved questions, reset configuration, and reset the app like a first-time visit.",
-          );
-
-          if (!proceed) return;
-
-          localStorage.removeItem(STORAGE.sources);
-          localStorage.removeItem(STORAGE.removedStarterFiles);
-          localStorage.removeItem(STORAGE.mastered);
-          localStorage.removeItem(STORAGE.bookmarked);
-          localStorage.removeItem(STORAGE.starterVersion);
-          localStorage.removeItem(STORAGE.dismissedUpdateVersion);
-          localStorage.removeItem(STORAGE.configCollapsed);
-
-          sources = [];
-          DB = [];
-          sectionsList = [];
-          questionKeyToIndex.clear();
-
-          masteredSet = new Set();
-          bookmarkedSet = new Set();
-          removedStarterFiles = new Set();
-
-          activeSection = "all";
-          searchTerm = "";
-          statusFilterValue = "all";
-          visibleCount = PAGE_SIZE;
-          openSet.clear();
-
-          els.searchInput.value = "";
-          els.statusFilter.value = "all";
-          els.mergeMode.checked = true;
-
-          setConfigCollapsed(true);
-
-          const starterLoaded = await loadStarterForFirstTime();
-
-          renderAll();
-
-          if (starterLoaded) {
-            showToast("Default state restored.");
           } else {
-            showToast(
-              "Default reset completed, but starter JSON files could not be loaded.",
-              "error",
+
+            sources.push(
+              newSource
             );
+
+          }
+        }
+      );
+
+    } else {
+
+      sources =
+        importedSources;
+
+    }
+
+
+    rebuildDatabase();
+
+    saveSources();
+
+    renderAll();
+  }
+
+
+  /* ==========================================================
+     STARTER CONTENT
+     ========================================================== */
+
+  async function fetchStarterSources(
+    version =
+      STARTER_BUNDLE_VERSION
+  ) {
+
+    if (
+      location.protocol ===
+      "file:"
+    ) {
+
+      showToast(
+
+        "Starter loading requires GitHub Pages or a local web server. file:// blocks fetch requests.",
+
+        "error"
+      );
+
+
+      return [];
+    }
+
+
+    const loaded = [];
+
+
+    for (
+      const fileName
+      of STARTER_FILES
+    ) {
+
+      if (
+        removedStarterFiles
+          .has(fileName)
+      ) {
+
+        continue;
+
+      }
+
+
+      const url =
+
+        STARTER_BASE_PATH +
+
+        fileName +
+
+        "?starterVersion=" +
+
+        encodeURIComponent(
+          version
+        ) +
+
+        "&t=" +
+
+        Date.now();
+
+
+      try {
+
+        const response =
+          await fetch(
+            url,
+            {
+              cache:
+                "no-store"
+            }
+          );
+
+
+        if (
+          !response.ok
+        ) {
+
+          throw new Error(
+            "HTTP " +
+            response.status
+          );
+        }
+
+
+        const text =
+          await response.text();
+
+
+        const items =
+          parseJsonPayload(
+            text,
+            fileName
+          );
+
+
+        loaded.push({
+
+          name:
+            fileName,
+
+          kind:
+            "starter",
+
+          data:
+            items
+
+        });
+
+      } catch (
+        error
+      ) {
+
+        console.error(
+
+          "Failed to load starter source:",
+
+          fileName,
+
+          error
+        );
+      }
+    }
+
+
+    return loaded;
+  }
+
+
+  async function loadStarterForFirstTime(
+    version =
+      STARTER_BUNDLE_VERSION
+  ) {
+
+    const starterSources =
+      await fetchStarterSources(
+        version
+      );
+
+
+    if (
+      !starterSources.length
+    ) {
+
+      return false;
+
+    }
+
+
+    sources =
+      starterSources;
+
+
+    rebuildDatabase();
+
+    saveSources();
+
+    saveStarterVersion(
+      version
+    );
+
+
+    return true;
+  }
+
+
+  async function refreshStarterBundle({
+
+    silent = false,
+
+    targetVersion =
+      STARTER_BUNDLE_VERSION
+
+  } = {}) {
+
+    const fetchedSources =
+
+      await fetchStarterSources(
+        targetVersion
+      );
+
+
+    if (
+      !fetchedSources.length
+    ) {
+
+      if (!silent) {
+
+        showToast(
+
+          "Starter content could not be refreshed.",
+
+          "error"
+        );
+      }
+
+
+      return false;
+    }
+
+
+    /*
+      Keep user-imported sources.
+    */
+    const userSources =
+
+      sources.filter(
+
+        source =>
+          source.kind !==
+          "starter"
+
+      );
+
+
+    sources = [
+
+      ...fetchedSources,
+
+      ...userSources
+
+    ];
+
+
+    rebuildDatabase();
+
+    saveSources();
+
+    saveStarterVersion(
+      targetVersion
+    );
+
+    renderAll();
+
+
+    if (!silent) {
+
+      showToast(
+
+        "Starter content refreshed. Progress was preserved."
+
+      );
+    }
+
+
+    return true;
+  }
+
+
+  function removeSource(
+    sourceName
+  ) {
+
+    const source =
+
+      sources.find(
+
+        item =>
+          item.name ===
+          sourceName
+
+      );
+
+
+    if (!source) {
+
+      return;
+
+    }
+
+
+    if (
+      !confirm(
+        `Remove "${sourceName}" from this device?`
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      source.kind ===
+      "starter"
+    ) {
+
+      removedStarterFiles
+        .add(
+          sourceName
+        );
+    }
+
+
+    sources =
+
+      sources.filter(
+
+        item =>
+          item.name !==
+          sourceName
+
+      );
+
+
+    rebuildDatabase();
+
+    saveSources();
+
+    renderAll();
+
+
+    showToast(
+      `Removed ${sourceName}`
+    );
+  }
+
+
+  function clearAllSources() {
+
+    if (
+      !sources.length
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      !confirm(
+
+        "Clear all sources? Your mastered and saved progress will remain, but no questions will be shown."
+
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    STARTER_FILES.forEach(
+      fileName =>
+        removedStarterFiles
+          .add(
+            fileName
+          )
+    );
+
+
+    sources = [];
+
+    DB = [];
+
+    sectionsList = [];
+
+    questionKeyToIndex
+      .clear();
+
+    openSet.clear();
+
+
+    saveSources();
+
+    renderAll();
+
+
+    showToast(
+
+      "All sources cleared. Progress was kept."
+
+    );
+  }
+
+
+  async function restoreDefaultState() {
+
+    const proceed =
+      confirm(
+
+        "Restore default state?\n\nThis will remove all imported files, restore starter files, clear mastered progress, clear saved questions, reset reading position, reset configuration, and reset the app like a first-time visit."
+
+      );
+
+
+    if (!proceed) {
+
+      return;
+
+    }
+
+
+    localStorage.removeItem(
+      STORAGE.sources
+    );
+
+    localStorage.removeItem(
+      STORAGE.removedStarterFiles
+    );
+
+    localStorage.removeItem(
+      STORAGE.mastered
+    );
+
+    localStorage.removeItem(
+      STORAGE.bookmarked
+    );
+
+    localStorage.removeItem(
+      STORAGE.starterVersion
+    );
+
+    localStorage.removeItem(
+      STORAGE.dismissedUpdateVersion
+    );
+
+    localStorage.removeItem(
+      STORAGE.configCollapsed
+    );
+
+    clearReadingPosition();
+
+
+    sources = [];
+
+    DB = [];
+
+    sectionsList = [];
+
+    questionKeyToIndex
+      .clear();
+
+
+    masteredSet =
+      new Set();
+
+    bookmarkedSet =
+      new Set();
+
+    removedStarterFiles =
+      new Set();
+
+
+    activeSection =
+      "all";
+
+    searchTerm =
+      "";
+
+    statusFilterValue =
+      "all";
+
+    visibleCount =
+      PAGE_SIZE;
+
+    openSet.clear();
+
+
+    els.searchInput.value =
+      "";
+
+    els.statusFilter.value =
+      "all";
+
+    els.mergeMode.checked =
+      true;
+
+
+    setConfigCollapsed(
+      true
+    );
+
+
+    const starterLoaded =
+      await loadStarterForFirstTime();
+
+
+    renderAll();
+
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+
+    if (
+      starterLoaded
+    ) {
+
+      showToast(
+        "Default state restored."
+      );
+
+    } else {
+
+      showToast(
+
+        "Default reset completed, but starter JSON files could not be loaded.",
+
+        "error"
+      );
+    }
+  }
+
+
+  /* ==========================================================
+     FILTERING
+     ========================================================== */
+
+  function getFilteredQuestions() {
+
+    const term =
+      searchTerm.toLowerCase();
+
+
+    return DB.filter(
+      question => {
+
+        if (
+          activeSection !==
+            "all" &&
+
+          question.sectionTitle !==
+            activeSection
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          statusFilterValue ===
+            "bookmarked" &&
+
+          !bookmarkedSet
+            .has(
+              question.key
+            )
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          statusFilterValue ===
+            "mastered" &&
+
+          !masteredSet
+            .has(
+              question.key
+            )
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          statusFilterValue ===
+            "unmastered" &&
+
+          masteredSet
+            .has(
+              question.key
+            )
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          statusFilterValue ===
+            "multi" &&
+
+          question.answers.length <
+            2
+        ) {
+
+          return false;
+        }
+
+
+        if (term) {
+
+          const answerText =
+
+            question.answers
+              .map(
+                answer =>
+                  answer.text
+              )
+              .join(" ");
+
+
+          const hintText =
+
+            question.hints
+              .map(
+                hint =>
+                  hint.text
+              )
+              .join(" ");
+
+
+          const searchBlob = (
+
+            question.id +
+            " " +
+
+            question.q +
+            " " +
+
+            question.sectionTitle +
+            " " +
+
+            hintText +
+            " " +
+
+            answerText
+
+          ).toLowerCase();
+
+
+          if (
+            !searchBlob
+              .includes(term)
+          ) {
+
+            return false;
           }
         }
 
-        /* ==========================================================
-       FILTERING
-       ========================================================== */
 
-        function getFilteredQuestions() {
-          const term = searchTerm.toLowerCase();
+        return true;
+      }
+    );
+  }
 
-          return DB.filter((question) => {
-            if (
-              activeSection !== "all" &&
-              question.sectionTitle !== activeSection
-            ) {
-              return false;
-            }
 
-            if (
-              statusFilterValue === "bookmarked" &&
-              !bookmarkedSet.has(question.key)
-            ) {
-              return false;
-            }
+  /* ==========================================================
+     RENDER METRICS
+     ========================================================== */
 
-            if (
-              statusFilterValue === "mastered" &&
-              !masteredSet.has(question.key)
-            ) {
-              return false;
-            }
+  function renderMetrics() {
 
-            if (
-              statusFilterValue === "unmastered" &&
-              masteredSet.has(question.key)
-            ) {
-              return false;
-            }
+    const total =
+      DB.length;
 
-            if (statusFilterValue === "multi" && question.answers.length < 2) {
-              return false;
-            }
 
-            /*
-          Searches:
-          - Question ID
-          - Question text
-          - Section name
-          - Every answer from every source
-        */
-            if (term) {
-              const answerText = question.answers
-                .map((answer) => answer.text)
-                .join(" ");
+    const mastered =
+      visibleMasteredCount();
 
-              const hintText = question.hints
-                .map((hint) => hint.text)
-                .join(" ");
 
-              const searchBlob = (
-                question.id +
-                " " +
-                question.q +
-                " " +
-                question.sectionTitle +
-                " " +
-                hintText +
-                " " +
-                answerText
-              ).toLowerCase();
+    const bookmarked =
+      visibleBookmarkedCount();
 
-              if (!searchBlob.includes(term)) {
-                return false;
-              }
-            }
 
-            return true;
-          });
-        }
+    const percent =
 
-        /* ==========================================================
-       RENDERING
-       ========================================================== */
+      total
 
-        function renderMetrics() {
-          const total = DB.length;
-          const mastered = visibleMasteredCount();
-          const bookmarked = visibleBookmarkedCount();
-          const percent = total ? Math.round((mastered / total) * 100) : 0;
+        ? Math.round(
+            (
+              mastered /
+              total
+            ) *
+            100
+          )
 
-          els.metricTotal.textContent = total;
-          els.metricMastered.textContent = mastered;
-          els.metricMasteredTotal.textContent = "/" + total;
-          els.metricBookmarked.textContent = bookmarked;
-          els.metricPercent.textContent = percent + "%";
-          els.globalProgressBar.style.width = percent + "%";
-        }
+        : 0;
 
-        function renderSourceBadge() {
-          if (!sources.length) {
-            els.sourceCountBadge.classList.add("hidden");
-            return;
-          }
 
-          els.sourceCountBadge.textContent =
-            sources.length + " source" + (sources.length === 1 ? "" : "s");
+    els.metricTotal
+      .textContent =
+        total;
 
-          els.sourceCountBadge.classList.remove("hidden");
-        }
 
-        function renderSources() {
-          renderSourceBadge();
+    els.metricMastered
+      .textContent =
+        mastered;
 
-          if (!sources.length) {
-            els.sourcesSection.classList.add("hidden");
-            els.clearAllBtn.classList.add("hidden");
-            return;
-          }
 
-          els.sourcesSection.classList.remove("hidden");
-          els.clearAllBtn.classList.remove("hidden");
+    els.metricMasteredTotal
+      .textContent =
+        "/" +
+        total;
 
-          els.sourcesCount.textContent =
-            sources.length + " source" + (sources.length === 1 ? "" : "s");
 
-          els.sourcesList.innerHTML = sources
-            .map((source, index) => {
-              const questionCount = Array.isArray(source.data)
+    els.metricBookmarked
+      .textContent =
+        bookmarked;
+
+
+    els.metricPercent
+      .textContent =
+        percent +
+        "%";
+
+
+    els.globalProgressBar
+      .style.width =
+        percent +
+        "%";
+  }
+
+
+  /* ==========================================================
+     SOURCES UI
+     ========================================================== */
+
+  function renderSourceBadge() {
+
+    if (
+      !sources.length
+    ) {
+
+      els.sourceCountBadge
+        .classList
+        .add(
+          "hidden"
+        );
+
+      return;
+    }
+
+
+    els.sourceCountBadge
+      .textContent =
+
+        sources.length +
+
+        " source" +
+
+        (
+          sources.length === 1
+            ? ""
+            : "s"
+        );
+
+
+    els.sourceCountBadge
+      .classList
+      .remove(
+        "hidden"
+      );
+  }
+
+
+  function renderSources() {
+
+    renderSourceBadge();
+
+
+    if (
+      !sources.length
+    ) {
+
+      els.sourcesSection
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+      els.clearAllBtn
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+      return;
+    }
+
+
+    els.sourcesSection
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    els.clearAllBtn
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    els.sourcesCount
+      .textContent =
+
+        sources.length +
+
+        " source" +
+
+        (
+          sources.length === 1
+            ? ""
+            : "s"
+        );
+
+
+    els.sourcesList
+      .innerHTML =
+
+        sources.map(
+          (
+            source,
+            index
+          ) => {
+
+            const questionCount =
+
+              Array.isArray(
+                source.data
+              )
+
                 ? source.data.length
+
                 : 0;
 
-              const typeClass =
-                source.kind === "starter"
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
-                  : "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300";
 
-              return `
-          <div class="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center gap-2">
-                <i class="fa-regular fa-file-lines text-xs text-slate-400"></i>
-                <p class="truncate text-sm font-medium">${esc(source.name)}</p>
-                <span class="rounded-full px-2 py-0.5 text-[10px] font-semibold ${typeClass}">
-                  ${esc(source.kind || "user")}
-                </span>
+            const typeClass =
+
+              source.kind ===
+              "starter"
+
+                ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300"
+
+                : "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300";
+
+
+            return `
+              <div class="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
+
+                <div class="min-w-0 flex-1">
+
+                  <div class="flex items-center gap-2">
+
+                    <i class="fa-regular fa-file-lines text-xs text-slate-400"></i>
+
+                    <p class="truncate text-sm font-medium">
+                      ${esc(source.name)}
+                    </p>
+
+                    <span class="rounded-full px-2 py-0.5 text-[10px] font-semibold ${typeClass}">
+                      ${esc(source.kind || "user")}
+                    </span>
+
+                  </div>
+
+                  <p class="mt-1 text-xs text-slate-500">
+
+                    ${questionCount}
+
+                    question${questionCount === 1 ? "" : "s"}
+
+                  </p>
+
+                </div>
+
+
+                <button
+
+                  data-remove-source-index="${index}"
+
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-red-500 transition hover:bg-red-50 active:scale-90 dark:hover:bg-red-950/40"
+
+                  aria-label="Remove source"
+
+                  title="Remove source"
+
+                >
+
+                  <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
               </div>
+            `;
+          }
+        ).join("");
 
-              <p class="mt-1 text-xs text-slate-500">
-                ${questionCount} question${questionCount === 1 ? "" : "s"}
-              </p>
-            </div>
 
-            <button
-              data-remove-source-index="${index}"
-              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-red-500 transition hover:bg-red-50 active:scale-90 dark:hover:bg-red-950/40"
-              aria-label="Remove source"
-              title="Remove source"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-        `;
-            })
-            .join("");
+    els.sourcesList
+      .querySelectorAll(
+        "[data-remove-source-index]"
+      )
+      .forEach(
+        button => {
 
-          els.sourcesList
-            .querySelectorAll("[data-remove-source-index]")
-            .forEach((button) => {
-              button.addEventListener("click", () => {
-                const index = Number(button.dataset.removeSourceIndex);
-                const source = sources[index];
+          button.addEventListener(
+            "click",
+            () => {
 
-                if (source) {
-                  removeSource(source.name);
-                }
-              });
-            });
+              const index =
+                Number(
+                  button.dataset
+                    .removeSourceIndex
+                );
+
+
+              const source =
+                sources[
+                  index
+                ];
+
+
+              if (source) {
+
+                removeSource(
+                  source.name
+                );
+              }
+            }
+          );
         }
+      );
+  }
 
-        function renderSidebar() {
-          if (!DB.length) {
-            els.sectionsSidebar.innerHTML = `
+
+  /* ==========================================================
+     SIDEBAR
+     ========================================================== */
+
+  function renderSidebar() {
+
+    if (!DB.length) {
+
+      els.sectionsSidebar
+        .innerHTML = `
           <div class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-center text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900">
             No sections available
           </div>
         `;
-            return;
-          }
 
-          const groups = {};
 
-          DB.forEach((question) => {
-            const section = question.sectionTitle || "General";
+      return;
+    }
 
-            if (!groups[section]) {
-              groups[section] = {
-                count: 0,
-                mastered: 0,
-              };
-            }
 
-            groups[section].count++;
+    const groups = {};
 
-            if (masteredSet.has(question.key)) {
-              groups[section].mastered++;
-            }
-          });
 
-          const sectionNames = Object.keys(groups).sort((a, b) =>
-            a.localeCompare(b),
-          );
+    DB.forEach(
+      question => {
 
-          let html = `
-        <button
-          data-section="all"
-          class="section-btn min-h-[44px] w-full rounded-xl px-3 py-2 text-left text-sm transition active:scale-[.98] ${
-            activeSection === "all"
-              ? "bg-brand-600 font-semibold text-white shadow"
-              : "border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
-          }"
-        >
-          <div class="flex items-center justify-between gap-2">
-            <span>All Sections</span>
-            <span class="text-[11px] ${activeSection === "all" ? "text-white/80" : "text-slate-400"}">
-              ${DB.length}
-            </span>
-          </div>
-        </button>
-      `;
+        const section =
+          question.sectionTitle ||
+          "General";
 
-          sectionNames.forEach((sectionName) => {
-            const group = groups[sectionName];
-            const active = activeSection === sectionName;
 
-            html += `
+        if (
+          !groups[section]
+        ) {
+
+          groups[section] = {
+
+            count: 0,
+
+            mastered: 0
+
+          };
+        }
+
+
+        groups[section]
+          .count++;
+
+
+        if (
+          masteredSet
+            .has(
+              question.key
+            )
+        ) {
+
+          groups[section]
+            .mastered++;
+        }
+      }
+    );
+
+
+    const sectionNames =
+
+      Object.keys(
+        groups
+      ).sort(
+        (a, b) =>
+          a.localeCompare(b)
+      );
+
+
+    let html = `
+      <button
+
+        data-section="all"
+
+        class="section-btn min-h-[44px] w-full rounded-xl px-3 py-2 text-left text-sm transition active:scale-[.98] ${
+          activeSection === "all"
+
+            ? "bg-brand-600 font-semibold text-white shadow"
+
+            : "border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+        }"
+
+      >
+
+        <div class="flex items-center justify-between gap-2">
+
+          <span>
+            All Sections
+          </span>
+
+          <span class="text-[11px] ${activeSection === "all" ? "text-white/80" : "text-slate-400"}">
+
+            ${DB.length}
+
+          </span>
+
+        </div>
+
+      </button>
+    `;
+
+
+    sectionNames.forEach(
+      sectionName => {
+
+        const group =
+          groups[
+            sectionName
+          ];
+
+
+        const active =
+          activeSection ===
+          sectionName;
+
+
+        html += `
           <button
+
             data-section="${esc(sectionName)}"
+
             class="section-btn min-h-[44px] w-full rounded-xl px-3 py-2 text-left text-sm transition active:scale-[.98] ${
               active
+
                 ? "bg-brand-600 font-semibold text-white shadow"
+
                 : "border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
             }"
+
           >
+
             <div class="flex items-center justify-between gap-2">
-              <span class="truncate">${esc(sectionName)}</span>
-              <span class="shrink-0 text-[11px] ${active ? "text-white/80" : "text-slate-400"}">
-                ${group.mastered}/${group.count}
+
+              <span class="truncate">
+                ${esc(sectionName)}
               </span>
+
+              <span class="shrink-0 text-[11px] ${active ? "text-white/80" : "text-slate-400"}">
+
+                ${group.mastered}/${group.count}
+
+              </span>
+
             </div>
+
           </button>
         `;
-          });
-
-          els.sectionsSidebar.innerHTML = html;
-
-          els.sectionsSidebar
-            .querySelectorAll(".section-btn")
-            .forEach((button) => {
-              button.addEventListener("click", () => {
-                activeSection = button.dataset.section;
-                visibleCount = PAGE_SIZE;
-
-                renderSidebar();
-                renderQuestions();
-
-                if (window.innerWidth < 1024) {
-                  closeDrawer();
-                }
-              });
-            });
-        }
-
-        function renderAnswerBlocks(question) {
-          const multipleAnswers = question.answers.length > 1;
-
-          return question.answers
-            .map(
-              (answer, index) => `
-    <div class="${index > 0 ? "mt-4 border-t border-dashed border-slate-200 pt-4 dark:border-slate-700" : ""}">
-      ${
-        multipleAnswers
-          ? `
-            <div class="mb-1.5 flex min-w-0 items-center gap-2 text-left">
-              <span class="shrink-0 rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-white dark:bg-white dark:text-slate-900">
-                Answer ${index + 1}
-              </span>
-
-              <span class="truncate text-[10px] text-slate-400" title="${esc(answer.source)}">
-                <i class="fa-regular fa-file-lines mr-1"></i>
-                ${esc(answer.source)}
-              </span>
-            </div>
-          `
-          : `
-            <div class="mb-1.5 flex min-w-0 items-center gap-2 text-left">
-              <span class="truncate text-[10px] text-slate-400" title="${esc(answer.source)}">
-                <i class="fa-regular fa-file-lines mr-1"></i>
-                ${esc(answer.source)}
-              </span>
-            </div>
-          `
       }
+    );
 
-      <div
-        class="answer-text whitespace-pre-wrap break-words rounded-lg border-l-4 bg-slate-50 p-4 text-left text-sm leading-7 dark:bg-slate-800/60 ${answerBorderColors[index % answerBorderColors.length]}"
-        style="text-align:left;text-indent:0;"
-      >${highlight(cleanText(answer.text), searchTerm)}</div>
-    </div>
-  `,
-            )
-            .join("");
+
+    els.sectionsSidebar
+      .innerHTML =
+        html;
+
+
+    els.sectionsSidebar
+      .querySelectorAll(
+        ".section-btn"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              activeSection =
+                button.dataset
+                  .section;
+
+
+              visibleCount =
+                PAGE_SIZE;
+
+
+              renderSidebar();
+
+              renderQuestions();
+
+
+              if (
+                window.innerWidth <
+                1024
+              ) {
+
+                closeDrawer();
+
+              }
+            }
+          );
         }
+      );
+  }
 
-        function renderHintBlock(question) {
-          const hint =
-            question.hints && question.hints.length ? question.hints[0] : null;
 
-          if (!hint || !hint.text) {
-            return "";
-          }
+  /* ==========================================================
+     HINT
+     ========================================================== */
+
+  function renderHintBlock(
+    question
+  ) {
+
+    /*
+      If multiple hints exist, use first only.
+
+      If no JSON hint exists, return nothing.
+    */
+    const hint =
+
+      question.hints &&
+      question.hints.length
+
+        ? question.hints[0]
+
+        : null;
+
+
+    if (
+      !hint ||
+      !hint.text
+    ) {
+
+      return "";
+    }
+
+
+    return `
+      <div class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-2 text-left dark:border-slate-800 dark:bg-slate-800/50">
+
+        <div class="mb-1 flex items-center gap-1.5 text-[10px] text-slate-400">
+
+          <i class="fa-regular fa-lightbulb"></i>
+
+          <span class="truncate">
+            ${esc(hint.source)}
+          </span>
+
+        </div>
+
+        <p class="text-left text-xs italic leading-5 text-slate-500 dark:text-slate-400">
+
+          ${highlight(
+            cleanText(
+              hint.text
+            ),
+            searchTerm
+          )}
+
+        </p>
+
+      </div>
+    `;
+  }
+
+
+  /* ==========================================================
+     ANSWERS
+     ========================================================== */
+
+  function renderAnswerBlocks(
+    question
+  ) {
+
+    const multipleAnswers =
+      question.answers.length >
+      1;
+
+
+    return question.answers
+
+      .map(
+        (
+          answer,
+          index
+        ) => {
+
+
+          /*
+            Ensure stored answer is cleaned again at
+            render time as an additional guarantee.
+          */
+          const answerText =
+            cleanText(
+              answer.text
+            );
+
 
           return `
-    <div class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-2 text-left dark:border-slate-800 dark:bg-slate-800/50">
-      <div class="mb-1 flex items-center gap-1.5 text-[10px] text-slate-400">
-        <i class="fa-regular fa-lightbulb"></i>
-        <span class="truncate">${esc(hint.source)}</span>
-      </div>
-      <p class="text-left text-xs italic leading-5 text-slate-500 dark:text-slate-400">
-        ${highlight(hint.text, searchTerm)}
-      </p>
-    </div>
-  `;
+            <div class="${index > 0 ? "mt-4 border-t border-dashed border-slate-200 pt-4 dark:border-slate-700" : ""}">
+
+              ${
+                multipleAnswers
+
+                  ? `
+                    <div class="mb-1.5 flex min-w-0 items-center gap-2 text-left">
+
+                      <span class="shrink-0 rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-bold text-white dark:bg-white dark:text-slate-900">
+
+                        Answer ${index + 1}
+
+                      </span>
+
+                      <span class="truncate text-[10px] text-slate-400" title="${esc(answer.source)}">
+
+                        <i class="fa-regular fa-file-lines mr-1"></i>
+
+                        ${esc(answer.source)}
+
+                      </span>
+
+                    </div>
+                  `
+
+                  : `
+                    <div class="mb-1.5 flex min-w-0 items-center gap-2 text-left">
+
+                      <span class="truncate text-[10px] text-slate-400" title="${esc(answer.source)}">
+
+                        <i class="fa-regular fa-file-lines mr-1"></i>
+
+                        ${esc(answer.source)}
+
+                      </span>
+
+                    </div>
+                  `
+              }
+
+
+              <div
+
+                class="answer-text whitespace-pre-wrap break-words rounded-lg border-l-4 bg-slate-50 p-4 text-left text-sm leading-7 dark:bg-slate-800/60 ${answerBorderColors[index % answerBorderColors.length]}"
+
+                style="text-align:left;text-indent:0;"
+
+              >${highlight(answerText, searchTerm)}</div>
+
+            </div>
+          `;
         }
+      )
 
-        function renderQuestions() {
-          const filtered = getFilteredQuestions();
-          const shown = filtered.slice(0, visibleCount);
-          const remaining = filtered.length - shown.length;
+      .join("");
+  }
 
-          if (!DB.length) {
-            els.questionsContainer.innerHTML = "";
-            els.emptyState.classList.remove("hidden");
-            return;
-          }
 
-          els.emptyState.classList.add("hidden");
+  /* ==========================================================
+     QUESTIONS
+     ========================================================== */
 
-          let html = `
-        <div class="sticky top-[57px] z-20 -mt-1 flex items-center justify-between gap-2 bg-slate-50/95 py-2 backdrop-blur dark:bg-slate-950/95 sm:top-[65px]">
-          <p class="text-xs text-slate-500 sm:text-sm">
-            Showing <b>${shown.length}</b> of <b>${filtered.length}</b> unique question${filtered.length === 1 ? "" : "s"}
-          </p>
+  function renderQuestions() {
 
-          <div class="flex gap-1.5">
-            <button
-              id="expandAll"
-              class="min-h-[36px] rounded-lg border border-slate-200 bg-white px-3 text-xs transition active:scale-95 dark:border-slate-800 dark:bg-slate-900"
-            >
-              Expand
-            </button>
+    const filtered =
+      getFilteredQuestions();
 
-            <button
-              id="collapseAll"
-              class="min-h-[36px] rounded-lg border border-slate-200 bg-white px-3 text-xs transition active:scale-95 dark:border-slate-800 dark:bg-slate-900"
-            >
-              Collapse
-            </button>
-          </div>
+
+    const shown =
+      filtered.slice(
+        0,
+        visibleCount
+      );
+
+
+    const remaining =
+      filtered.length -
+      shown.length;
+
+
+    if (
+      !DB.length
+    ) {
+
+      els.questionsContainer
+        .innerHTML = "";
+
+
+      els.emptyState
+        .classList
+        .remove(
+          "hidden"
+        );
+
+
+      return;
+    }
+
+
+    els.emptyState
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    let html = `
+      <div class="sticky top-[57px] z-20 -mt-1 mb-2 flex items-center justify-between gap-2 bg-slate-50/95 py-2 backdrop-blur dark:bg-slate-950/95 sm:top-[65px]">
+
+        <p class="text-xs text-slate-500 sm:text-sm">
+
+          Showing
+
+          <b>${shown.length}</b>
+
+          of
+
+          <b>${filtered.length}</b>
+
+          unique question${filtered.length === 1 ? "" : "s"}
+
+        </p>
+
+
+        <div class="flex gap-1.5">
+
+          <button
+
+            id="expandAll"
+
+            class="min-h-[36px] rounded-lg border border-slate-200 bg-white px-3 text-xs transition active:scale-95 dark:border-slate-800 dark:bg-slate-900"
+
+          >
+
+            Expand
+
+          </button>
+
+
+          <button
+
+            id="collapseAll"
+
+            class="min-h-[36px] rounded-lg border border-slate-200 bg-white px-3 text-xs transition active:scale-95 dark:border-slate-800 dark:bg-slate-900"
+
+          >
+
+            Collapse
+
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+
+    if (
+      !filtered.length
+    ) {
+
+      html += `
+        <div class="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900">
+
+          No questions match your current search or filter.
+
         </div>
       `;
 
-          if (!filtered.length) {
-            html += `
-          <div class="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900">
-            No questions match your current search or filter.
-          </div>
-        `;
-          } else {
-            html += shown
-              .map((question) => {
-                const isMastered = masteredSet.has(question.key);
-                const isBookmarked = bookmarkedSet.has(question.key);
-                const hasMultipleAnswers = question.answers.length > 1;
+    } else {
 
-                return `
-            <article
-              data-question-key="${esc(question.key)}"
-              class="overflow-hidden rounded-xl border bg-white text-left shadow-sm transition dark:bg-slate-900 ${
-                isMastered
-                  ? "border-emerald-300 dark:border-emerald-700"
-                  : "border-slate-200 dark:border-slate-800"
-              }"
-            >
-              <div class="p-3.5 sm:p-4">
-                <div class="flex items-start justify-between gap-2">
-                  <div class="flex min-w-0 flex-wrap items-center gap-1.5">
-                    <span
-                      class="shrink-0 rounded-full bg-slate-900 px-2 py-0.5 text-[11px] font-bold text-white dark:bg-white dark:text-slate-900"
-                      title="Question ID"
-                    >
-                      ${esc(question.id)}
-                    </span>
+      html += shown
 
-                    ${
-                      hasMultipleAnswers
-                        ? `
-                          <span class="shrink-0 rounded-full border border-violet-200 bg-violet-50 px-2 py-0.5 text-[11px] text-violet-700 dark:border-violet-900 dark:bg-violet-950/40 dark:text-violet-300">
-                            <i class="fa-solid fa-layer-group mr-1"></i>
-                            ${question.answers.length} answers
-                          </span>
-                        `
-                        : ""
-                    }
+        .map(
+          question => {
 
-                    <span
-                      class="truncate text-[11px] text-slate-500"
-                      title="${esc(question.sectionTitle)}"
-                    >
-                      ${esc(question.sectionTitle)}
-                    </span>
+            const isMastered =
+              masteredSet.has(
+                question.key
+              );
+
+
+            const isBookmarked =
+              bookmarkedSet.has(
+                question.key
+              );
+
+
+            const hasMultipleAnswers =
+              question.answers.length >
+              1;
+
+
+            return `
+              <article
+
+                data-question-key="${esc(question.key)}"
+
+                class="overflow-hidden rounded-xl border bg-white text-left shadow-sm transition dark:bg-slate-900 ${
+                  isMastered
+
+                    ? "border-emerald-300 dark:border-emerald-700"
+
+                    : "border-slate-200 dark:border-slate-800"
+                }"
+
+              >
+
+                <div class="p-4 sm:p-5">
+
+
+                  <div class="flex items-start justify-between gap-2">
+
+
+                    <div class="flex min-w-0 flex-wrap items-center gap-1.5">
+
+
+                      <span
+
+                        class="shrink-0 rounded-full bg-slate-900 px-2 py-0.5 text-[11px] font-bold text-white dark:bg-white dark:text-slate-900"
+
+                        title="Question ID"
+
+                      >
+
+                        ${esc(question.id)}
+
+                      </span>
+
+
+                      ${
+                        hasMultipleAnswers
+
+                          ? `
+                            <span class="shrink-0 rounded-full border border-violet-200 bg-violet-50 px-2 py-0.5 text-[11px] text-violet-700 dark:border-violet-900 dark:bg-violet-950/40 dark:text-violet-300">
+
+                              <i class="fa-solid fa-layer-group mr-1"></i>
+
+                              ${question.answers.length} answers
+
+                            </span>
+                          `
+
+                          : ""
+                      }
+
+
+                      <span
+
+                        class="truncate text-[11px] text-slate-500"
+
+                        title="${esc(question.sectionTitle)}"
+
+                      >
+
+                        ${esc(question.sectionTitle)}
+
+                      </span>
+
+
+                    </div>
+
+
+                    <div class="flex shrink-0 gap-1.5">
+
+
+                      <button
+
+                        data-action="bookmark"
+
+                        data-question-key="${esc(question.key)}"
+
+                        aria-label="Bookmark question"
+
+                        class="flex h-10 w-10 -m-1 items-center justify-center rounded-xl transition active:scale-90 ${
+                          isBookmarked
+
+                            ? "text-amber-500"
+
+                            : "text-slate-300 hover:text-amber-400 dark:text-slate-600"
+                        }"
+
+                      >
+
+                        <i class="fa-${isBookmarked ? "solid" : "regular"} fa-star"></i>
+
+                      </button>
+
+
+                      <button
+
+                        data-action="mastered"
+
+                        data-question-key="${esc(question.key)}"
+
+                        aria-label="Mark question as mastered"
+
+                        class="flex h-10 w-10 -m-1 items-center justify-center rounded-xl transition active:scale-90 ${
+                          isMastered
+
+                            ? "text-emerald-500"
+
+                            : "text-slate-300 hover:text-emerald-400 dark:text-slate-600"
+                        }"
+
+                      >
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                      </button>
+
+
+                    </div>
+
+
                   </div>
 
-                  <div class="flex shrink-0 gap-1.5">
-                    <button
-                      data-action="bookmark"
-                      data-question-key="${esc(question.key)}"
-                      aria-label="Bookmark question"
-                      class="flex h-10 w-10 -m-1 items-center justify-center rounded-xl transition active:scale-90 ${
-                        isBookmarked
-                          ? "text-amber-500"
-                          : "text-slate-300 hover:text-amber-400 dark:text-slate-600"
-                      }"
-                    >
-                      <i class="fa-${isBookmarked ? "solid" : "regular"} fa-star"></i>
-                    </button>
 
-                    <button
-                      data-action="mastered"
-                      data-question-key="${esc(question.key)}"
-                      aria-label="Mark question as mastered"
-                      class="flex h-10 w-10 -m-1 items-center justify-center rounded-xl transition active:scale-90 ${
-                        isMastered
-                          ? "text-emerald-500"
-                          : "text-slate-300 hover:text-emerald-400 dark:text-slate-600"
-                      }"
-                    >
-                      <i class="fa-solid fa-circle-check"></i>
-                    </button>
-                  </div>
+                  <h3 class="mt-3 text-[15px] font-semibold leading-snug sm:text-base">
+
+                    ${highlight(
+                      cleanText(
+                        question.q
+                      ),
+                      searchTerm
+                    )}
+
+                  </h3>
+
+
+                  ${renderHintBlock(question)}
+
+
+                  <details
+
+                    data-question-id="${esc(question.id)}"
+
+                    class="group mt-3"
+
+                    ${openSet.has(question.id) ? "open" : ""}
+
+                  >
+
+                    <summary class="flex min-h-[40px] cursor-pointer list-none items-center gap-2 select-none text-sm font-semibold text-brand-600 dark:text-blue-400">
+
+
+                      <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
+
+
+                      <span class="group-open:hidden">
+
+                        Show ${hasMultipleAnswers ? question.answers.length + " answers" : "answer"}
+
+                      </span>
+
+
+                      <span class="hidden group-open:inline">
+
+                        Hide answer${hasMultipleAnswers ? "s" : ""}
+
+                      </span>
+
+
+                    </summary>
+
+
+                    <div class="mt-2">
+
+                      ${renderAnswerBlocks(question)}
+
+                    </div>
+
+
+                  </details>
+
+
                 </div>
 
-                <h3 class="mt-2.5 text-[15px] font-semibold leading-snug sm:text-base">
-                  ${highlight(question.q, searchTerm)}
-                </h3>
+              </article>
+            `;
+          }
+        )
 
-                ${renderHintBlock(question)}
+        .join("");
 
-                <details
-                  data-question-id="${esc(question.id)}"
-                  class="group mt-2.5"
-                  ${openSet.has(question.id) ? "open" : ""}
-                >
-                  <summary class="flex min-h-[40px] cursor-pointer list-none items-center gap-2 select-none text-sm font-semibold text-brand-600 dark:text-blue-400">
-                    <i class="fa-solid fa-chevron-down text-[10px] transition-transform group-open:rotate-180"></i>
-                    <span class="group-open:hidden">
-                      Show ${hasMultipleAnswers ? question.answers.length + " answers" : "answer"}
-                    </span>
-                    <span class="hidden group-open:inline">
-                      Hide answer${hasMultipleAnswers ? "s" : ""}
-                    </span>
-                  </summary>
 
-                  <div class="mt-1">
-                    ${renderAnswerBlocks(question)}
-                  </div>
-                </details>
-              </div>
-            </article>
-          `;
-              })
-              .join("");
+      if (
+        remaining > 0
+      ) {
 
-            if (remaining > 0) {
-              html += `
-            <button
-              id="loadMoreBtn"
-              class="min-h-[48px] w-full rounded-xl bg-brand-600 text-sm font-semibold text-white transition hover:bg-brand-500 active:scale-[.99]"
-            >
-              Load ${Math.min(PAGE_SIZE, remaining)} more
-              <span class="opacity-80">(${remaining} left)</span>
-            </button>
-          `;
+        html += `
+          <button
+
+            id="loadMoreBtn"
+
+            class="min-h-[48px] w-full rounded-xl bg-brand-600 text-sm font-semibold text-white transition hover:bg-brand-500 active:scale-[.99]"
+
+          >
+
+            Load ${Math.min(PAGE_SIZE, remaining)} more
+
+            <span class="opacity-80">
+
+              (${remaining} left)
+
+            </span>
+
+          </button>
+        `;
+      }
+    }
+
+
+    els.questionsContainer
+      .innerHTML =
+        html;
+
+
+    els.questionsContainer
+      .querySelectorAll(
+        "details[data-question-id]"
+      )
+      .forEach(
+        details => {
+
+          details.addEventListener(
+            "toggle",
+            () => {
+
+              const id =
+                details.dataset
+                  .questionId;
+
+
+              if (
+                details.open
+              ) {
+
+                openSet.add(id);
+
+              } else {
+
+                openSet.delete(id);
+
+              }
             }
-          }
-
-          els.questionsContainer.innerHTML = html;
-
-          els.questionsContainer
-            .querySelectorAll("details[data-question-id]")
-            .forEach((details) => {
-              details.addEventListener("toggle", () => {
-                const id = details.dataset.questionId;
-
-                if (details.open) {
-                  openSet.add(id);
-                } else {
-                  openSet.delete(id);
-                }
-              });
-            });
-
-          els.questionsContainer
-            .querySelectorAll("[data-action]")
-            .forEach((button) => {
-              button.addEventListener("click", () => {
-                const key = button.dataset.questionKey;
-                const action = button.dataset.action;
-
-                if (action === "bookmark") {
-                  if (bookmarkedSet.has(key)) {
-                    bookmarkedSet.delete(key);
-                  } else {
-                    bookmarkedSet.add(key);
-                  }
-                }
-
-                if (action === "mastered") {
-                  if (masteredSet.has(key)) {
-                    masteredSet.delete(key);
-                  } else {
-                    masteredSet.add(key);
-                  }
-                }
-
-                saveProgress();
-                renderMetrics();
-                renderSidebar();
-                renderQuestions();
-              });
-            });
-
-          $("loadMoreBtn")?.addEventListener("click", () => {
-            visibleCount += PAGE_SIZE;
-            renderQuestions();
-          });
-
-          $("expandAll")?.addEventListener("click", () => {
-            els.questionsContainer
-              .querySelectorAll("details[data-question-id]")
-              .forEach((details) => {
-                details.open = true;
-                openSet.add(details.dataset.questionId);
-              });
-          });
-
-          $("collapseAll")?.addEventListener("click", () => {
-            els.questionsContainer
-              .querySelectorAll("details[data-question-id]")
-              .forEach((details) => {
-                details.open = false;
-                openSet.delete(details.dataset.questionId);
-              });
-          });
-        }
-
-        function renderAll() {
-          renderSources();
-          renderMetrics();
-          renderSidebar();
-          renderQuestions();
-        }
-
-        /* ==========================================================
-       IMPORT / EXPORT
-       ========================================================== */
-
-        function handleImportedFiles(fileList) {
-          const files = [...fileList].filter(
-            (file) =>
-              file && file.name && file.name.toLowerCase().endsWith(".json"),
           );
+        }
+      );
 
-          if (!files.length) {
-            showToast("Please select valid .json files.", "error");
-            return;
-          }
 
-          const readers = files.map(
-            (file) =>
-              new Promise((resolve, reject) => {
-                const reader = new FileReader();
+    els.questionsContainer
+      .querySelectorAll(
+        "[data-action]"
+      )
+      .forEach(
+        button => {
 
-                reader.onload = (event) => {
+          button.addEventListener(
+            "click",
+            () => {
+
+              const key =
+                button.dataset
+                  .questionKey;
+
+
+              const action =
+                button.dataset
+                  .action;
+
+
+              if (
+                action ===
+                "bookmark"
+              ) {
+
+                if (
+                  bookmarkedSet
+                    .has(key)
+                ) {
+
+                  bookmarkedSet
+                    .delete(key);
+
+                } else {
+
+                  bookmarkedSet
+                    .add(key);
+
+                }
+              }
+
+
+              if (
+                action ===
+                "mastered"
+              ) {
+
+                if (
+                  masteredSet
+                    .has(key)
+                ) {
+
+                  masteredSet
+                    .delete(key);
+
+                } else {
+
+                  masteredSet
+                    .add(key);
+
+                }
+              }
+
+
+              saveProgress();
+
+              renderMetrics();
+
+              renderSidebar();
+
+              renderQuestions();
+            }
+          );
+        }
+      );
+
+
+    $("loadMoreBtn")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          visibleCount +=
+            PAGE_SIZE;
+
+
+          renderQuestions();
+
+        }
+      );
+
+
+    $("expandAll")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          els.questionsContainer
+            .querySelectorAll(
+              "details[data-question-id]"
+            )
+            .forEach(
+              details => {
+
+                details.open =
+                  true;
+
+
+                openSet.add(
+                  details.dataset
+                    .questionId
+                );
+              }
+            );
+        }
+      );
+
+
+    $("collapseAll")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          els.questionsContainer
+            .querySelectorAll(
+              "details[data-question-id]"
+            )
+            .forEach(
+              details => {
+
+                details.open =
+                  false;
+
+
+                openSet.delete(
+                  details.dataset
+                    .questionId
+                );
+              }
+            );
+        }
+      );
+  }
+
+
+  function renderAll() {
+
+    renderSources();
+
+    renderMetrics();
+
+    renderSidebar();
+
+    renderQuestions();
+  }
+
+
+  /* ==========================================================
+     IMPORT / EXPORT
+     ========================================================== */
+
+  function handleImportedFiles(
+    fileList
+  ) {
+
+    const files = [
+      ...fileList
+    ].filter(
+      file =>
+
+        file &&
+
+        file.name &&
+
+        file.name
+          .toLowerCase()
+          .endsWith(
+            ".json"
+          )
+    );
+
+
+    if (
+      !files.length
+    ) {
+
+      showToast(
+
+        "Please select valid .json files.",
+
+        "error"
+      );
+
+
+      return;
+    }
+
+
+    const readers =
+
+      files.map(
+        file =>
+
+          new Promise(
+            (
+              resolve,
+              reject
+            ) => {
+
+              const reader =
+                new FileReader();
+
+
+              reader.onload =
+                event => {
+
                   resolve({
-                    name: file.name,
-                    text: event.target.result,
+
+                    name:
+                      file.name,
+
+                    text:
+                      event.target
+                        .result
+
                   });
                 };
 
-                reader.onerror = reject;
-                reader.readAsText(file);
-              }),
-          );
 
-          Promise.all(readers)
-            .then((results) => {
-              const importedSources = [];
+              reader.onerror =
+                reject;
 
-              results.forEach(({ name, text }) => {
-                try {
-                  const parsedItems = parseJsonPayload(text, name);
 
-                  /*
-                If user imports starter file manually, treat as user source.
-              */
-                  importedSources.push({
-                    name,
-                    kind: "user",
-                    data: parsedItems,
-                  });
-                } catch (error) {
-                  showToast(name + ": " + error.message, "error");
-                }
-              });
-
-              if (!importedSources.length) return;
-
-              setSourcesAfterImport(importedSources, els.mergeMode.checked);
-
-              showToast(
-                `Loaded ${importedSources.length} file(s) • ${DB.length} unique questions`,
-              );
-            })
-            .catch(() => {
-              showToast("Could not read the selected JSON file(s).", "error");
-            });
-        }
-
-        function exportCurrentBank() {
-          const exportData = DB.map((question) => ({
-            id: question.id,
-            q: question.q,
-            sectionTitle: question.sectionTitle,
-            hint: question.hints?.[0]?.text || "",
-            hints: (question.hints || []).map((hint) => ({
-              source: hint.source,
-              text: hint.text,
-            })),
-            answers: question.answers.map((answer) => ({
-              source: answer.source,
-              text: cleanText(answer.text),
-            })),
-          }));
-
-          const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-            type: "application/json",
-          });
-
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-
-          link.href = url;
-          link.download = "sdm-question-bank-export.json";
-          link.click();
-
-          URL.revokeObjectURL(url);
-
-          showToast(`Exported ${exportData.length} unique questions.`);
-        }
-
-        /* ==========================================================
-       APP / DESIGN VERSION UPDATE CHECK
-       ========================================================== */
-
-        async function checkForUpdates() {
-          if (location.protocol === "file:") return;
-
-          try {
-            const url = VERSION_FILE + "?check=" + Date.now();
-
-            const response = await fetch(url, {
-              cache: "no-store",
-            });
-
-            if (!response.ok) return;
-
-            const remoteVersion = await response.json();
-
-            const remoteAppVersion = remoteVersion.appVersion || "";
-            const remoteStarterVersion =
-              remoteVersion.starterBundleVersion || "";
-
-            const appUpdateAvailable = isNewerVersion(
-              remoteAppVersion,
-              APP_VERSION,
-            );
-
-            const starterUpdateAvailable = isNewerVersion(
-              remoteStarterVersion,
-              STARTER_BUNDLE_VERSION,
-            );
-
-            if (!appUpdateAvailable && !starterUpdateAvailable) {
-              return;
-            }
-
-            const updateKey = remoteAppVersion + "|" + remoteStarterVersion;
-
-            const dismissedKey = localStorage.getItem(
-              STORAGE.dismissedUpdateVersion,
-            );
-
-            if (dismissedKey === updateKey) {
-              return;
-            }
-
-            const messages = [];
-
-            if (appUpdateAvailable) {
-              messages.push(
-                "A newer app version is available with updated design or functionality.",
+              reader.readAsText(
+                file
               );
             }
+          )
+      );
 
-            if (starterUpdateAvailable) {
-              messages.push(
-                "New starter questions, answers or sections are also available.",
-              );
-            }
 
-            if (remoteVersion.message) {
-              messages.push(remoteVersion.message);
-            }
+    Promise.all(
+      readers
+    )
 
-            els.updateBannerText.textContent = messages.join(" ");
-            els.updateBanner.dataset.updateKey = updateKey;
-            els.updateBanner.classList.remove("hidden");
-          } catch (error) {
-            console.warn("Unable to check updates:", error);
-          }
-        }
+      .then(
+        results => {
 
-        function updateAppNow() {
-          /*
-        Reloads index.html with a changing query parameter.
-        This fetches the latest HTML/CSS/JS design from GitHub Pages.
+          const importedSources =
+            [];
 
-        localStorage stays intact:
-        - mastered progress stays
-        - bookmarks stay
-        - sources stay
-      */
-          const url = new URL(window.location.href);
 
-          url.searchParams.set("update", Date.now());
+          results.forEach(
+            ({
+              name,
+              text
+            }) => {
 
-          window.location.href = url.toString();
-        }
+              try {
 
-        /* ==========================================================
-       DRAWER
-       ========================================================== */
+                const parsedItems =
 
-        function openDrawer() {
-          els.drawer.classList.remove("-translate-x-full");
-          els.drawerOverlay.classList.remove("hidden");
-          document.body.style.overflow = "hidden";
-        }
+                  parseJsonPayload(
+                    text,
+                    name
+                  );
 
-        function closeDrawer() {
-          els.drawer.classList.add("-translate-x-full");
-          els.drawerOverlay.classList.add("hidden");
-          document.body.style.overflow = "";
-        }
 
-        /* ==========================================================
-       INITIALIZATION
-       ========================================================== */
+                importedSources.push({
 
-        async function initializeApp() {
-          if (localStorage.getItem(STORAGE.theme) === "light") {
-            document.documentElement.classList.remove("dark");
-          }
+                  name,
 
-          initializeConfigState();
+                  kind:
+                    "user",
 
-          const storedStateExists = loadSourcesFromStorage();
+                  data:
+                    parsedItems
 
-          /*
-        Returning visitor:
-        Restore exactly their local source state.
-      */
-          if (storedStateExists) {
-            rebuildDatabase();
-            renderAll();
+                });
 
-            /*
-          If the HTML was updated and STARTER_BUNDLE_VERSION changed,
-          fetch newer starter content automatically.
+              } catch (
+                error
+              ) {
 
-          Progress stays unchanged.
-
-          Removed starter source(s) remain removed because
-          removedStarterFiles are respected.
-        */
-            const storedStarterVersion =
-              localStorage.getItem(STORAGE.starterVersion) || "";
-
-            const currentlyHasStarterSources = sources.some(
-              (source) => source.kind === "starter",
-            );
-
-            if (
-              currentlyHasStarterSources &&
-              storedStarterVersion !== STARTER_BUNDLE_VERSION
-            ) {
-              const refreshed = await refreshStarterBundle({ silent: true });
-
-              if (refreshed) {
                 showToast(
-                  "Starter content was updated. Your progress was kept.",
+
+                  name +
+                  ": " +
+                  error.message,
+
+                  "error"
                 );
               }
             }
-
-            checkForUpdates();
-            return;
-          }
-
-          /*
-        First-ever visit:
-        Automatically fetch starter files.
-      */
-          const starterLoaded = await loadStarterForFirstTime();
-
-          renderAll();
-
-          if (starterLoaded) {
-            showToast("Starter bundle loaded.");
-          } else if (location.protocol === "file:") {
-            els.emptyState.classList.remove("hidden");
-            els.emptyState.innerHTML = `
-          <i class="fa-regular fa-folder-open mb-4 text-4xl opacity-60"></i>
-          <h2 class="mb-1 font-semibold">Starter files cannot load from file://</h2>
-          <p class="text-sm">
-            Open this app through GitHub Pages, Live Server, or a local HTTP server.
-            You can still use Configuration to manually choose JSON files.
-          </p>
-        `;
-          } else {
-            els.emptyState.classList.remove("hidden");
-            els.emptyState.innerHTML = `
-          <i class="fa-solid fa-triangle-exclamation mb-4 text-4xl text-amber-500"></i>
-          <h2 class="mb-1 font-semibold">Starter files could not be loaded</h2>
-          <p class="text-sm">
-            Check that the starter JSON files exist beside index.html and that their names match STARTER_FILES.
-          </p>
-        `;
-          }
-
-          checkForUpdates();
-        }
-
-        /* ==========================================================
-       EVENT LISTENERS
-       ========================================================== */
-
-        els.configToggleBtn.addEventListener("click", () => {
-          const isCollapsed = els.configPanel.classList.contains("hidden");
-          setConfigCollapsed(!isCollapsed);
-        });
-
-        els.loadJsonBtn.addEventListener("click", () => {
-          els.jsonFileInput.click();
-        });
-
-        els.jsonFileInput.addEventListener("change", (event) => {
-          handleImportedFiles(event.target.files);
-          event.target.value = "";
-        });
-
-        els.exportJsonBtn.addEventListener("click", exportCurrentBank);
-
-        els.refreshStarterBtn.addEventListener("click", () => {
-          refreshStarterBundle();
-        });
-
-        els.clearAllBtn.addEventListener("click", clearAllSources);
-
-        els.restoreDefaultBtn.addEventListener("click", restoreDefaultState);
-
-        els.searchInput.addEventListener("input", (event) => {
-          searchTerm = event.target.value;
-          visibleCount = PAGE_SIZE;
-          renderQuestions();
-        });
-
-        els.statusFilter.addEventListener("change", (event) => {
-          statusFilterValue = event.target.value;
-          visibleCount = PAGE_SIZE;
-          renderQuestions();
-        });
-
-        els.themeToggle.addEventListener("click", () => {
-          document.documentElement.classList.toggle("dark");
-
-          localStorage.setItem(
-            STORAGE.theme,
-            document.documentElement.classList.contains("dark")
-              ? "dark"
-              : "light",
           );
-        });
 
-        els.updateNowBtn.addEventListener("click", updateAppNow);
 
-        els.dismissUpdateBtn.addEventListener("click", () => {
-          const updateKey = els.updateBanner.dataset.updateKey;
+          if (
+            !importedSources.length
+          ) {
 
-          if (updateKey) {
-            localStorage.setItem(STORAGE.dismissedUpdateVersion, updateKey);
+            return;
+
           }
 
-          els.updateBanner.classList.add("hidden");
-        });
 
-        els.drawerBtn.addEventListener("click", openDrawer);
-        els.closeDrawer.addEventListener("click", closeDrawer);
-        els.drawerOverlay.addEventListener("click", closeDrawer);
+          setSourcesAfterImport(
 
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") {
-            closeDrawer();
+            importedSources,
+
+            els.mergeMode
+              .checked
+          );
+
+
+          showToast(
+
+            `Loaded ${importedSources.length} file(s) • ${DB.length} unique questions`
+
+          );
+        }
+      )
+
+      .catch(
+        () => {
+
+          showToast(
+
+            "Could not read the selected JSON file(s).",
+
+            "error"
+          );
+        }
+      );
+  }
+
+
+  function exportCurrentBank() {
+
+    const exportData =
+
+      DB.map(
+        question => ({
+
+          id:
+            question.id,
+
+          q:
+            question.q,
+
+          sectionTitle:
+            question.sectionTitle,
+
+          hint:
+            question.hints?.[0]?.text ||
+            "",
+
+          hints:
+            (
+              question.hints ||
+              []
+            ).map(
+              hint => ({
+
+                source:
+                  hint.source,
+
+                text:
+                  hint.text
+
+              })
+            ),
+
+          answers:
+            question.answers
+              .map(
+                answer => ({
+
+                  source:
+                    answer.source,
+
+                  text:
+                    cleanText(
+                      answer.text
+                    )
+
+                })
+              )
+
+        })
+      );
+
+
+    const blob =
+      new Blob(
+
+        [
+          JSON.stringify(
+            exportData,
+            null,
+            2
+          )
+        ],
+
+        {
+          type:
+            "application/json"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+
+    link.href =
+      url;
+
+
+    link.download =
+      "sdm-question-bank-export.json";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+      url
+    );
+
+
+    showToast(
+
+      `Exported ${exportData.length} unique questions.`
+
+    );
+  }
+
+
+  /* ==========================================================
+     UPDATE SYSTEM
+     ========================================================== */
+
+  async function checkForUpdates() {
+
+    if (
+      location.protocol ===
+      "file:"
+    ) {
+
+      return;
+    }
+
+
+    try {
+
+      const response =
+
+        await fetch(
+
+          VERSION_FILE +
+
+          "?check=" +
+
+          Date.now(),
+
+          {
+            cache:
+              "no-store"
           }
-        });
-
-        window.addEventListener("resize", () => {
-          if (window.innerWidth >= 1024) {
-            closeDrawer();
-          }
-        });
-
-        /*
-      Desktop drag-and-drop JSON support.
-    */
-        window.addEventListener("dragover", (event) => {
-          event.preventDefault();
-        });
-
-        window.addEventListener("drop", (event) => {
-          event.preventDefault();
-
-          if (event.dataTransfer.files && event.dataTransfer.files.length) {
-            handleImportedFiles(event.dataTransfer.files);
-          }
-        });
-
-        window.addEventListener(
-          "scroll",
-          () => {
-            if (window.scrollY > 500) {
-              els.toTop.classList.remove("hidden");
-              els.toTop.classList.add("flex");
-            } else {
-              els.toTop.classList.add("hidden");
-              els.toTop.classList.remove("flex");
-            }
-          },
-          { passive: true },
         );
 
-        els.toTop.addEventListener("click", () => {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
+
+      if (
+        !response.ok
+      ) {
+
+        return;
+      }
+
+
+      const remoteVersion =
+        await response.json();
+
+
+      const remoteAppVersion =
+
+        String(
+          remoteVersion.appVersion ||
+          ""
+        ).trim();
+
+
+      const remoteStarterVersion =
+
+        String(
+          remoteVersion.starterBundleVersion ||
+          ""
+        ).trim();
+
+
+      /*
+        Compare content version against what this
+        device actually has installed, not just against
+        hardcoded HTML version.
+      */
+      const installedStarterVersion =
+
+        localStorage.getItem(
+          STORAGE.starterVersion
+        ) ||
+
+        STARTER_BUNDLE_VERSION;
+
+
+      const appUpdateAvailable =
+
+        isNewerVersion(
+
+          remoteAppVersion,
+
+          APP_VERSION
+        );
+
+
+      const starterUpdateAvailable =
+
+        isNewerVersion(
+
+          remoteStarterVersion,
+
+          installedStarterVersion
+        );
+
+
+      if (
+        !appUpdateAvailable &&
+        !starterUpdateAvailable
+      ) {
+
+        pendingRemoteVersion =
+          null;
+
+
+        els.updateBanner
+          .classList
+          .add(
+            "hidden"
+          );
+
+
+        return;
+      }
+
+
+      const updateKey =
+
+        remoteAppVersion +
+
+        "|" +
+
+        remoteStarterVersion;
+
+
+      const dismissedKey =
+
+        localStorage.getItem(
+
+          STORAGE.dismissedUpdateVersion
+
+        );
+
+
+      if (
+        dismissedKey ===
+        updateKey
+      ) {
+
+        return;
+      }
+
+
+      pendingRemoteVersion = {
+
+        appVersion:
+          remoteAppVersion,
+
+        starterBundleVersion:
+          remoteStarterVersion,
+
+        appUpdateAvailable,
+
+        starterUpdateAvailable,
+
+        updateKey
+
+      };
+
+
+      const messages = [];
+
+
+      if (
+        appUpdateAvailable
+      ) {
+
+        messages.push(
+
+          `App ${remoteAppVersion} is available with updated design or functionality.`
+
+        );
+      }
+
+
+      if (
+        starterUpdateAvailable
+      ) {
+
+        messages.push(
+
+          `Starter content ${remoteStarterVersion} is available.`
+
+        );
+      }
+
+
+      if (
+        remoteVersion.message
+      ) {
+
+        messages.push(
+          remoteVersion.message
+        );
+      }
+
+
+      els.updateBannerText
+        .textContent =
+          messages.join(" ");
+
+
+      els.updateBanner
+        .dataset
+        .updateKey =
+          updateKey;
+
+
+      els.updateBanner
+        .classList
+        .remove(
+          "hidden"
+        );
+
+    } catch (
+      error
+    ) {
+
+      console.warn(
+
+        "Unable to check updates:",
+
+        error
+      );
+    }
+  }
+
+
+  /* ==========================================================
+     GITHUB DEPLOYMENT VERIFICATION
+     ========================================================== */
+
+  async function getDeployedAppVersion() {
+
+    try {
+
+      const url =
+        new URL(
+
+          "./index.html",
+
+          window.location.href
+
+        );
+
+
+      url.searchParams.set(
+
+        "deploymentCheck",
+
+        Date.now() +
+
+        "-" +
+
+        Math.random()
+          .toString(36)
+          .slice(2)
+
+      );
+
+
+      const response =
+
+        await fetch(
+
+          url.toString(),
+
+          {
+            method:
+              "GET",
+
+            cache:
+              "no-store",
+
+            headers: {
+              "Cache-Control":
+                "no-cache"
+            }
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+
+        throw new Error(
+          "HTTP " +
+          response.status
+        );
+      }
+
+
+      const html =
+        await response.text();
+
+
+      const parser =
+        new DOMParser();
+
+
+      const doc =
+        parser.parseFromString(
+
+          html,
+
+          "text/html"
+
+        );
+
+
+      const versionMeta =
+
+        doc.querySelector(
+
+          'meta[name="app-version"]'
+
+        );
+
+
+      return (
+
+        versionMeta
+          ?.content
+          ?.trim() ||
+
+        ""
+
+      );
+
+    } catch (
+      error
+    ) {
+
+      console.warn(
+
+        "Could not determine deployed app version:",
+
+        error
+      );
+
+
+      return "";
+    }
+  }
+
+
+  async function waitForAppDeployment(
+
+    targetVersion,
+
+    {
+      attempts = 20,
+
+      delayMs = 3000
+    } = {}
+
+  ) {
+
+    for (
+      let attempt = 1;
+
+      attempt <=
+      attempts;
+
+      attempt++
+    ) {
+
+      const deployedVersion =
+
+        await getDeployedAppVersion();
+
+
+      console.log(
+
+        `Deployment check ${attempt}/${attempts}`,
+
+        {
+          current:
+            APP_VERSION,
+
+          target:
+            targetVersion,
+
+          deployed:
+            deployedVersion
+        }
+      );
+
+
+      if (
+        deployedVersion &&
+
+        compareVersions(
+
+          deployedVersion,
+
+          targetVersion
+
+        ) >= 0
+      ) {
+
+        return {
+
+          ready:
+            true,
+
+          deployedVersion
+
+        };
+      }
+
+
+      if (
+        attempt <
+        attempts
+      ) {
+
+        await sleep(
+          delayMs
+        );
+      }
+    }
+
+
+    return {
+
+      ready:
+        false,
+
+      deployedVersion:
+        ""
+
+    };
+  }
+
+
+  /* ==========================================================
+     UPDATE NOW
+     ========================================================== */
+
+  async function updateAppNow() {
+
+    if (
+      !pendingRemoteVersion
+    ) {
+
+      els.updateBanner
+        .classList
+        .add(
+          "hidden"
+        );
+
+
+      return;
+    }
+
+
+    /*
+      Preserve where the user currently is before
+      any reload/update.
+    */
+    saveReadingPositionNow();
+
+
+    const {
+
+      appVersion:
+        targetAppVersion,
+
+      starterBundleVersion:
+        targetStarterVersion,
+
+      appUpdateAvailable,
+
+      starterUpdateAvailable,
+
+      updateKey
+
+    } =
+      pendingRemoteVersion;
+
+
+    const originalHtml =
+      els.updateNowBtn
+        .innerHTML;
+
+
+    els.updateNowBtn
+      .disabled =
+        true;
+
+
+    /*
+      ----------------------------------------------------------
+      APP / DESIGN UPDATE
+      ----------------------------------------------------------
+    */
+    if (
+      appUpdateAvailable
+    ) {
+
+      els.updateNowBtn
+        .innerHTML = `
+          <i class="fa-solid fa-spinner fa-spin mr-1"></i>
+          Waiting for deployment...
+        `;
+
+
+      showToast(
+
+        "Waiting for GitHub Pages to serve the new app version..."
+
+      );
+
+
+      const result =
+
+        await waitForAppDeployment(
+
+          targetAppVersion,
+
+          {
+            attempts: 20,
+
+            delayMs: 3000
+          }
+        );
+
+
+      if (
+        !result.ready
+      ) {
+
+        els.updateNowBtn
+          .disabled =
+            false;
+
+
+        els.updateNowBtn
+          .innerHTML =
+            originalHtml;
+
+
+        showToast(
+
+          "GitHub Pages is still serving the old index.html. Please try Update now again shortly.",
+
+          "error"
+        );
+
+
+        return;
+      }
+
+
+      /*
+        Inform the new page that update was intentional.
+      */
+      sessionStorage.setItem(
+
+        "sdm_app_update_completed",
+
+        result.deployedVersion
+
+      );
+
+
+      /*
+        Keep target content version so the new HTML can
+        offer/update content after loading if needed.
+      */
+      if (
+        targetStarterVersion
+      ) {
+
+        sessionStorage.setItem(
+
+          "sdm_target_starter_version",
+
+          targetStarterVersion
+
+        );
+      }
+
+
+      localStorage.removeItem(
+
+        STORAGE.dismissedUpdateVersion
+
+      );
+
+
+      /*
+        Navigate only after the server was verified to
+        contain the required index.html version.
+      */
+      const newUrl =
+
+        new URL(
+
+          "./index.html",
+
+          window.location.href
+
+        );
+
+
+      newUrl.searchParams.set(
+
+        "v",
+
+        result.deployedVersion
+
+      );
+
+
+      newUrl.searchParams.set(
+
+        "reload",
+
+        Date.now()
+
+      );
+
+
+      window.location.replace(
+
+        newUrl.toString()
+
+      );
+
+
+      return;
+    }
+
+
+    /*
+      ----------------------------------------------------------
+      STARTER CONTENT UPDATE ONLY
+      ----------------------------------------------------------
+    */
+    if (
+      starterUpdateAvailable
+    ) {
+
+      els.updateNowBtn
+        .innerHTML = `
+          <i class="fa-solid fa-spinner fa-spin mr-1"></i>
+          Updating content...
+        `;
+
+
+      const ok =
+
+        await refreshStarterBundle({
+
+          targetVersion:
+
+            targetStarterVersion ||
+
+            STARTER_BUNDLE_VERSION
+
         });
 
-        initializeApp();
-      })();
-    </script>
-  </body>
+
+      els.updateNowBtn
+        .disabled =
+          false;
+
+
+      els.updateNowBtn
+        .innerHTML =
+          originalHtml;
+
+
+      if (ok) {
+
+        localStorage.setItem(
+
+          STORAGE.dismissedUpdateVersion,
+
+          updateKey
+
+        );
+
+
+        els.updateBanner
+          .classList
+          .add(
+            "hidden"
+          );
+
+
+        pendingRemoteVersion =
+          null;
+
+
+        showToast(
+
+          "Starter content updated. Your progress was preserved."
+
+        );
+      }
+
+
+      return;
+    }
+
+
+    els.updateNowBtn
+      .disabled =
+        false;
+
+
+    els.updateNowBtn
+      .innerHTML =
+        originalHtml;
+
+
+    els.updateBanner
+      .classList
+      .add(
+        "hidden"
+      );
+  }
+
+
+  /* ==========================================================
+     DRAWER
+     ========================================================== */
+
+  function openDrawer() {
+
+    els.drawer
+      .classList
+      .remove(
+        "-translate-x-full"
+      );
+
+
+    els.drawerOverlay
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    document.body
+      .style
+      .overflow =
+        "hidden";
+  }
+
+
+  function closeDrawer() {
+
+    els.drawer
+      .classList
+      .add(
+        "-translate-x-full"
+      );
+
+
+    els.drawerOverlay
+      .classList
+      .add(
+        "hidden"
+      );
+
+
+    document.body
+      .style
+      .overflow =
+        "";
+  }
+
+
+  /* ==========================================================
+     INITIALIZATION
+     ========================================================== */
+
+  async function initializeApp() {
+
+    /*
+      Theme.
+    */
+    if (
+      localStorage.getItem(
+        STORAGE.theme
+      ) ===
+      "light"
+    ) {
+
+      document.documentElement
+        .classList
+        .remove(
+          "dark"
+        );
+    }
+
+
+    initializeConfigState();
+
+
+    /*
+      Handle successful app-update navigation.
+    */
+    const completedAppUpdate =
+
+      sessionStorage.getItem(
+
+        "sdm_app_update_completed"
+
+      );
+
+
+    if (
+      completedAppUpdate
+    ) {
+
+      sessionStorage.removeItem(
+
+        "sdm_app_update_completed"
+
+      );
+
+
+      /*
+        Remove cache-busting parameters from address bar
+        without causing another reload.
+      */
+      const cleanUrl =
+
+        new URL(
+          window.location.href
+        );
+
+
+      cleanUrl.searchParams
+        .delete("v");
+
+
+      cleanUrl.searchParams
+        .delete("reload");
+
+
+      cleanUrl.searchParams
+        .delete("update");
+
+
+      window.history
+        .replaceState(
+
+          {},
+
+          "",
+
+          cleanUrl.pathname +
+
+          cleanUrl.search +
+
+          cleanUrl.hash
+
+        );
+
+
+      setTimeout(
+        () => {
+
+          showToast(
+
+            `App updated to ${APP_VERSION}. Your progress was preserved.`
+
+          );
+
+        },
+
+        700
+      );
+    }
+
+
+    /*
+      Load saved sources.
+    */
+    const storedStateExists =
+
+      loadSourcesFromStorage();
+
+
+    /*
+      ----------------------------------------------------------
+      RETURNING USER
+      ----------------------------------------------------------
+    */
+    if (
+      storedStateExists
+    ) {
+
+      rebuildDatabase();
+
+
+      /*
+        IMPORTANT:
+        No seamless starter update here anymore.
+
+        We intentionally DO NOT call refreshStarterBundle()
+        based on version difference.
+
+        version.json will trigger the visible update banner,
+        and the user must press Update now.
+      */
+
+
+      /*
+        Prepare list size before rendering, so the saved
+        question is present even if it was > first 50.
+      */
+      const savedPosition =
+
+        prepareReadingPositionForRestore();
+
+
+      renderAll();
+
+
+      /*
+        Restore exactly where the user was.
+      */
+      if (
+        savedPosition
+      ) {
+
+        await restoreReadingPosition(
+
+          savedPosition
+
+        );
+      }
+
+
+      /*
+        Check version.json and display banner when needed.
+      */
+      await checkForUpdates();
+
+
+      return;
+    }
+
+
+    /*
+      ----------------------------------------------------------
+      FIRST VISIT
+      ----------------------------------------------------------
+    */
+    const starterLoaded =
+
+      await loadStarterForFirstTime();
+
+
+    renderAll();
+
+
+    if (
+      starterLoaded
+    ) {
+
+      showToast(
+
+        "Starter bundle loaded."
+
+      );
+
+    } else if (
+      location.protocol ===
+      "file:"
+    ) {
+
+      els.emptyState
+        .classList
+        .remove(
+          "hidden"
+        );
+
+
+      els.emptyState
+        .innerHTML = `
+          <i class="fa-regular fa-folder-open mb-4 text-4xl opacity-60"></i>
+
+          <h2 class="mb-1 font-semibold">
+            Starter files cannot load from file://
+          </h2>
+
+          <p class="text-sm">
+
+            Open this app through GitHub Pages, Live Server, or a local HTTP server.
+
+            You can still use Configuration to manually choose JSON files.
+
+          </p>
+        `;
+
+    } else {
+
+      els.emptyState
+        .classList
+        .remove(
+          "hidden"
+        );
+
+
+      els.emptyState
+        .innerHTML = `
+          <i class="fa-solid fa-triangle-exclamation mb-4 text-4xl text-amber-500"></i>
+
+          <h2 class="mb-1 font-semibold">
+            Starter files could not be loaded
+          </h2>
+
+          <p class="text-sm">
+
+            Check that the starter JSON files exist beside index.html and that their names match STARTER_FILES.
+
+          </p>
+        `;
+    }
+
+
+    await checkForUpdates();
+  }
+
+
+  /* ==========================================================
+     EVENTS
+     ========================================================== */
+
+  els.configToggleBtn
+    .addEventListener(
+      "click",
+      () => {
+
+        const isCollapsed =
+
+          els.configPanel
+            .classList
+            .contains(
+              "hidden"
+            );
+
+
+        setConfigCollapsed(
+          !isCollapsed
+        );
+      }
+    );
+
+
+  els.loadJsonBtn
+    .addEventListener(
+      "click",
+      () => {
+
+        els.jsonFileInput
+          .click();
+
+      }
+    );
+
+
+  els.jsonFileInput
+    .addEventListener(
+      "change",
+      event => {
+
+        handleImportedFiles(
+          event.target.files
+        );
+
+
+        event.target.value =
+          "";
+      }
+    );
+
+
+  els.exportJsonBtn
+    .addEventListener(
+      "click",
+      exportCurrentBank
+    );
+
+
+  /*
+    Manual content refresh remains available in Configuration.
+
+    This is intentional and is not seamless.
+  */
+  els.refreshStarterBtn
+    .addEventListener(
+      "click",
+      () => {
+
+        saveReadingPositionNow();
+
+        refreshStarterBundle();
+
+      }
+    );
+
+
+  els.clearAllBtn
+    .addEventListener(
+      "click",
+      clearAllSources
+    );
+
+
+  els.restoreDefaultBtn
+    .addEventListener(
+      "click",
+      restoreDefaultState
+    );
+
+
+  els.searchInput
+    .addEventListener(
+      "input",
+      event => {
+
+        searchTerm =
+          event.target.value;
+
+
+        visibleCount =
+          PAGE_SIZE;
+
+
+        renderQuestions();
+
+      }
+    );
+
+
+  els.statusFilter
+    .addEventListener(
+      "change",
+      event => {
+
+        statusFilterValue =
+          event.target.value;
+
+
+        visibleCount =
+          PAGE_SIZE;
+
+
+        renderQuestions();
+
+      }
+    );
+
+
+  els.themeToggle
+    .addEventListener(
+      "click",
+      () => {
+
+        document.documentElement
+          .classList
+          .toggle(
+            "dark"
+          );
+
+
+        localStorage.setItem(
+
+          STORAGE.theme,
+
+          document.documentElement
+            .classList
+            .contains(
+              "dark"
+            )
+
+            ? "dark"
+
+            : "light"
+        );
+      }
+    );
+
+
+  els.updateNowBtn
+    .addEventListener(
+      "click",
+      updateAppNow
+    );
+
+
+  els.dismissUpdateBtn
+    .addEventListener(
+      "click",
+      () => {
+
+        const updateKey =
+
+          els.updateBanner
+            .dataset
+            .updateKey;
+
+
+        if (
+          updateKey
+        ) {
+
+          localStorage.setItem(
+
+            STORAGE.dismissedUpdateVersion,
+
+            updateKey
+
+          );
+        }
+
+
+        els.updateBanner
+          .classList
+          .add(
+            "hidden"
+          );
+      }
+    );
+
+
+  els.drawerBtn
+    .addEventListener(
+      "click",
+      openDrawer
+    );
+
+
+  els.closeDrawer
+    .addEventListener(
+      "click",
+      closeDrawer
+    );
+
+
+  els.drawerOverlay
+    .addEventListener(
+      "click",
+      closeDrawer
+    );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key ===
+        "Escape"
+      ) {
+
+        closeDrawer();
+
+      }
+    }
+  );
+
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if (
+        window.innerWidth >=
+        1024
+      ) {
+
+        closeDrawer();
+
+      }
+    }
+  );
+
+
+  /*
+    JSON drag/drop.
+  */
+  window.addEventListener(
+    "dragover",
+    event => {
+
+      event.preventDefault();
+
+    }
+  );
+
+
+  window.addEventListener(
+    "drop",
+    event => {
+
+      event.preventDefault();
+
+
+      if (
+        event.dataTransfer.files &&
+        event.dataTransfer.files.length
+      ) {
+
+        handleImportedFiles(
+
+          event.dataTransfer.files
+
+        );
+      }
+    }
+  );
+
+
+  /*
+    Persist reading position while scrolling.
+  */
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      /*
+        Back to top button.
+      */
+      if (
+        window.scrollY >
+        500
+      ) {
+
+        els.toTop
+          .classList
+          .remove(
+            "hidden"
+          );
+
+
+        els.toTop
+          .classList
+          .add(
+            "flex"
+          );
+
+      } else {
+
+        els.toTop
+          .classList
+          .add(
+            "hidden"
+          );
+
+
+        els.toTop
+          .classList
+          .remove(
+            "flex"
+          );
+      }
+
+
+      /*
+        Save current question.
+      */
+      scheduleReadingPositionSave();
+
+    },
+
+    {
+      passive: true
+    }
+  );
+
+
+  /*
+    Save immediately before tab/page is hidden.
+
+    visibilitychange is useful on mobile where
+    beforeunload is not always reliable.
+  */
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+
+      if (
+        document.visibilityState ===
+        "hidden"
+      ) {
+
+        saveReadingPositionNow();
+
+      }
+    }
+  );
+
+
+  window.addEventListener(
+    "pagehide",
+    () => {
+
+      saveReadingPositionNow();
+
+    }
+  );
+
+
+  els.toTop
+    .addEventListener(
+      "click",
+      () => {
+
+        /*
+          Explicitly navigating to top should become the new
+          continuation location.
+        */
+        window.scrollTo({
+
+          top: 0,
+
+          behavior:
+            "smooth"
+
+        });
+
+
+        setTimeout(
+          saveReadingPositionNow,
+          700
+        );
+      }
+    );
+
+
+  /* ==========================================================
+     START
+     ========================================================== */
+
+  initializeApp();
+
+})();
+</script>
+
+</body>
 </html>
