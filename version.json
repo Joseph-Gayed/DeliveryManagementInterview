@@ -1,5 +1,5 @@
 {
-  "appVersion": "2026-08-29.1",
+  "appVersion": "2026-08-29.2",
   "starterBundleVersion": "2026-08-29.1",
-  "message": "Design Enhancements."
+  "message": "Added update deployment verification and continue-from-last-question support."
 }
