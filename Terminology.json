@@ -1,0 +1,408 @@
+[
+  {
+    "id": "Q251",
+    "q": "What is the difference between a Finish-to-Start (FS) and a Start-to-Start (SS) task dependency?",
+    "a": "A Finish-to-Start (FS) dependency means Task B cannot begin until Task A is completed. A Start-to-Start (SS) dependency means Task B cannot begin until Task A has started; they can then run in parallel. Use FS for strictly sequential workflows where outputs of the first task are required for the second. Use SS when you want to fast-track a schedule by overlapping tasks that can run concurrently once initialized. Example of FS: You cannot begin testing code (Task B) until development is finished (Task A). Example of SS: You can start writing user documentation (Task B) as soon as development begins (Task A), rather than waiting for development to completely wrap up.",
+    "sectionTitle": "Terminology",
+    "cat": "Task Dependencies"
+  },
+  {
+    "id": "Q252",
+    "q": "What is the difference between a Finish-to-Finish (FF) and a Start-to-Finish (SF) task dependency?",
+    "a": "A Finish-to-Finish (FF) dependency means Task B cannot finish until Task A finishes; they can end together but Task B's completion is gated by Task A. A Start-to-Finish (SF) dependency is a rare logical relationship where Task B cannot finish until Task A starts. Use FF when tasks must wrap up in coordination. Use SF primarily for handovers, legacy system switchovers, or shift coverage. Example of FF: You cannot finish writing the final test report (Task B) until the execution of all system tests is finished (Task A). Example of SF: A legacy payment gateway (Task B) cannot be fully decommissioned and shut down until the new payment gateway goes live and starts processing transactions (Task A).",
+    "sectionTitle": "Terminology",
+    "cat": "Task Dependencies"
+  },
+  {
+    "id": "Q253",
+    "q": "What is the difference between a Lead and a Lag in task scheduling?",
+    "a": "A Lead is an acceleration of the successor task, allowing it to start before the predecessor task finishes (represented as negative lag). A Lag is a directed delay inserted between two dependent tasks, forcing a waiting period even if resources are ready. Use Lead to shorten project timelines when tasks can overlap safely. Use Lag to represent non-work wait times dictated by physical, technical, or environmental constraints. Example of Lead: In a Finish-to-Start setup, if code deployment takes 5 days, you might start preparing test cases 2 days before deployment finishes (FS - 2 days). Example of Lag: After deploying a major database migration (Task A), you might enforce a 24-hour lag (FS + 24 hours) to monitor system stability before executing the next deployment phase (Task B).",
+    "sectionTitle": "Terminology",
+    "cat": "Task Dependencies"
+  },
+  {
+    "id": "Q254",
+    "q": "What is the Critical Path Method (CPM) and why is it essential for delivery managers?",
+    "a": "The Critical Path Method (CPM) is a scheduling technique that identifies the longest sequence of dependent tasks from project start to finish. The total duration of this path determines the shortest possible time to complete the project. Any delay to a task on the critical path directly delays the project completion date. It is essential because it tells a Delivery Manager exactly where to focus risk-management, resource-allocation, and monitoring efforts to protect the target go-live date. Example: If a delivery consists of design (3 days), database setup (2 days), API coding (5 days), and QA (4 days) sequentially, the critical path is 14 days. If frontend design is happening in parallel and takes only 2 days, it is not on the critical path because it has flexibility.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q255",
+    "q": "What is the difference between Total Float and Free Float in time management?",
+    "a": "Total Float (also called Total Slack) is the amount of time a task can be delayed from its early start date without delaying the overall project finish date. Free Float is the amount of time a task can be delayed without delaying the early start date of its immediate successor task. Use Total Float to understand overall project scheduling flexibility. Use Free Float to manage immediate, localized handoffs between teams. Example: A non-critical feature integration task has 10 days of Total Float and 3 days of Free Float. If you delay it by 2 days, the immediate downstream developer's start date is unaffected. If you delay it by 5 days, the downstream developer's task is delayed by 2 days, but the overall project target date remains safe.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q256",
+    "q": "What is the difference between Crashing and Fast-Tracking as schedule compression techniques?",
+    "a": "Crashing accelerates a schedule by adding resources (such as bringing in more engineers or paying for overtime) to critical path tasks, which increases cost. Fast-Tracking overlaps sequential critical path tasks so they are performed in parallel, which increases risk, rework, and communication overhead. Use Crashing when budget is available but risk tolerance is low. Use Fast-Tracking when budget is fixed but the team can manage the risk of parallel development and potential rework. Example of Crashing: Adding two senior engineers to the API development task to finish it in 3 days instead of 5. Example of Fast-Tracking: Starting the frontend integration based on draft API specifications before the backend API coding is fully complete.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q257",
+    "q": "What is the difference between Resource Leveling and Resource Smoothing?",
+    "a": "Resource Leveling adjusts start and finish dates of tasks based on resource constraints, resolving overallocation by delaying tasks. This technique often extends the project's critical path and overall duration. Resource Smoothing delays only non-critical tasks within their float limits to optimize resource usage. It does not extend the project completion date or alter the critical path. Use Resource Leveling when you have a hard limit on resource capacity. Use Resource Smoothing when your deadline is fixed but you want to avoid resource utilization spikes and dips. Example of Leveling: Delaying a frontend task because the single available frontend developer is already assigned to a critical path task. Example of Smoothing: Rescheduling a non-critical technical-debt cleanup task to a week when the database administrator has lower support utilization.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q258",
+    "q": "What is the difference between Rolling Wave Planning and Progressive Elaboration?",
+    "a": "Progressive Elaboration is the continuous process of detailing and refining plans as more information and concrete requirements become available throughout the project lifecycle. Rolling Wave Planning is a specific iterative planning technique under progressive elaboration where near-term work is planned in detail, while work far in the future is left at a high level. Use Progressive Elaboration as a general mindset of continuous refinement. Use Rolling Wave Planning to avoid wasting effort detailing distant requirements that are highly likely to change. Example of Rolling Wave Planning: Planning Sprint 1 and 2 tasks down to daily subtasks, while representing Sprint 5 and 6 work as broad, estimated epics.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q259",
+    "q": "What is the difference between a Milestone and a Deliverable?",
+    "a": "A Milestone is a zero-duration marker that represents a significant event, decision, or stage completion in a project. A Deliverable is a tangible, measurable, and verifiable physical or digital product, service, or result produced to complete a phase or project. Use Milestones to track progress at a high level for stakeholders. Use Deliverables to define the concrete outcomes the team must build. Example of a Milestone: 'Sign-off on API Architecture' or 'UAT Completed' (zero days of active work; it marks an achievement). Example of a Deliverable: 'The compiled API codebase' or 'The UAT test summary document'.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q260",
+    "q": "What is the difference between a Gantt Chart and a Project Network Diagram?",
+    "a": "A Gantt Chart is a bar-chart visualization of a project schedule showing tasks, durations, start/end dates, and overlaps plotted against a timeline. A Project Network Diagram (such as a PERT chart) is a schematic flow diagram showing the logical, sequential relationships and dependencies between tasks, independent of a calendar timeline. Use Gantt Charts for presenting schedules, resource allocations, and progress updates to stakeholders. Use Network Diagrams to calculate the critical path, analyze complex dependencies, and identify loop paths. Example of Gantt: A horizontal timeline showing development starting Jan 1 and ending Jan 15, followed by QA. Example of Network Diagram: A series of linked boxes showing 'Task A -> Task B' with early/late start calculations.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q261",
+    "q": "What is the difference between Parkinson's Law and Student Syndrome in time management?",
+    "a": "Parkinson's Law states that work expands to fill the time available for its completion; if a developer is given 5 days for a 2-day task, they will often spend all 5 days on it. Student Syndrome describes the human tendency to delay active work on a task until the last possible moment before a deadline, eliminating any safety buffer. Use awareness of both to design sensible sprint commitments, avoid excessive safety margins inside individual tasks, and focus instead on team-level buffers. Example of Parkinson's: A developer refactoring a simple component for a week because no other tasks are scheduled. Example of Student Syndrome: An engineer starting a 3-day research spike on the afternoon of day 4 of a 5-day sprint.",
+    "sectionTitle": "Terminology",
+    "cat": "Time Management"
+  },
+  {
+    "id": "Q262",
+    "q": "What is the difference between Analogous Estimation and Parametric Estimation?",
+    "a": "Analogous Estimation uses the actual cost or duration of previous, similar projects as the basis for estimating the current project (fast, low cost, but less accurate). Parametric Estimation uses a statistical relationship between historical data and other variables (parameters) to calculate an estimate (highly accurate but requires quality data). Use Analogous when limited detail is known early in a project. Use Parametric when the work is highly repeatable and quantifiable. Example of Analogous: Estimating a new mobile app will take 4 months because a similar app built last year took 4 months. Example of Parametric: Estimating database schema migration based on a rate of $150 per table, resulting in $1,500 for a 10-table migration.",
+    "sectionTitle": "Terminology",
+    "cat": "Estimation"
+  },
+  {
+    "id": "Q263",
+    "q": "What is the difference between Three-Point Estimation and the PERT technique?",
+    "a": "Three-Point Estimation calculates an expected duration using three values: Optimistic (O), Most Likely (M), and Pessimistic (P), typically calculated using a simple average: (O + M + P) / 3. PERT (Program Evaluation and Review Technique) uses a weighted average that places heavy emphasis on the 'Most Likely' scenario, calculated as: (O + 4M + P) / 6, and incorporates standard deviation calculations to determine probability. Use Three-Point for a quick, balanced view of uncertainty. Use PERT when you need to perform quantitative risk analysis and provide statistical confidence levels (e.g., 'we have a 95% probability of hitting this date'). Example: If O=3, M=5, P=13, Three-point expected value is 7 days. PERT expected value is 6 days.",
+    "sectionTitle": "Terminology",
+    "cat": "Estimation"
+  },
+  {
+    "id": "Q264",
+    "q": "What is the difference between Top-Down and Bottom-Up Estimation?",
+    "a": "Top-Down Estimation takes a high-level view, often based on historical data or expert judgment, to estimate the whole project before breaking it down (e.g., 'Similar apps cost $100k, so budget that'). It is fast but less accurate. Bottom-Up Estimation involves estimating the cost or duration of individual lowest-level tasks (work packages) and rolling them up into a total project estimate. It is highly accurate but very time-consuming.",
+    "sectionTitle": "Terminology",
+    "cat": "Estimation"
+  },
+  {
+    "id": "Q265",
+    "q": "What is the difference between an Estimate, a Forecast, a Target, and a Commitment?",
+    "a": "An Estimate is a calculated approximation of time or cost based on known information (e.g., 'It will take 4-6 weeks'). A Forecast is a prediction of future project status based on current performance (e.g., 'Based on our current velocity, we will finish by May'). A Target is a desired business goal (e.g., 'We want this launched before Q3'). A Commitment is a promise to deliver specific scope by a specific date. A common failure in delivery is treating a rough estimate as a hard commitment.",
+    "sectionTitle": "Terminology",
+    "cat": "Estimation"
+  },
+  {
+    "id": "Q266",
+    "q": "What is the difference between a Project, a Program, and a Portfolio?",
+    "a": "A Project is a temporary endeavor undertaken to create a unique product, service, or result, with defined constraints. A Program is a group of related, coordinated projects managed together to obtain benefits and control not available from managing them individually. A Portfolio is a collection of projects, programs, sub-portfolios, and operational activities managed as a group to achieve strategic business objectives. Use Project level for execution. Use Program level for cross-project dependency management. Use Portfolio level for strategic investment and prioritization. Example of Project: Migrating a single database to the cloud. Example of Program: Coordinating database migration, application rewriting, and security tooling upgrades. Example of Portfolio: Managing the company's entire $50M digital-transformation budget across all divisions.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q267",
+    "q": "What is the difference between a Project Manager, a Delivery Manager, and a Program Manager?",
+    "a": "A Project Manager focuses on managing scope, timeline, budget, and resources to deliver a defined output. A Delivery Manager focuses on removing impediments, enabling team execution, optimizing process flow, and maintaining high engineering standards to deliver continuous value. A Program Manager operates at a higher level, coordinating dependencies, alignment, and business-benefit realization across multiple related projects. Use Project Managers for tightly bounded, fixed-constraint initiatives. Use Delivery Managers for empowering continuous-delivery agile teams. Use Program Managers for multi-initiative strategic alignments. Example of PM: Tracking task-completion dates against a Gantt chart. Example of DM: Running retrospectives to reduce cycle time and optimize code-review pipelines. Example of Program Manager: Aligning release schedules between marketing, engineering, and legal.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q268",
+    "q": "What is the difference between a Project Manager, a Delivery Manager, and a Product Manager?",
+    "a": "A Product Manager decides *what* to build and *why*, focusing on market needs, user value, and ROI (e.g., 'We need a chatbot to reduce support costs'). A Project Manager focuses on *how* and *when* it will be delivered within fixed scope, time, and budget constraints (e.g., managing the schedule, risks, and budget for the chatbot build). A Delivery Manager focuses on team enablement, process efficiency, and removing blockers in agile environments, often blending agile coaching with delivery accountability. Use a Product Manager for strategic direction, a Project Manager for structured governance, and a Delivery Manager for agile execution and flow.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q269",
+    "q": "What is the difference between a Product Owner (PO) and a Product Manager (PM)?",
+    "a": "A Product Manager is strategically focused, managing the overall product vision, market fit, commercial viability, pricing, and long-term roadmap. A Product Owner is tactically focused within the team, owning the product backlog, writing user stories, clarifying acceptance criteria, and collaborating daily with developers. Use Product Manager to discover what to build. Use Product Owner to execute how to build it sprint by sprint. (In many organizations, these roles are combined, but the accountability split remains: PM faces outward to the market/customers; PO faces inward to the delivery team). Example of PM: Conducting market research to see if the company should build an AI chatbot. Example of PO: Deciding which user story to prioritize in the upcoming sprint planning.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q270",
+    "q": "What is the difference between a Project Sponsor and a Steering Committee?",
+    "a": "A Project Sponsor is a single executive or business owner who champions the project, secures funding, owns the business case, and holds ultimate accountability for project success. A Steering Committee is a governing body of key stakeholders, executives, and department representatives that provides strategic direction, cross-functional alignment, and approvals for major scope or budget changes. Use Sponsor for fast-escalated decisions and budget ownership. Use Steering Committee for enterprise alignment and shared governance. Example of Sponsor: The VP of Finance funding the implementation of a new billing system. Example of Steering Committee: A monthly forum of security, finance, engineering, and operations leaders evaluating the billing system's progress.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q271",
+    "q": "What is the difference between a Business Case, a Project Charter, and a Statement of Work (SOW)?",
+    "a": "A Business Case justifies the investment by comparing costs, benefits, and risks (e.g., an ROI analysis for building a new CRM). A Project Charter formally authorizes the project, names the Project Manager, and outlines high-level scope and objectives. A Statement of Work (SOW) is a formal, often legally binding document defining specific activities, deliverables, and timelines expected from a vendor or external team. Use a Business Case to get funding, a Charter to start internal work, and an SOW to engage external vendors.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q272",
+    "q": "What is the difference between an Output, an Outcome, and Business Value?",
+    "a": "An Output is the tangible or intangible artifact produced by a team (e.g., software code or a feature). An Outcome is the observable change in user behavior or operational capability resulting from those outputs. Business Value is the realized commercial or strategic benefit derived from those outcomes (e.g., increased revenue or reduced operational cost). Use Outputs to track execution. Use Outcomes to measure user adoption and problem resolution. Use Business Value to justify investment and return. Example of Output: Releasing a new self-service billing portal. Example of Outcome: 40% of customers shifting from phone-based payments to self-service. Example of Business Value: Saving $10,000 monthly in customer support operations costs.",
+    "sectionTitle": "Terminology",
+    "cat": "Governance & Roles"
+  },
+  {
+    "id": "Q273",
+    "q": "What is the difference between Scope Creep and Gold Plating?",
+    "a": "Scope Creep is the unauthorized, uncontrolled expansion of project scope without adjustments to time, cost, or resources, usually driven by stakeholders requesting 'minor' extras. Gold Plating occurs when developers or delivery teams add extra functionality, features, or quality refinements that were not requested or approved in the requirements, usually believing it adds value. Use change-control processes to block Scope Creep. Use strict peer reviews and Definition of Done standards to prevent Gold Plating. Example of Scope Creep: A stakeholder asking a developer during a stand-up to 'just add a quick CSV export button' to a dashboard. Example of Gold Plating: An engineer spending three days building a custom animation effect that was never specified in the UI designs.",
+    "sectionTitle": "Terminology",
+    "cat": "Scope Management"
+  },
+  {
+    "id": "Q274",
+    "q": "What is the difference between a Change Request and Change Control?",
+    "a": "A Change Request is a formal proposal to modify any document, deliverable, or baseline (scope, schedule, or cost) within a project. Change Control is the structured process of identifying, documenting, evaluating, approving, or rejecting those proposed modifications through a formal review body. Use Change Requests to capture modifications. Use Change Control to ensure the impact on cost, time, and quality is fully analyzed before any change is implemented. Example of Change Request: A written form submitted by product management to add multi-currency support to a payment module. Example of Change Control: The process where the Delivery Manager, Tech Lead, and Sponsor review the multi-currency request, estimate its 2-week schedule impact, and formally sign off.",
+    "sectionTitle": "Terminology",
+    "cat": "Scope Management"
+  },
+  {
+    "id": "Q275",
+    "q": "What is the difference between Functional and Non-Functional Requirements (NFRs)?",
+    "a": "Functional Requirements define what the system must do (features, capabilities, and specific behaviors). Non-Functional Requirements (NFRs) define how the system must perform those behaviors (performance, security, usability, reliability, scalability, and compliance constraints). Use Functional requirements to guide feature development. Use Non-Functional requirements to guide architecture, infrastructure, and performance testing. Example of Functional: 'A user must be able to reset their password via an email link.' Example of Non-Functional: 'The password reset email must be sent within 2 seconds of the request, and the reset page must load in under 1 second under a 10,000-user concurrent load.'",
+    "sectionTitle": "Terminology",
+    "cat": "Scope Management"
+  },
+  {
+    "id": "Q276",
+    "q": "What is the difference between an Assumption and a Constraint?",
+    "a": "An Assumption is a factor in planning that is considered to be true, real, or certain without concrete proof. A Constraint is an absolute limit, restriction, or boundary placed on the project that must be accommodated. Use Assumptions to plan in the face of uncertainty, making sure to track and validate them periodically. Use Constraints as fixed parameters that shape your technical and schedule design. Example of Assumption: 'We assume the client's internal IT team will provide api credentials within 3 days of project kick-off.' Example of Constraint: 'The project budget is capped at $100k, and the system must comply with PCI-DSS security standards.'",
+    "sectionTitle": "Terminology",
+    "cat": "Scope Management"
+  },
+  {
+    "id": "Q277",
+    "q": "What is the difference between a Risk, an Issue, a Dependency, and a Blocker?",
+    "a": "A Risk is a future, uncertain event that may or may not occur, with a positive or negative impact on project objectives (it has a probability < 100%). An Issue is a present, realized problem that has already occurred and is actively impacting the project (probability = 100%). A Dependency is a logical connection where one task or team requires an output from another to proceed. A Blocker is an active impediment currently halting work on a specific task. Use Risk management to prevent problems. Use Issue management to resolve realized problems. Use Dependency mapping to sequence plans. Use Blocker removal to maintain daily developer flow. Example of Risk: The risk that a critical API provider might experience downtime during our testing phase. Example of Issue: The API provider is currently down, stopping our team from testing. Example of Dependency: Our frontend team needs the API contract before they can build mock screens. Example of Blocker: A developer cannot commit code because the CI build server disk space is full.",
+    "sectionTitle": "Terminology",
+    "cat": "Risk Management"
+  },
+  {
+    "id": "Q278",
+    "q": "What is the difference between Risk Appetite, Risk Tolerance, and Risk Threshold?",
+    "a": "Risk Appetite is the broad, high-level amount of risk an organization is willing to accept in pursuit of its strategic objectives. Risk Tolerance is the measurable degree of variance around a specific project objective that stakeholders are willing to accept. Risk Threshold is the specific, quantifiable level of uncertainty at which an organization will actively trigger a risk response or escalation. Use Risk Appetite to align portfolio decisions. Use Risk Tolerance to set project boundaries. Use Risk Thresholds to automate escalation pathways. Example of Risk Appetite: A startup willing to use cutting-edge, unstable open-source technologies to move fast. Example of Risk Tolerance: A project sponsor accepting a schedule variance of up to 2 weeks. Example of Risk Threshold: A rule that any budget cost variance exceeding 10% automatically triggers a formal review by the Steering Committee.",
+    "sectionTitle": "Terminology",
+    "cat": "Risk Management"
+  },
+  {
+    "id": "Q279",
+    "q": "What is the difference between Risk Mitigation, Risk Contingency, and a Workaround?",
+    "a": "Risk Mitigation is a proactive action taken before a risk occurs to reduce its probability and/or impact. Risk Contingency is a pre-planned course of action to be executed only if a specific risk event occurs, backed by reserved resources. A Workaround is an unplanned, ad-hoc response devised to deal with an unexpected issue that had no prior contingency plan. Use Mitigation for high-impact, high-probability risks. Use Contingency to manage accepted risks efficiently. Use Workarounds as emergency responses to unforeseen crises. Example of Mitigation: Running automated vulnerability scans during every build to prevent security issues. Example of Contingency: Setting aside a $10k backup budget to hire a contract developer if a core team member resigns. Example of Workaround: Manually running a database script to restore billing access after an unpredicted database corruption occurred on a Sunday.",
+    "sectionTitle": "Terminology",
+    "cat": "Risk Management"
+  },
+  {
+    "id": "Q280",
+    "q": "What is the difference between a RAID Log and a Risk Register?",
+    "a": "A Risk Register is a specialized, detailed document focused entirely on identifying, scoring (probability/impact), owning, and monitoring risks throughout a project. A RAID Log is a broader, everyday execution tool used to capture and track Risks, Assumptions, Issues, and Dependencies in a centralized view. Use a Risk Register for formal project governance, audits, and deep risk modeling. Use a RAID Log as a dynamic dashboard for the delivery team's weekly coordination. Example of Risk Register: A formal registry detailing 40 technical risks, their calculated monetary exposure, and mitigation budgets. Example of RAID Log: A shared spreadsheet used during status meetings to quickly check the status of 3 active issues, 2 key dependencies, and 5 upcoming risks.",
+    "sectionTitle": "Terminology",
+    "cat": "Risk Management"
+  },
+  {
+    "id": "Q281",
+    "q": "What is the difference between CAPEX and OPEX in software delivery?",
+    "a": "CAPEX (Capital Expenditure) refers to funds used by a company to acquire, upgrade, and write off major assets (such as custom software development, patents, or hardware purchases), which are capitalized and depreciated over time. OPEX (Operational Expenditure) refers to the day-to-day expenses required to run the business (such as cloud hosting fees, software-as-a-service subscriptions, or ongoing maintenance labor), which are expensed immediately in the current tax year. Use CAPEX rules to capitalize new product development labor. Use OPEX rules to track infrastructure and support costs. Example of CAPEX: The engineering labor cost spent writing code for a brand-new proprietary software product. Example of OPEX: The monthly AWS hosting bill for running that product in production.",
+    "sectionTitle": "Terminology",
+    "cat": "Finance"
+  },
+  {
+    "id": "Q282",
+    "q": "What is the difference between Resource Allocation and Resource Contention?",
+    "a": "Resource Allocation is the planned assignment of available people, skills, or equipment to specific tasks in a schedule. Resource Contention occurs when multiple project tasks, teams, or active projects demand the same scarce resource at the same time, leading to scheduling conflicts and delays. Use Resource Allocation to plan capacity. Use Resource Contention analysis to identify single points of failure and bottleneck skills. Example of Allocation: Assigning Sarah (UI Designer) to build mockups for Team A for 2 weeks. Example of Contention: Both Team A and Team B requiring the company's single Database Administrator to execute migrations on the same Tuesday night.",
+    "sectionTitle": "Terminology",
+    "cat": "Resource Management"
+  },
+  {
+    "id": "Q283",
+    "q": "What is the difference between 'Responsible' and 'Accountable' in a RACI Matrix?",
+    "a": "Responsible (R) refers to the person who actually performs the active work to complete the task. Accountable (A) refers to the single individual who has ultimate ownership, decision authority, and veto power over the quality and success of the task (only one person can be Accountable for any task). Use 'Responsible' to distribute workload. Use 'Accountable' to clarify decision-making and ownership boundaries. Example of RACI: A software engineer is Responsible (R) for writing the database migration script. The Tech Lead is Accountable (A) for signing off and ensuring the database does not corrupt during execution.",
+    "sectionTitle": "Terminology",
+    "cat": "Resource Management"
+  },
+  {
+    "id": "Q284",
+    "q": "What is the difference between Capacity, Utilization, and Availability?",
+    "a": "Capacity is the total potential work a team or resource can do in a given timeframe (e.g., 'The team has 200 hours this sprint'). Availability is the portion of that capacity actually present, after subtracting holidays, meetings, and training (e.g., 'Only 140 hours are available'). Utilization is the percentage of that available time actually spent on productive project work (e.g., 'The team is 85% utilized'). Aiming for 100% utilization creates bottlenecks and slow delivery; healthy teams leave buffer time.",
+    "sectionTitle": "Terminology",
+    "cat": "Resource Management"
+  },
+  {
+    "id": "Q285",
+    "q": "What is a Work Breakdown Structure (WBS)?",
+    "a": "A WBS is a hierarchical decomposition of the total scope of work to be carried out by the project team. It breaks down the final deliverable into smaller, more manageable components called work packages. For example, building a website might be broken down into Design, Backend, Frontend, and Deployment, with sub-tasks under each. It ensures no scope is missed and makes estimation easier.",
+    "sectionTitle": "Terminology",
+    "cat": "Planning"
+  },
+  {
+    "id": "Q286",
+    "q": "What is the difference between a Roadmap, a Project Plan, and a Release Plan?",
+    "a": "A Roadmap is a strategic, high-level visual summary of the vision and direction of a product over time (e.g., quarters or years), focusing on themes and outcomes. A Project Plan is a detailed, tactical schedule showing specific tasks, dependencies, resources, and dates required to deliver a project. A Release Plan is a mid-level agile plan showing which features or backlog items will be delivered in upcoming iterations or specific deployment windows.",
+    "sectionTitle": "Terminology",
+    "cat": "Planning"
+  },
+  {
+    "id": "Q287",
+    "q": "What is the difference between a Release, a Deployment, and a Launch?",
+    "a": "Deployment is the technical process of moving code or artifacts into a specific environment (e.g., moving code to production servers). Release is the business decision to make that deployed functionality visible and accessible to customers (often decoupled from deployment using feature flags). Launch is the commercial marketing and public relations event surrounding the release. Use Deployment as an engineering action. Use Release as a product management decision. Use Launch as a marketing campaign. Example of Deployment: Deploying compiled code to production behind a disabled feature flag on a Tuesday night. Example of Release: Flipping the feature flag to 'on' for 10% of users on Wednesday morning. Example of Launch: Issuing a press release and sending marketing emails to all customers on Friday.",
+    "sectionTitle": "Terminology",
+    "cat": "Release Management"
+  },
+  {
+    "id": "Q288",
+    "q": "What is the difference between a Cutover Plan and Hypercare?",
+    "a": "A Cutover Plan is a highly detailed, step-by-step sequential checklist of technical and operational activities executed during the deployment window to transition from the old system to the new one. Hypercare is the defined period of intense, elevated support, monitoring, and rapid defect resolution immediately following a production go-live to ensure system stability and user adoption. Use Cutover Plan for the hours surrounding go-live. Use Hypercare for the days or weeks immediately following go-live. Example of Cutover Plan: A minute-by-minute Google Sheet detailing database backup, schema update, code deploy, DNS switch, and sanity checks on launch night. Example of Hypercare: Assigning a dedicated squad to resolve customer login issues within 1 hour during the first 2 weeks after launching a new user portal.",
+    "sectionTitle": "Terminology",
+    "cat": "Release Management"
+  },
+  {
+    "id": "Q289",
+    "q": "What is the difference between a Rollback and a Roll-Forward recovery strategy?",
+    "a": "A Rollback restores the production environment to its last-known stable state by reversing the deployment (e.g., redeploying the previous version of the code and database schema). A Roll-Forward accepts the current deployment state and rapidly creates, tests, and deploys a corrective hotfix to resolve the issue in production. Use Rollback as the default response when speed of recovery is critical and the changes are easily reversible. Use Roll-Forward when a rollback is high risk, such as when destructive, irreversible database migrations have occurred. Example of Rollback: Reverting production container images from v2.0 back to v1.9 within 3 minutes of detecting checkout failures. Example of Roll-Forward: Deploying a 1-line syntax hotfix (v2.1) to fix an API error because reverting would corrupt 5,000 new transaction records.",
+    "sectionTitle": "Terminology",
+    "cat": "Release Management"
+  },
+  {
+    "id": "Q290",
+    "q": "What is the difference between Business Readiness and Operational/Production Readiness?",
+    "a": "Business Readiness ensures the customers, users, and business stakeholders are prepared to adopt and use the new system (training, marketing, documentation, and processes are aligned). Operational/Production Readiness ensures the technical systems, infrastructure, support teams, and monitoring are prepared to host, support, and maintain the new system in production. Use Business Readiness to drive adoption and avoid user shock. Use Production Readiness to protect system stability and supportability. Example of Business Readiness: Training 50 internal call center agents on how to navigate the new customer CRM dashboard. Example of Production Readiness: Setting up Prometheus alerts, documenting on-call runbooks, and ensuring the database backup policy is configured.",
+    "sectionTitle": "Terminology",
+    "cat": "Release Management"
+  },
+  {
+    "id": "Q291",
+    "q": "What is the difference between a Defect, an Incident, and a Problem?",
+    "a": "A Defect is a flaw in the software code or design that causes it to deviate from its intended behavior (discovered during testing or in production). An Incident is an active disruption or reduction in the quality of an IT service in production (discovered via monitoring or user complaints). A Problem is the underlying, unknown root cause of one or more recurring incidents. Use Defect tracking to prioritize code fixes. Use Incident Management to restore service fast. Use Problem Management to investigate system root causes and prevent recurrence. Example of Defect: A bug where entering a special character in a form crashes the page. Example of Incident: Users are currently unable to check out because the payment API is returning 500 errors. Example of Problem: Investigating why the payment API sporadically returns 500 errors under memory load, leading to a long-term database connection-pooling fix.",
+    "sectionTitle": "Terminology",
+    "cat": "Operations"
+  },
+  {
+    "id": "Q292",
+    "q": "What is the difference between Severity and Priority in incident and defect management?",
+    "a": "Severity measures the technical or business impact of an issue on the system (how badly is the system broken?). Priority measures the urgency of resolving the issue (how quickly must we fix this?). While often aligned, high severity does not always equal high priority, and low severity can sometimes be high priority. Use Severity to understand operational risk. Use Priority to determine developer task sequencing. Example of High Severity / Low Priority: A bug that completely crashes the application, but only when using an obsolete, deprecated browser version that accounts for 0.01% of traffic. Example of Low Severity / High Priority: The company logo on the main public landing page is misspelled or broken; it doesn't impact system functionality, but it causes immediate brand damage.",
+    "sectionTitle": "Terminology",
+    "cat": "Operations"
+  },
+  {
+    "id": "Q293",
+    "q": "What is the difference between an SLA, an SLO, and an SLI?",
+    "a": "An SLI (Service Level Indicator) is the quantitative measure of service performance, such as latency or error rate. An SLO (Service Level Objective) is the target reliability goal for that indicator, agreed upon within the engineering and product team. An SLA (Service Level Agreement) is the formal, legal commitment made to external customers, specifying financial or service penalties if the SLO is missed. Use SLI to measure. Use SLO to target. Use SLA to define legal and commercial boundaries. Example of SLI: The current HTTP response latency is 150ms. Example of SLO: The API response latency must be under 200ms for 99.9% of requests over any 30-day window. Example of SLA: If API response latency exceeds 200ms for more than 0.1% of requests in a month, customers are entitled to a 10% billing credit.",
+    "sectionTitle": "Terminology",
+    "cat": "Operations"
+  },
+  {
+    "id": "Q294",
+    "q": "What is the difference between RTO (Recovery Time Objective) and RPO (Recovery Point Objective)?",
+    "a": "RTO (Recovery Time Objective) is the maximum acceptable duration of downtime before a system must be fully restored after a disaster. RPO (Recovery Point Objective) is the maximum acceptable age of data that can be lost from backup storage during a disaster (how much data are you willing to lose?). Use RTO to design failover speeds. Use RPO to design database backup frequencies. Example of RTO: A system with an RTO of 4 hours must be restored to operation within 4 hours of a critical outage. Example of RPO: A database with an RPO of 1 hour must perform incremental backups at least every hour; if a crash occurs, the team can lose at most 1 hour's worth of transactions.",
+    "sectionTitle": "Terminology",
+    "cat": "Operations"
+  },
+  {
+    "id": "Q295",
+    "q": "What is the difference between High Availability (HA) and Disaster Recovery (DR)?",
+    "a": "High Availability (HA) refers to system designs that ensure continuous operational performance and uptime, typically by routing around localized component failures within a single data center or region (automated, immediate failover). Disaster Recovery (DR) refers to the broad plans, processes, and infrastructure backups required to restore operations after a major, catastrophic event that takes out an entire data center or region. Use HA to handle routine hardware failures. Use DR to survive major geographic outages. Example of HA: Running an application across three AWS Availability Zones with a load balancer. Example of DR: Maintaining a cold standby replica of the entire system in a separate geographic region (e.g., US-East and US-West) with a process to switch traffic if the primary region goes dark.",
+    "sectionTitle": "Terminology",
+    "cat": "Operations"
+  },
+  {
+    "id": "Q296",
+    "q": "What is the difference between Availability, Reliability, and Resilience?",
+    "a": "Availability is the percentage of time a system is up and functioning (e.g., '99.9% uptime'). Reliability is the probability that the system performs its intended function without failure over a specific time period (e.g., 'Zero dropped transactions during Black Friday'). Resilience is the system's ability to withstand failures, adapt, and quickly recover when things go wrong (e.g., 'If a server dies, traffic automatically reroutes to another without user impact').",
+    "sectionTitle": "Terminology",
+    "cat": "Operations"
+  },
+  {
+    "id": "Q297",
+    "q": "What is the difference between Technical Debt and a Defect?",
+    "a": "Technical Debt refers to the implied future cost of additional rework caused by choosing an easy, fast solution now instead of using a better, more sustainable approach (the system still works, but it is hard to maintain). A Defect is a functional failure where the software behaves incorrectly and fails to meet its immediate requirements (the system is actively broken). Use technical-debt management to protect long-term delivery velocity. Use defect resolution to protect immediate product quality. Example of Technical Debt: Hardcoding a single currency rate to meet a tight launch deadline instead of building a multi-currency database lookup. Example of Defect: A bug where clicking 'pay' crashes the checkout page because of a null-pointer exception.",
+    "sectionTitle": "Terminology",
+    "cat": "Quality Assurance"
+  },
+  {
+    "id": "Q298",
+    "q": "What is the difference between the Definition of Done (DoD) and Acceptance Criteria (AC)?",
+    "a": "The Definition of Done (DoD) is a standardized, global checklist of quality and engineering requirements that must be met for every single work item before it can be considered complete (applies to all user stories). Acceptance Criteria (AC) are unique, feature-specific requirements that define the functional behavior a specific user story must exhibit to satisfy the customer's need. Use DoD to maintain consistent software quality and release standards. Use AC to verify correct functional implementation of individual requirements. Example of DoD: Code must be peer-reviewed, pass CI automated tests, have 80% test coverage, and be deployed to staging. Example of AC: 'The login button must turn red when invalid credentials are submitted, and a 'Forgot Password' link must appear.'",
+    "sectionTitle": "Terminology",
+    "cat": "Quality Assurance"
+  },
+  {
+    "id": "Q299",
+    "q": "What is the difference between Verification and Validation?",
+    "a": "Verification asks: 'Are we building the system right?' It checks if the software meets its specified technical requirements (static code analysis, unit tests, code reviews). Validation asks: 'Are we building the right system?' It checks if the completed software solves the real customer need and fits user expectations (UAT, usability testing, beta releases). Use Verification to ensure technical correctness. Use Validation to ensure product market fit and business value. Example of Verification: Running unit tests to confirm an interest-rate calculation function matches the mathematical formula in the specification. Example of Validation: Showing the beta billing portal to real accounting users to confirm they can easily pay their monthly invoices.",
+    "sectionTitle": "Terminology",
+    "cat": "Quality Assurance"
+  },
+  {
+    "id": "Q300",
+    "q": "What is the difference between Quality Assurance (QA) and Quality Control (QC)?",
+    "a": "Quality Assurance (QA) is a proactive, process-oriented discipline focused on designing processes, standards, and tools to prevent defects from being introduced in the first place (e.g., establishing CI pipelines, secure coding training, test-driven development). Quality Control (QC) is a reactive, product-oriented discipline focused on identifying defects in the actual built software (e.g., executing manual test cases, automated E2E tests, UAT). Use QA to build a stable, scalable development lifecycle. Use QC to catch bugs before code hits production. Example of QA: Automating code-quality gates that prevent developers from merging pull requests without passing unit tests. Example of QC: A tester running exploratory regression tests on a staging build before a release window.",
+    "sectionTitle": "Terminology",
+    "cat": "Quality Assurance"
+  },
+  {
+    "id": "Q301",
+    "q": "What is the difference between System Testing and User Acceptance Testing (UAT)?",
+    "a": "System Testing is executed by the engineering or QA team to validate that the completely integrated system functions correctly across technical boundaries, NFRs, and APIs. User Acceptance Testing (UAT) is executed by business users, clients, or domain experts to confirm that the software supports real-world business workflows and is ready to go to production. Use System Testing to find technical integration bugs. Use UAT to secure business sign-off before launch. Example of System Testing: Verifying that the backend API, frontend web portal, and payment gateway successfully exchange JSON payloads under load. Example of UAT: A real-world billing manager logging in to process weekly customer invoices, ensuring the UI flow is intuitive and accurate.",
+    "sectionTitle": "Terminology",
+    "cat": "Quality Assurance"
+  },
+  {
+    "id": "Q302",
+    "q": "What is the difference between Regression Testing and Smoke Testing?",
+    "a": "Regression Testing is a comprehensive test suite executed after changes are made to ensure that existing, unmodified functionality has not been broken. Smoke Testing is a quick, high-level subset of tests run immediately after a deployment to verify that the application's most critical paths are working and the environment is stable enough for deeper testing. Use Regression Testing to protect quality after code modifications. Use Smoke Testing as a fast sanity check during environments deployments. Example of Regression Testing: Running a 400-test automated suite covering all modules before a bi-weekly production release. Example of Smoke Testing: Checking if the login page loads, database query returns data, and checkout page renders in 30 seconds after code is deployed to staging.",
+    "sectionTitle": "Terminology",
+    "cat": "Quality Assurance"
+  },
+  {
+    "id": "Q303",
+    "q": "What is the difference between a KPI and an OKR?",
+    "a": "A KPI (Key Performance Indicator) is a metric that measures the ongoing operational health and performance of an existing process or business unit (business-as-usual monitoring). An OKR (Objectives and Key Results) is a goal-setting framework designed to drive ambitious, strategic change and alignment over a specific period, consisting of an Objective (what we want to achieve) and Key Results (how we measure progress). Use KPIs to maintain operational baselines. Use OKRs to run strategic growth experiments and pivot organizations. Example of KPI: Monitoring server uptime (Target: >99.9% uptime). Example of OKR: Objective: Build an elite developer culture. KR 1: Increase deployment frequency from monthly to twice daily. KR 2: Achieve an average change lead time under 4 hours.",
+    "sectionTitle": "Terminology",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q304",
+    "q": "What is the difference between a Leading Indicator and a Lagging Indicator?",
+    "a": "A Leading Indicator is a predictive metric that signals future trends or performance, helping teams anticipate changes and take action before outcomes occur. A Lagging Indicator is a retrospective metric that measures past performance, showing the ultimate outcome of a completed process. Use Leading Indicators to adjust execution strategies proactively. Use Lagging Indicators to measure long-term success and return on investment. Example of Leading Indicator: The number of open security vulnerabilities in the backlog or the code-review turnaround time (predicts future release quality and speed). Example of Lagging Indicator: The monthly production incident count or actual quarterly revenue (measures what has already happened).",
+    "sectionTitle": "Terminology",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q305",
+    "q": "What is the difference between Velocity and Throughput?",
+    "a": "Velocity is an agile planning metric measuring the total number of story points completed by a Scrum team during a single sprint. Throughput is a flow metric measuring the raw count of work items (tickets) completed in a specific period of time, regardless of their individual size or point estimates. Use Velocity for internal team-level sprint capacity planning and forecasting. Use Throughput for stable, flow-based forecasting (Kanban) and high-level release frequency modeling. Example of Velocity: A team completing stories estimated at 5, 8, and 13 story points during Sprint 1 has a velocity of 26 points. Example of Throughput: A team completing 12 Jira tickets (bugs, stories, or tasks) in a single week has a throughput of 12 tickets/week.",
+    "sectionTitle": "Terminology",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q306",
+    "q": "What is the difference between Lead Time and Cycle Time?",
+    "a": "Lead Time measures the total time elapsed from the moment a work request is created (or placed in the backlog) until it is fully delivered to the customer. Cycle Time measures the time it takes for a work item to move from the moment active development begins until it is completed and ready for release. Use Lead Time to understand customer-facing responsiveness and identify upstream queue delays. Use Cycle Time to measure development efficiency and workflow bottlenecks. Example of Lead Time: A user submits a feature request on Jan 1. It is approved, prioritized, built, and released on Jan 30 (Lead Time = 30 days). Example of Cycle Time: A developer starts coding that feature on Jan 20, and finishes testing and deploying it on Jan 25 (Cycle Time = 5 days).",
+    "sectionTitle": "Terminology",
+    "cat": "Metrics"
+  },
+  {
+    "id": "Q307",
+    "q": "What is the difference between an MVP, a Prototype, a Proof of Concept (PoC), and a Pilot?",
+    "a": "A Proof of Concept (PoC) is a small, internal technical experiment designed to verify if a technology or design concept is actually feasible (can we build it?). A Prototype is an interactive, non-functional visual model of the interface designed to test design concepts and gather early feedback from users. An MVP (Minimum Viable Product) is a basic, functional version of a real product launched to real customers, designed to gather maximum market learning with the least effort. A Pilot is a full deployment of the completed product to a small, isolated segment of real users to validate system performance and operations before a global launch. Example of PoC: Testing if a specific third-party API can return response data in under 50ms. Example of Prototype: A clickable Figma mockup of a new onboarding flow shown to 5 test users. Example of MVP: Launching a simple one-page website where users can manually order custom dog food to see if there is genuine market demand. Example of Pilot: Deploying the completed HR payroll system only to the Chicago branch for 1 month before launching it company-wide.",
+    "sectionTitle": "Terminology",
+    "cat": "Product Validation"
+  },
+  {
+    "id": "Q308",
+    "q": "What is the difference between Agile, Waterfall, and Hybrid delivery?",
+    "a": "Waterfall is a sequential, phase-based approach (Requirements -> Design -> Code -> Test) best for projects with fixed, well-understood scope. Agile is an iterative, feedback-driven approach emphasizing adaptability, small increments, and customer collaboration, best for high-uncertainty software projects. Hybrid delivery combines both, often using Agile execution for software development (Sprints) within a Waterfall governance wrapper (fixed milestones and budget).",
+    "sectionTitle": "Terminology",
+    "cat": "Delivery Approaches"
+  }
+]
